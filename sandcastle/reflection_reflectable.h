@@ -15,8 +15,6 @@ Intent:
 namespace Reflection
 {
 
-  
-
   //abstract base class. NO MEMBERS TO BLOAT THE DERIVED SIZE. A VPTR IS BAD ENOUGH
   class Reflectable
   {

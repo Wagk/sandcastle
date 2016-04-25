@@ -13,6 +13,8 @@
 #define reflection_modifydata_inl__
 
 #include "reflection_modifydata.h"
+#include <sstream>
+#include "include_assert.h"
 
 namespace Reflection
 {
@@ -22,7 +24,11 @@ namespace Reflection
   template<typename T>
   bool Reflection::Modifydata::operator>>(NonMirroredType<T>& value)
   {
-    return false;
+    EXPECT(m_layout == LEAF);
+
+    str::istringstream(m_field) >> value;
+
+    return true;
   }
 
   /*!************************************************************
@@ -31,7 +37,9 @@ namespace Reflection
   template<typename T>
   bool Reflection::Modifydata::operator>>(MirroredType<T>& value)
   {
-    return false;
+    EXPECT(m_layout == LEAF);
+
+    return value.Modify(*this);
   }
 
 } //namespace Reflection
