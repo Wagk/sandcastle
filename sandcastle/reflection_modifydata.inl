@@ -16,6 +16,23 @@
 
 namespace Reflection
 {
+  /*!************************************************************
+
+  **************************************************************/
+  template<typename T>
+  bool Reflection::Modifydata::operator>>(NonMirroredType<T>& value)
+  {
+    return false;
+  }
+
+  /*!************************************************************
+
+  **************************************************************/
+  template<typename T>
+  bool Reflection::Modifydata::operator>>(MirroredType<T>& value)
+  {
+    return false;
+  }
 
 } //namespace Reflection
 

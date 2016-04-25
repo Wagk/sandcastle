@@ -48,11 +48,16 @@ namespace Reflection
 
     using Modifyinfo = Pair<bool, Modifydata>;
 
+    DataLayoutType m_layout = LEAF;
+
+    bool m_modify;
     String m_field; //used only for leaf nodes to restore data
-    Vector<Pair<String, Modifyinfo>> m_arrayfields;
+    Vector<Modifyinfo> m_arrayfields;
     Map<String, Modifyinfo> m_subfields;
 
   };
+
+  
 
 } //namespace Reflection
 
