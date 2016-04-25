@@ -13,22 +13,7 @@ Note:
 #include <string>
 #include <fstream>
 
-#include "modulegroup.h"
 
-class ModuleLayoutParser
-{
-public:
-
-  ModuleLayoutParser();
-  ModuleLayoutParser(const std::string& filestring); //reads in a file and does things to it
-
-  ModuleGroup GetModuleGroup() const;
-
-
-private:
-
-
-};
 
 #endif // module_definer_h__
 /*!************************************************************

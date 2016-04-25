@@ -3,9 +3,7 @@
   <ItemGroup>
     <ClCompile Include="reflection_statedata.cpp" />
     <ClCompile Include="sandcastle.cpp" />
-    <ClCompile Include="ship.cpp" />
     <ClCompile Include="testing_concurrency.cpp" />
-    <ClCompile Include="trait.cpp" />
     <ClCompile Include="utility_filesystem.cpp" />
     <ClCompile Include="utility_parser.cpp" />
     <ClCompile Include="utility_serial.cpp" />
@@ -20,21 +18,15 @@
     <ClCompile Include="concurrent_trigger.cpp" />
     <ClCompile Include="concurrent_worker.cpp" />
     <ClCompile Include="concurrent_worker_mutex.cpp" />
-    <ClCompile Include="conditions.cpp" />
-    <ClCompile Include="fleet.cpp" />
-    <ClCompile Include="generators.cpp" />
-    <ClCompile Include="module.cpp" />
-    <ClCompile Include="randomizer.cpp" />
     <ClCompile Include="reflection_modifydata.cpp" />
     <ClCompile Include="reflection_propertydata.cpp" />
     <ClCompile Include="reflection_propertylist.cpp" />
+    <ClCompile Include="memory_allocator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="reflection_statedata.h" />
     <ClInclude Include="sandcastle.h" />
-    <ClInclude Include="ship.h" />
     <ClInclude Include="testing_concurrency.h" />
-    <ClInclude Include="trait.h" />
     <ClInclude Include="utility_filesystem.h" />
     <ClInclude Include="utility_parser.h" />
     <ClInclude Include="utility_reflection.h" />
@@ -92,20 +84,14 @@
     <ClInclude Include="concurrent_trigger.h" />
     <ClInclude Include="concurrent_worker.h" />
     <ClInclude Include="concurrent_worker_mutex.h" />
-    <ClInclude Include="conditions.h" />
-    <ClInclude Include="fleet.h" />
-    <ClInclude Include="generators.h" />
     <ClInclude Include="include_assert.h" />
     <ClInclude Include="include_std.h" />
     <ClInclude Include="interface_singleton.h" />
-    <ClInclude Include="mod_engine.h" />
-    <ClInclude Include="module.h" />
-    <ClInclude Include="modulegroup.h" />
-    <ClInclude Include="randomizer.h" />
     <ClInclude Include="reflection_modifydata.h" />
     <ClInclude Include="reflection_propertydata.h" />
     <ClInclude Include="reflection_propertylist.h" />
     <ClInclude Include="reflection_reflectable.h" />
+    <ClInclude Include="memory_allocator.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="reflection_statedata.inl" />
@@ -114,10 +100,10 @@
     <None Include="concurrent_pool.inl" />
     <None Include="concurrent_queue.inl" />
     <None Include="interface_singleton.inl" />
-    <None Include="randomizer.inl" />
     <None Include="reflection_modifydata.inl" />
     <None Include="reflection_propertydata.inl" />
     <None Include="reflection_propertylist.inl" />
     <None Include="reflection_reflectable.inl" />
+    <None Include="memory_allocator.inl" />
   </ItemGroup>
 </Project>

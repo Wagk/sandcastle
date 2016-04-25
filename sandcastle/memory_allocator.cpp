@@ -1,26 +1,19 @@
 /*!************************************************************
-	Created:	2016/02/15
-	Intent:		
-			An example of a module.
-	Note:
-			
+	Created	:	2016/04/25
+	Note	:
+		
 **************************************************************/
-#ifndef mod_engine_h__
-#define mod_engine_h__
+#include "memory_allocator.h"
 
-#include "module.h"
-
-class EngineModule : public Module 
+namespace Memory
 {
-public:
+   
+} //namespace Memory
 
-private:
-};
 
-#endif // mod_engine_h__
 /*!************************************************************
 	Todo:
 			
+	References:
+		
 **************************************************************/
-
-

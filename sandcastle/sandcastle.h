@@ -11,10 +11,6 @@
 #include <vector>
 #include <string>
 
-#include "ship.h"
-#include "fleet.h"
-
-#include "module.h"
 
 #include "utility_timestep.h"
 #include "utility_serial.h"
