@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FF705AAE-1D42-408D-AA32-3BD37837B797}</ProjectGuid>
+    <RootNamespace>sandcastle</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IntDir>$(SolutionDir)artifacts\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IntDir>$(SolutionDir)artifacts\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IntDir>$(SolutionDir)artifacts\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IntDir>$(SolutionDir)artifacts\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)output\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="concurrent_dispatcher.cpp" />
+    <ClCompile Include="concurrent_job.cpp" />
+    <ClCompile Include="concurrent_light_job.cpp" />
+    <ClCompile Include="concurrent_process_graph.cpp" />
+    <ClCompile Include="concurrent_scheduler.cpp" />
+    <ClCompile Include="concurrent_thread.cpp" />
+    <ClCompile Include="concurrent_trigger.cpp" />
+    <ClCompile Include="concurrent_worker.cpp" />
+    <ClCompile Include="concurrent_worker_mutex.cpp" />
+    <ClCompile Include="conditions.cpp" />
+    <ClCompile Include="external\json\jsoncpp.cpp" />
+    <ClCompile Include="fleet.cpp" />
+    <ClCompile Include="generators.cpp" />
+    <ClCompile Include="module.cpp" />
+    <ClCompile Include="randomizer.cpp" />
+    <ClCompile Include="reflection_modifydata.cpp" />
+    <ClCompile Include="reflection_propertydata.cpp" />
+    <ClCompile Include="reflection_propertylist.cpp" />
+    <ClCompile Include="reflection_statedata.cpp" />
+    <ClCompile Include="sandcastle.cpp" />
+    <ClCompile Include="ship.cpp" />
+    <ClCompile Include="testing_concurrency.cpp" />
+    <ClCompile Include="trait.cpp" />
+    <ClCompile Include="utility_filesystem.cpp" />
+    <ClCompile Include="utility_parser.cpp" />
+    <ClCompile Include="utility_serial.cpp" />
+    <ClCompile Include="utility_timestep.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="concurrent_dispatcher.h" />
+    <ClInclude Include="concurrent_hazard.h" />
+    <ClInclude Include="concurrent_job.h" />
+    <ClInclude Include="concurrent_light_job.h" />
+    <ClInclude Include="concurrent_pool.h" />
+    <ClInclude Include="concurrent_process_graph.h" />
+    <ClInclude Include="concurrent_queue.h" />
+    <ClInclude Include="concurrent_scheduler.h" />
+    <ClInclude Include="concurrent_thread.h" />
+    <ClInclude Include="concurrent_trigger.h" />
+    <ClInclude Include="concurrent_worker.h" />
+    <ClInclude Include="concurrent_worker_mutex.h" />
+    <ClInclude Include="conditions.h" />
+    <ClInclude Include="external\chaiscript\chaiscript.hpp" />
+    <ClInclude Include="external\chaiscript\chaiscript_defines.hpp" />
+    <ClInclude Include="external\chaiscript\chaiscript_stdlib.hpp" />
+    <ClInclude Include="external\chaiscript\chaiscript_threading.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\any.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\bad_boxed_cast.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\bind_first.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\bootstrap.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\bootstrap_stl.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\boxed_cast.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\boxed_cast_helper.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\boxed_number.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\boxed_value.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\callable_traits.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\dispatchkit.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\dynamic_object.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\dynamic_object_detail.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\exception_specification.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\function_call.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\function_call_detail.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\handle_return.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\operators.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\proxy_constructors.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\proxy_functions.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\proxy_functions_detail.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\register_function.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\type_conversions.hpp" />
+    <ClInclude Include="external\chaiscript\dispatchkit\type_info.hpp" />
+    <ClInclude Include="external\chaiscript\language\chaiscript_algebraic.hpp" />
+    <ClInclude Include="external\chaiscript\language\chaiscript_common.hpp" />
+    <ClInclude Include="external\chaiscript\language\chaiscript_engine.hpp" />
+    <ClInclude Include="external\chaiscript\language\chaiscript_eval.hpp" />
+    <ClInclude Include="external\chaiscript\language\chaiscript_parser.hpp" />
+    <ClInclude Include="external\chaiscript\language\chaiscript_prelude_docs.hpp" />
+    <ClInclude Include="external\chaiscript\utility\json.hpp" />
+    <ClInclude Include="external\chaiscript\utility\json_wrap.hpp" />
+    <ClInclude Include="external\chaiscript\utility\utility.hpp" />
+    <ClInclude Include="external\json\json\json-forwards.h" />
+    <ClInclude Include="external\json\json\json.h" />
+    <ClInclude Include="fleet.h" />
+    <ClInclude Include="generators.h" />
+    <ClInclude Include="include_assert.h" />
+    <ClInclude Include="include_std.h" />
+    <ClInclude Include="interface_singleton.h" />
+    <ClInclude Include="module.h" />
+    <ClInclude Include="modulegroup.h" />
+    <ClInclude Include="mod_engine.h" />
+    <ClInclude Include="randomizer.h" />
+    <ClInclude Include="reflection_modifydata.h" />
+    <ClInclude Include="reflection_propertydata.h" />
+    <ClInclude Include="reflection_propertylist.h" />
+    <ClInclude Include="reflection_reflectable.h" />
+    <ClInclude Include="reflection_statedata.h" />
+    <ClInclude Include="sandcastle.h" />
+    <ClInclude Include="ship.h" />
+    <ClInclude Include="testing_concurrency.h" />
+    <ClInclude Include="trait.h" />
+    <ClInclude Include="utility_filesystem.h" />
+    <ClInclude Include="utility_parser.h" />
+    <ClInclude Include="utility_reflection.h" />
+    <ClInclude Include="utility_script.h" />
+    <ClInclude Include="utility_serial.h" />
+    <ClInclude Include="utility_timestep.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="concurrent_dispatcher.inl" />
+    <None Include="concurrent_hazard.inl" />
+    <None Include="concurrent_pool.inl" />
+    <None Include="concurrent_queue.inl" />
+    <None Include="interface_singleton.inl" />
+    <None Include="randomizer.inl" />
+    <None Include="reflection_modifydata.inl" />
+    <None Include="reflection_propertydata.inl" />
+    <None Include="reflection_propertylist.inl" />
+    <None Include="reflection_reflectable.inl" />
+    <None Include="reflection_statedata.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
