@@ -34,12 +34,14 @@ TODO:
   other)
 
 *******************************************************************************/
-#include "sandcastle.h"
 #include <iostream>
-#include "utility_filesystem.h"
 
-#include "concurrent_scheduler.h"
+#include "sandcastle.h"
 #include "testing_concurrency.h"
+
+#include "sandcastle/utility_filesystem.h"
+#include "sandcastle/concurrent_scheduler.h"
+
 
 bool run_simulation = true;
 
