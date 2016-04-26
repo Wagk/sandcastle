@@ -10,8 +10,8 @@
 #ifndef testing_concurrency_h__
 #define testing_concurrency_h__
 
-#include "include_std.h"
-#include "concurrent_job.h"
+#include "sandcastle/include_std.h"
+#include "sandcastle/concurrent_job.h"
 
 namespace Testing
 {
