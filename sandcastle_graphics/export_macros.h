@@ -1,16 +1,16 @@
 /*!************************************************************
-Created	:	2016/03/03
-Intent	:
-
-Usage	:
-
-Note	:
-
+	Created	:	2016/04/27
+	Intent	:		
+		
+	Usage	:
+		```
+			
+		```
+	Note	:
+		
 **************************************************************/
 #ifndef export_macros_h__
 #define export_macros_h__
-
-//I am defining the SANDCASTLE_DLL Macro for the sandcastle project.
 
 #ifdef SANDCASTLE_DLL
 #define SANDCASTLE_API __declspec(dllexport) 
@@ -18,5 +18,12 @@ Note	:
 #define SANDCASTLE_API __declspec(dllimport)
 #endif
 
+#endif // export_macros_h__
+/*!************************************************************
+	Todo:
+			
+	References:
+		
+**************************************************************/
 
-#endif
+
