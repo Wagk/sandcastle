@@ -7,13 +7,7 @@
 
 namespace Graphics
 {
-  
-  class Renderer
-  {
-  public:
 
-  private:
-  };
 
 } //namespace Graphics
 

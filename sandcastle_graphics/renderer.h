@@ -14,6 +14,8 @@
 #ifndef renderer_h__
 #define renderer_h__
 
+#include "glfw/glfw3.h"
+
 namespace Graphics
 {
 
