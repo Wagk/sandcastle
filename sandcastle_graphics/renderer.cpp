@@ -9,6 +9,14 @@ namespace Graphics
 {
 
 
+  /*!************************************************************
+
+  **************************************************************/
+  void Renderer::Request(const Drawrequest& request)
+  {
+
+  }
+
 } //namespace Graphics
 
 

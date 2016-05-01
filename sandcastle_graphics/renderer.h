@@ -16,12 +16,16 @@
 
 #include "glfw/glfw3.h"
 
+#include "drawrequest.h"
+
 namespace Graphics
 {
 
   class Renderer
   {
   public:
+
+    void Request(const Drawrequest& request);
 
   private:
 

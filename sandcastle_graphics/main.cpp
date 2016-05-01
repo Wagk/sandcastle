@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
 static void error_callback(int error, const char* description)
 {
   fputs(description, stderr);
@@ -30,12 +31,20 @@ int main(void)
   glfwSetErrorCallback(error_callback);
   if (!glfwInit())
     exit(EXIT_FAILURE);
+
+  // Initialize GLEW to setup the OpenGL Function pointers
+  glewExperimental = GL_TRUE;
+  glewInit();
+
   window = glfwCreateWindow(640, 480, "Simple example", NULL, NULL);
   if (!window)
   {
     glfwTerminate();
     exit(EXIT_FAILURE);
   }
+
+
+  
   glfwMakeContextCurrent(window);
   glfwSwapInterval(1);
   glfwSetKeyCallback(window, key_callback);

@@ -73,28 +73,28 @@
     <OutDir>$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)artifacts\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <LibraryPath>$(ProjectDir)\external\libs\32bit\;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
-    <IncludePath>$(ProjectDir)\external\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(SolutionDir)sandcastle\;$(ProjectDir)\external\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <TargetName>$(ProjectName)_$(Platform)_$(Configuration)</TargetName>
     <OutDir>$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)artifacts\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <LibraryPath>$(ProjectDir)\external\libs\32bit\;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
-    <IncludePath>$(ProjectDir)\external\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(SolutionDir)sandcastle\;$(ProjectDir)\external\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>$(ProjectName)_$(Platform)_$(Configuration)</TargetName>
     <OutDir>$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)artifacts\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <LibraryPath>$(ProjectDir)\external\libs\64bit\;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
-    <IncludePath>$(ProjectDir)\external\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(SolutionDir)sandcastle\;$(ProjectDir)\external\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetName>$(ProjectName)_$(Platform)_$(Configuration)</TargetName>
     <OutDir>$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)artifacts\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <LibraryPath>$(ProjectDir)\external\libs\64bit\;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
-    <IncludePath>$(ProjectDir)\external\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(SolutionDir)sandcastle\;$(ProjectDir)\external\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
