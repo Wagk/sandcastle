@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sandcastle", "sandcastle\sandcastle.vcxproj", "{FF705AAE-1D42-408D-AA32-3BD37837B797}"
 EndProject
@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sandcastle_graphics", "sand
 	ProjectSection(ProjectDependencies) = postProject
 		{FF705AAE-1D42-408D-AA32-3BD37837B797} = {FF705AAE-1D42-408D-AA32-3BD37837B797}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sandcastle_context", "sandcastle_core\sandcastle_core.vcxproj", "{10D0542A-8BCB-4025-9EFD-46A22EAF8BB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,14 @@ Global
 		{4FCCB5A7-6BDA-4912-BB86-AF9DDE423EAA}.Release|x64.Build.0 = Release|x64
 		{4FCCB5A7-6BDA-4912-BB86-AF9DDE423EAA}.Release|x86.ActiveCfg = Release|Win32
 		{4FCCB5A7-6BDA-4912-BB86-AF9DDE423EAA}.Release|x86.Build.0 = Release|Win32
+		{10D0542A-8BCB-4025-9EFD-46A22EAF8BB5}.Debug|x64.ActiveCfg = Debug|x64
+		{10D0542A-8BCB-4025-9EFD-46A22EAF8BB5}.Debug|x64.Build.0 = Debug|x64
+		{10D0542A-8BCB-4025-9EFD-46A22EAF8BB5}.Debug|x86.ActiveCfg = Debug|Win32
+		{10D0542A-8BCB-4025-9EFD-46A22EAF8BB5}.Debug|x86.Build.0 = Debug|Win32
+		{10D0542A-8BCB-4025-9EFD-46A22EAF8BB5}.Release|x64.ActiveCfg = Release|x64
+		{10D0542A-8BCB-4025-9EFD-46A22EAF8BB5}.Release|x64.Build.0 = Release|x64
+		{10D0542A-8BCB-4025-9EFD-46A22EAF8BB5}.Release|x86.ActiveCfg = Release|Win32
+		{10D0542A-8BCB-4025-9EFD-46A22EAF8BB5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
