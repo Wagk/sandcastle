@@ -16,7 +16,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sandcastle_graphics", "sand
 		{FF705AAE-1D42-408D-AA32-3BD37837B797} = {FF705AAE-1D42-408D-AA32-3BD37837B797}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sandcastle_context", "sandcastle_core\sandcastle_core.vcxproj", "{10D0542A-8BCB-4025-9EFD-46A22EAF8BB5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sandcastle_context", "sandcastle_context\sandcastle_core.vcxproj", "{10D0542A-8BCB-4025-9EFD-46A22EAF8BB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
