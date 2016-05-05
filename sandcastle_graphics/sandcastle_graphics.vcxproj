@@ -108,7 +108,7 @@
       <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
-      <Command>xcopy "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\" "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\" /s /i /y;</Command>
+      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)" /b "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)" /b ;</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -123,7 +123,7 @@
       <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
-      <Command>xcopy "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\" "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\" /s /i /y;</Command>
+      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)" /b "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)" /b ;</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
