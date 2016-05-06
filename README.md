@@ -1,6 +1,7 @@
 # Sandcastle
 Public repository for the Sandcastle Engine
 
+
 # Checklists
 ### When creating a new project (within the solution)
 
@@ -18,10 +19,11 @@ Public repository for the Sandcastle Engine
 		
 ### When adding a 3rd party library
 The conventions are:
-	- All include files should be found under `$(ProjectDir)\external\`
-	- All static libs should be found under `$(ProjectDir)\external\libs\`
-		- 32-bit machines should place their libs in `$(ProjectDir)\external\libs\32bit`
-		- 64-bit machines should place their libs in `$(ProjectDir)\external\libs\64bit`
+
+- All include files should be found under `$(ProjectDir)\external\`
+- All static libs should be found under `$(ProjectDir)\external\libs\`
+	- 32-bit machines should place their libs in `$(ProjectDir)\external\libs\32bit`
+	- 64-bit machines should place their libs in `$(ProjectDir)\external\libs\64bit`
 		
 # Useful Macros
 (These are generally used for Visual Assist, but we can refer to it as a useful guideline)
