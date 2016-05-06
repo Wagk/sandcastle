@@ -166,7 +166,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="drawrequest.h" />
-    <ClInclude Include="export_macros.h" />
     <ClInclude Include="material.h" />
     <ClInclude Include="renderer.h" />
   </ItemGroup>

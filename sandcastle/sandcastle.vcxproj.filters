@@ -89,6 +89,7 @@
     <ClInclude Include="reflection_reflectable.h" />
     <ClInclude Include="memory_allocator.h" />
     <ClInclude Include="export_macros.h" />
+    <ClInclude Include="include_utility.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="reflection_statedata.inl" />
