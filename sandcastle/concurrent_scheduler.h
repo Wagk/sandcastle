@@ -36,6 +36,7 @@
 
 #include "include_std.h"
 #include "interface_singleton.h"
+#include "export_macros.h"
 
 namespace Concurrent
 {
@@ -57,7 +58,7 @@ namespace Concurrent
     	Ensure   :
     	Usage    :		
     **************************************************************/
-    void Init();
+    SANDCASTLE_API void Init();
 
     /*!************************************************************
     	FullName :	Concurrent::Scheduler::Run
@@ -70,7 +71,22 @@ namespace Concurrent
     	Ensure   :
     	Usage    :		
     **************************************************************/
-    void Run(); 
+    SANDCASTLE_API void Run();
+
+    /*!************************************************************
+    FullName :	Concurrent::Scheduler::AddJob
+    Returns  :	void
+    Parameter:	Job * job
+    Brief    :
+    Adds a single job to the main job queue (or whatever
+    work stealing requires us to do in the future). The
+    priority and affinity of the job is decided when the
+    job was constructed
+    Expect   :
+    Ensure   :
+    Usage    :
+    **************************************************************/
+    SANDCASTLE_API void AddJob(Job* job);
 
     /*!************************************************************
     	FullName :	Concurrent::Scheduler::KillWorkers
@@ -83,21 +99,6 @@ namespace Concurrent
     	Usage    :		
     **************************************************************/
     void KillWorkers();
-
-    /*!************************************************************
-    	FullName :	Concurrent::Scheduler::AddJob
-    	Returns  :	void
-    	Parameter:	Job * job
-    	Brief    :		
-    			Adds a single job to the main job queue (or whatever
-          work stealing requires us to do in the future). The
-          priority and affinity of the job is decided when the
-          job was constructed
-    	Expect   :		
-    	Ensure   :
-    	Usage    :		
-    **************************************************************/
-    void AddJob(Job* job);
 
     /*!************************************************************
     	FullName :	Concurrent::Scheduler::GetStopFlag

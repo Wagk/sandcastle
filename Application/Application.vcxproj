@@ -74,24 +74,32 @@
     <OutDir>$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)artifacts\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_$(Platform)_$(Configuration)</TargetName>
+    <IncludePath>$(SolutionDir)sandcastle\;$(SolutionDir)sandcastle_graphics\;$(SolutionDir)sandcastle_context\;$(ProjectDir)\external\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(ProjectDir)\external\libs\32bit\;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)artifacts\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_$(Platform)_$(Configuration)</TargetName>
+    <IncludePath>$(SolutionDir)sandcastle\;$(SolutionDir)sandcastle_graphics\;$(SolutionDir)sandcastle_context\;$(ProjectDir)\external\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(ProjectDir)\external\libs\64bit\;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)artifacts\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_$(Platform)_$(Configuration)</TargetName>
+    <IncludePath>$(SolutionDir)sandcastle\;$(SolutionDir)sandcastle_graphics\;$(SolutionDir)sandcastle_context\;$(ProjectDir)\external\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(ProjectDir)\external\libs\32bit\;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)artifacts\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_$(Platform)_$(Configuration)</TargetName>
+    <IncludePath>$(SolutionDir)sandcastle\;$(SolutionDir)sandcastle_graphics\;$(SolutionDir)sandcastle_context\;$(ProjectDir)\external\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>$(ProjectDir)\external\libs\64bit\;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -109,6 +117,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)output\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <PreLinkEvent>
+      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)" /b ;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)" /b ;</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -126,6 +138,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)output\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <PreLinkEvent>
+      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)" /b ;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)" /b ;</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -147,6 +163,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)output\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <PreLinkEvent>
+      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)" /b ;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)" /b ;</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -168,6 +188,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)output\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <PreLinkEvent>
+      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)" /b ;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)" /b ;</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="..\sandcastle\sandcastle.vcxproj">
