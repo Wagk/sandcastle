@@ -13,6 +13,8 @@
 #include "concurrent_job.h"
 #include "include_std.h"
 
+#include "export_macros.h"
+
 namespace Concurrent
 {
 
@@ -22,7 +24,7 @@ namespace Concurrent
 
     using FuncType = void(void);
 
-    LightJob(const Function<FuncType>& function, 
+    SANDCASTLE_API LightJob(const Function<FuncType>& function,
       JobAffinity affinity = AFFINITY_WORKER);
 
   private:

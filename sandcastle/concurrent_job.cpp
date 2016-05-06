@@ -27,7 +27,7 @@ namespace Concurrent
   {
     m_done = false;
 
-    Thread::info.GetScheduler()->AddJob(this);
+    Thread::GetInfo().GetScheduler()->AddJob(this);
   }
 
   /*!************************************************************

@@ -26,7 +26,7 @@ namespace Concurrent
     //find someway to guarantee that you'll never exceed the count
     auto& records = HazardManager<HazardCount, Type>::Get().m_record;
 
-    return records[Thread::info.GetID() * HazardCount + index];
+    return records[Thread::GetInfo().GetID() * HazardCount + index];
   }
 
   /**************************************************************

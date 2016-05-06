@@ -30,7 +30,7 @@ namespace Concurrent
     while (has_lock == false)
     {
       if (has_lock = m_mutex.try_lock()) return;
-      else if (Thread::info.GetScheduler()->GetJobCount(Thread::info.GetAffinity()) > 0)
+      else if (Thread::GetInfo().GetScheduler()->GetJobCount(Thread::GetInfo().GetAffinity()) > 0)
       {
         WorkSingleJob();
       }

@@ -8,6 +8,8 @@
 #ifndef util_timestep_h__
 #define util_timestep_h__
 
+#include "export_macros.h"
+
 namespace Utility
 {
 
@@ -20,7 +22,7 @@ namespace Utility
     Consider:
     Note:
   **************************************************************/
-  void StartTimer();
+  SANDCASTLE_API void StartTimer();
 
   /*!************************************************************
     FullName:	EndTimer
@@ -34,7 +36,7 @@ namespace Utility
     Consider:
     Note:
   **************************************************************/
-  void EndTimer();
+  SANDCASTLE_API void EndTimer();
 
   /*!************************************************************
     FullName:	GetTimeStep
@@ -47,7 +49,7 @@ namespace Utility
     Consider:
     Note:
   **************************************************************/
-  float GetTimeStep();
+  SANDCASTLE_API float GetTimeStep();
 
 } //namespace Utility
 

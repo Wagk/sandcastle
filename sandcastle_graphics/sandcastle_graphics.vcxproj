@@ -72,28 +72,28 @@
     <TargetName>$(ProjectName)_$(Platform)_$(Configuration)</TargetName>
     <OutDir>$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)artifacts\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <LibraryPath>$(ProjectDir)\external\libs\32bit\;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
+    <LibraryPath>$(ProjectDir)\external\libs\$(Platform)\;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
     <IncludePath>$(SolutionDir)sandcastle\;$(ProjectDir)\external\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <TargetName>$(ProjectName)_$(Platform)_$(Configuration)</TargetName>
     <OutDir>$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)artifacts\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <LibraryPath>$(ProjectDir)\external\libs\32bit\;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
+    <LibraryPath>$(ProjectDir)\external\libs\$(Platform)\;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
     <IncludePath>$(SolutionDir)sandcastle\;$(ProjectDir)\external\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>$(ProjectName)_$(Platform)_$(Configuration)</TargetName>
     <OutDir>$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)artifacts\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <LibraryPath>$(ProjectDir)\external\libs\64bit\;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
+    <LibraryPath>$(ProjectDir)\external\libs\$(Platform)\;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
     <IncludePath>$(SolutionDir)sandcastle\;$(ProjectDir)\external\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetName>$(ProjectName)_$(Platform)_$(Configuration)</TargetName>
     <OutDir>$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)artifacts\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <LibraryPath>$(ProjectDir)\external\libs\64bit\;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
+    <LibraryPath>$(ProjectDir)\external\libs\$(Platform)\;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
     <IncludePath>$(SolutionDir)sandcastle\;$(ProjectDir)\external\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -108,7 +108,8 @@
       <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
-      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)" /b ;</Command>
+      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).lib" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).ilk" /b;</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -123,7 +124,8 @@
       <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
-      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)" /b ;</Command>
+      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).lib" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).ilk" /b;</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -142,7 +144,8 @@
       <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
-      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)" /b ;</Command>
+      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).lib" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).ilk" /b;</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -161,7 +164,8 @@
       <AdditionalDependencies>opengl32.lib;glew32s.lib;glfw3.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
-      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)" /b ;</Command>
+      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).lib" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).ilk" /b;</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

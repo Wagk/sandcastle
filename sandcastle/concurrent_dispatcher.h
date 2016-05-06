@@ -14,6 +14,8 @@
 #include "concurrent_trigger.h"
 #include "include_std.h"
 
+#include "export_macros.h"
+
 namespace Concurrent
 {
 
@@ -34,8 +36,8 @@ namespace Concurrent
   public:
 
     //mind the affinities
-    SimpleDispatcher(const Vector<Job*>& jobs = Vector<Job*>());
-    SimpleDispatcher(const SimpleDispatcher& rhs);
+    SANDCASTLE_API SimpleDispatcher(const Vector<Job*>& jobs = Vector<Job*>());
+    SANDCASTLE_API SimpleDispatcher(const SimpleDispatcher& rhs);
 
     //remember that this dispatcher is also a Job, meaning it has
     //its own run and schedule functions
@@ -50,7 +52,7 @@ namespace Concurrent
     	Ensure   :
     	Usage    :		
     **************************************************************/
-    void Insert(Job* job);
+    SANDCASTLE_API void Insert(Job* job);
 
     /*!************************************************************
     	FullName :	Concurrent::SimpleDispatcher::AssignBlock
@@ -73,7 +75,7 @@ namespace Concurrent
     	Ensure   :
     	Usage    :		
     **************************************************************/
-    void Clear();
+    SANDCASTLE_API void Clear();
 
     SimpleDispatcher& operator=(const SimpleDispatcher& rhs);
 
