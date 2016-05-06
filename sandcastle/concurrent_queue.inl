@@ -131,8 +131,6 @@ namespace Concurrent
 
     Node<T>* tail = nullptr;
 
-    Thread::info;
-
     while (true)
     {
       //As a thread, I expect these to be the most updated pointers

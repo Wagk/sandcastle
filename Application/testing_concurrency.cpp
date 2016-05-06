@@ -77,13 +77,13 @@ namespace Testing
         std::lock_guard<Mutex> lock(lock1);
         ++atomic1;
         std::cout << "lock1 " << atomic1 
-          << " " << Concurrent::Thread::info.GetID() << std::endl;
+          << " " << Concurrent::Thread::GetInfo().GetID() << std::endl;
       }));
       counter2.push_back(new LightJob([&atomic2, &lock2]() {
         std::lock_guard<Mutex> lock(lock2);
         ++atomic2;
         std::cout << "lock2 " << atomic2 
-          << " " << Concurrent::Thread::info.GetID() << std::endl;
+          << " " << Concurrent::Thread::GetInfo().GetID() << std::endl;
       }));
     }
 

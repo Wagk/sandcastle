@@ -11,8 +11,8 @@ namespace Concurrent
   **************************************************************/
   void WorkSingleJob()
   {
-    JobAffinity affinity = Thread::info.GetAffinity();
-    Scheduler& scheduler = *Thread::info.GetScheduler();
+    JobAffinity affinity = Thread::GetInfo().GetAffinity();
+    Scheduler& scheduler = *Thread::GetInfo().GetScheduler();
 
     //grab a job (priority to be decided)
     Job* job = scheduler.GetJob(affinity);
@@ -32,10 +32,10 @@ namespace Concurrent
   void WorkerThread(ThreadInitInfo init)
   {
     //set up preliminary stuff for the lifetime of the thread
-    Thread::info = init;
+    Thread::GetInfo() = init;
 
-    JobAffinity affinity = Thread::info.GetAffinity();
-    Scheduler& scheduler = *Thread::info.GetScheduler();
+    JobAffinity affinity = Thread::GetInfo().GetAffinity();
+    Scheduler& scheduler = *Thread::GetInfo().GetScheduler();
 
     //start looping forever
     while (scheduler.GetStopFlag() == false)

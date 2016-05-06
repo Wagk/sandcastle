@@ -14,6 +14,8 @@
 #include "concurrent_job.h"
 #include "concurrent_scheduler.h"
 
+#include "export_macros.h"
+
 namespace Concurrent
 {
 
@@ -26,7 +28,7 @@ namespace Concurrent
   	Ensure   :
   	Usage    :		
   **************************************************************/
-  void WorkSingleJob();
+  SANDCASTLE_API void WorkSingleJob();
   /*!************************************************************
   	FullName :	Concurrent::WorkerThread
   	Returns  :	void

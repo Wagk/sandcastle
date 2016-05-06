@@ -14,6 +14,8 @@
 #include "concurrent_scheduler.h"
 #include "concurrent_job.h"
 
+#include "export_macros.h"
+
 #define LOCKLESS_QUEUE_HAZARD_ALLOC 2
 
 //safe to set this to 1, leaving only the main thread working
@@ -42,7 +44,7 @@ namespace Concurrent
     ThreadInfo() = default;
     ThreadInfo& operator=(const ThreadInitInfo& rhs);
 
-    ThreadID GetID() const;
+    SANDCASTLE_API ThreadID GetID() const;
     Scheduler* GetScheduler();
     JobAffinity GetAffinity() const;
 
@@ -69,7 +71,7 @@ namespace Concurrent
   */
   namespace Thread
   {
-    extern thread_local ThreadInfo info; //initialization
+    SANDCASTLE_API ThreadInfo GetInfo();
     extern thread_local HazardPackage<LOCKLESS_QUEUE_HAZARD_ALLOC, SCHEDULING> hazardous;
   }
 

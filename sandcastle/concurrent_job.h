@@ -16,6 +16,8 @@
 #include <vector>
 #include "concurrent_trigger.h"
 
+#include "export_macros.h"
+
 namespace Concurrent
 {
   enum JobPriority
@@ -49,7 +51,7 @@ namespace Concurrent
       Ensure   :
       Usage    :
     **************************************************************/
-    Job(JobAffinity affinity = AFFINITY_MAIN,
+    SANDCASTLE_API Job(JobAffinity affinity = AFFINITY_MAIN,
       JobPriority priority = PRIORITY_NORMAL);
 
     virtual ~Job() = default;
@@ -80,7 +82,7 @@ namespace Concurrent
       Ensure   :
       Usage    :
     **************************************************************/
-    void Run();
+    SANDCASTLE_API void Run();
 
     /*!************************************************************
       FullName :	Concurrent::Job::Done

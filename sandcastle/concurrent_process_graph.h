@@ -28,6 +28,8 @@
 #include "concurrent_dispatcher.h"
 #include "include_std.h"
 
+#include "export_macros.h"
+
 namespace Concurrent
 {
 
@@ -41,7 +43,7 @@ namespace Concurrent
   {
   public:
 
-    ProcessGraphNode(const SimpleDispatcher& work_unit = SimpleDispatcher());
+    SANDCASTLE_API ProcessGraphNode(const SimpleDispatcher& work_unit = SimpleDispatcher());
 
     //no `execute` job since Job already has `Run`
 
@@ -50,7 +52,7 @@ namespace Concurrent
 
     void SetJobBlock(const SimpleDispatcher& work_unit);
 
-    void SetNextNode(ProcessGraphNode* nextnode);
+    SANDCASTLE_API void SetNextNode(ProcessGraphNode* nextnode);
 
   private:
 

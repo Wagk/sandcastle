@@ -4,8 +4,18 @@ namespace Concurrent
 {
   namespace Thread
   {
+
     thread_local ThreadInfo info; //initialization
     thread_local HazardPackage<LOCKLESS_QUEUE_HAZARD_ALLOC, SCHEDULING> hazardous;
+
+    /*!************************************************************
+
+    **************************************************************/
+    ThreadInfo GetInfo()
+    {
+      return info;
+    }
+
   }
 
 

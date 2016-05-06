@@ -45,8 +45,8 @@ namespace Concurrent
   {
   public:
 
-    Scheduler();
-    ~Scheduler();
+    SANDCASTLE_API Scheduler();
+    SANDCASTLE_API ~Scheduler();
 
     /*!************************************************************
     	FullName :	Concurrent::Scheduler::Init
