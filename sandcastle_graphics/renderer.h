@@ -18,6 +18,9 @@
 
 #include "drawrequest.h"
 
+#include "include_assert.h"
+#include "utility_filesystem.h"
+
 namespace Graphics
 {
 
