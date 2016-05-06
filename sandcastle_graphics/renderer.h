@@ -29,6 +29,7 @@ namespace Graphics
   public:
 
     void Request(const Drawrequest& request);
+    void Render(float delta_t);
 
   private:
 

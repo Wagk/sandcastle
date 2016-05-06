@@ -240,6 +240,7 @@
     <ClInclude Include="external\json\json\json.h" />
     <ClInclude Include="include_assert.h" />
     <ClInclude Include="include_std.h" />
+    <ClInclude Include="include_utility.h" />
     <ClInclude Include="interface_singleton.h" />
     <ClInclude Include="reflection_modifydata.h" />
     <ClInclude Include="reflection_propertydata.h" />

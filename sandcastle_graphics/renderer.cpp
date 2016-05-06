@@ -5,6 +5,8 @@
 **************************************************************/
 #include "renderer.h"
 
+#include "include_utility.h"
+
 namespace Graphics
 {
 
@@ -14,7 +16,15 @@ namespace Graphics
   **************************************************************/
   void Renderer::Request(const Drawrequest& request)
   {
+    UNREFERENCED_PARAMETER(request);
+  }
 
+  /*!************************************************************
+
+  **************************************************************/
+  void Renderer::Render(float delta_t)
+  {
+    UNREFERENCED_PARAMETER(delta_t);
   }
 
 } //namespace Graphics
