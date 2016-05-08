@@ -119,16 +119,16 @@
       <AdditionalDependencies>sandcastle_$(Platform)_$(Configuration).lib;sandcastle_graphics_$(Platform)_$(Configuration).lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
-      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).lib" /b;
-copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).ilk" /b;
-copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).dll" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).dll" /b;
-copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).exp" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).exp" /b;
-copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).pdb" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).pdb" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).lib" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).ilk" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).dll" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).dll" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).exp" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).exp" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).pdb" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).pdb" /b;</Command>
+      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)external\libs\$(Platform)\sandcastle_$(Platform)_$(Configuration).lib" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)external\libs\$(Platform)\sandcastle_$(Platform)_$(Configuration).ilk" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).dll" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).dll" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).exp" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).exp" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).pdb" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).pdb" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)\external\libs\$(Platform)\sandcastle_graphics_$(Platform)_$(Configuration).lib" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)\external\libs\$(Platform)\sandcastle_graphics_$(Platform)_$(Configuration).ilk" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).dll" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).dll" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).exp" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).exp" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).pdb" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).pdb" /b;</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -149,16 +149,16 @@ copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\s
       <AdditionalDependencies>sandcastle_$(Platform)_$(Configuration).lib;sandcastle_graphics_$(Platform)_$(Configuration).lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
-      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).lib" /b;
-copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).ilk" /b;
-copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).dll" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).dll" /b;
-copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).exp" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).exp" /b;
-copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).pdb" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).pdb" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).lib" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).ilk" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).dll" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).dll" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).exp" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).exp" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).pdb" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).pdb" /b;</Command>
+      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)external\libs\$(Platform)\sandcastle_$(Platform)_$(Configuration).lib" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)external\libs\$(Platform)\sandcastle_$(Platform)_$(Configuration).ilk" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).dll" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).dll" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).exp" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).exp" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).pdb" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).pdb" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)\external\libs\$(Platform)\sandcastle_graphics_$(Platform)_$(Configuration).lib" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)\external\libs\$(Platform)\sandcastle_graphics_$(Platform)_$(Configuration).ilk" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).dll" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).dll" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).exp" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).exp" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).pdb" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).pdb" /b;</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -183,16 +183,16 @@ copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\s
       <AdditionalDependencies>sandcastle_$(Platform)_$(Configuration).lib;sandcastle_graphics_$(Platform)_$(Configuration).lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
-      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).lib" /b;
-copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).ilk" /b;
-copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).dll" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).dll" /b;
-copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).exp" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).exp" /b;
-copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).pdb" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).pdb" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).lib" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).ilk" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).dll" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).dll" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).exp" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).exp" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).pdb" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).pdb" /b;</Command>
+      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)external\libs\$(Platform)\sandcastle_$(Platform)_$(Configuration).lib" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)external\libs\$(Platform)\sandcastle_$(Platform)_$(Configuration).ilk" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).dll" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).dll" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).exp" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).exp" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).pdb" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).pdb" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)\external\libs\$(Platform)\sandcastle_graphics_$(Platform)_$(Configuration).lib" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)\external\libs\$(Platform)\sandcastle_graphics_$(Platform)_$(Configuration).ilk" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).dll" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).dll" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).exp" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).exp" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).pdb" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).pdb" /b;</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -217,16 +217,16 @@ copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\s
       <AdditionalDependencies>sandcastle_$(Platform)_$(Configuration).lib;sandcastle_graphics_$(Platform)_$(Configuration).lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
-      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).lib" /b;
-copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).ilk" /b;
-copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).dll" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).dll" /b;
-copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).exp" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).exp" /b;
-copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).pdb" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).pdb" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).lib" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)\external\libs\$(Platform)\$(ProjectName)_$(Platform)_$(Configuration).ilk" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).dll" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).dll" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).exp" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).exp" /b;
-copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).pdb" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\$(ProjectName)_$(Platform)_$(Configuration).pdb" /b;</Command>
+      <Command>copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)external\libs\$(Platform)\sandcastle_$(Platform)_$(Configuration).lib" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)external\libs\$(Platform)\sandcastle_$(Platform)_$(Configuration).ilk" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).dll" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).dll" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).exp" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).exp" /b;
+copy /y "$(SolutionDir)output\sandcastle\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).pdb" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_$(Platform)_$(Configuration).pdb" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).lib" /b "$(ProjectDir)\external\libs\$(Platform)\sandcastle_graphics_$(Platform)_$(Configuration).lib" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).ilk" /b "$(ProjectDir)\external\libs\$(Platform)\sandcastle_graphics_$(Platform)_$(Configuration).ilk" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).dll" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).dll" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).exp" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).exp" /b;
+copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).pdb" /b "$(SolutionDir)output\$(ProjectName)\$(Platform)\$(Configuration)\sandcastle_graphics_$(Platform)_$(Configuration).pdb" /b;</Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
