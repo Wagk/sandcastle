@@ -144,7 +144,7 @@ namespace Concurrent
   {
     ThreadInitInfo info = { HARDWARE_CONCURRENCY - 1 , this, AFFINITY_MAIN };
 
-    Thread::GetInfo() = info;
+    Thread::info = info;
   }
 
   /*!************************************************************
