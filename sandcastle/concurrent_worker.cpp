@@ -32,7 +32,7 @@ namespace Concurrent
   void WorkerThread(ThreadInitInfo init)
   {
     //set up preliminary stuff for the lifetime of the thread
-    Thread::GetInfo() = init;
+    Thread::SetInfo(init);
 
     JobAffinity affinity = Thread::GetInfo().GetAffinity();
     Scheduler& scheduler = *Thread::GetInfo().GetScheduler();

@@ -8,10 +8,15 @@ namespace Concurrent
     thread_local ThreadInfo info; //initialization
     thread_local HazardPackage<LOCKLESS_QUEUE_HAZARD_ALLOC, SCHEDULING> hazardous;
 
-    /*!************************************************************
+	SANDCASTLE_API void SetInfo(const ThreadInitInfo& ext_info)
+	{
+		info = ext_info;
+	}
+
+	/*!************************************************************
 
     **************************************************************/
-    ThreadInfo GetInfo()
+    SANDCASTLE_API ThreadInfo GetInfo()
     {
       return info;
     }
