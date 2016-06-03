@@ -21,12 +21,18 @@
     <ClInclude Include="sandcastle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="testing_reflection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sandcastle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="testing_concurrency.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testing_reflection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

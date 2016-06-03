@@ -42,6 +42,8 @@ TODO:
 #include "sandcastle/utility_filesystem.h"
 #include "sandcastle/concurrent_scheduler.h"
 
+#include "sandcastle_graphics/testing_graphics.h"
+
 
 bool run_simulation = true;
 
@@ -99,6 +101,10 @@ int main(int argc, char* argv[])
     We can also make it possible for a job to "detach", which mean we don't wait
     for it, and let a thread just deal with it.
   */
+
+  Testing::Graphics::GraphicsTest();
+
+
   //DO NOT EXECUTE JOBS ABOVE HERE
   //DO NOT EXECUTE JOBS ABOVE HERE
   //DO NOT EXECUTE JOBS ABOVE HERE
