@@ -71,9 +71,10 @@ namespace Concurrent
   */
   namespace Thread
   {
-    SANDCASTLE_API ThreadInfo GetInfo();
-    extern thread_local ThreadInfo info;
-    extern thread_local HazardPackage<LOCKLESS_QUEUE_HAZARD_ALLOC, SCHEDULING> hazardous;
+	  SANDCASTLE_API void SetInfo(const ThreadInitInfo& info);
+	  SANDCASTLE_API ThreadInfo GetInfo();
+	  extern thread_local ThreadInfo info;
+	  extern thread_local HazardPackage<LOCKLESS_QUEUE_HAZARD_ALLOC, SCHEDULING> hazardous;
   }
 
 } //namespace Concurrent
