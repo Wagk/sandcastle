@@ -9,23 +9,26 @@
     Note    :
 
 **************************************************************/
-#ifndef reflection_reflectable_h__
-#define reflection_reflectable_h__
+#ifndef reflection_values_h__
+#define reflection_values_h__
 
-#include "reflection_properties.h"
-#include "reflection_reflectable.h"
+#include <map>
 
 namespace reflection
 {
 
-	class reflectable
+	class value_descriptor
 	{
-		
+	public:
+
+	private:
+
+
 	};
 
 } //namespace reflection
 
-#endif //reflection_mirrorable_h__
+#endif //reflection_values_h__
 /*!************************************************************
     Todo:
 

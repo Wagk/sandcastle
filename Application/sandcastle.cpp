@@ -102,7 +102,7 @@ int main(int argc, char* argv[])
     for it, and let a thread just deal with it.
   */
 
-  Testing::Graphics::GraphicsTest();
+  //Testing::Graphics::GraphicsTest();
 
 
   //DO NOT EXECUTE JOBS ABOVE HERE

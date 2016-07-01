@@ -9,23 +9,20 @@
     Note    :
 
 **************************************************************/
-#ifndef reflection_reflectable_h__
-#define reflection_reflectable_h__
-
-#include "reflection_properties.h"
-#include "reflection_reflectable.h"
+#ifndef reflection_properties_h__
+#define reflection_properties_h__
 
 namespace reflection
 {
 
-	class reflectable
+	class property_descriptor
 	{
-		
+
 	};
 
 } //namespace reflection
 
-#endif //reflection_mirrorable_h__
+#endif //reflection_properties_h__
 /*!************************************************************
     Todo:
 

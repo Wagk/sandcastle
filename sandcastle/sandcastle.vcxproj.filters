@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="reflection_statedata.cpp" />
     <ClCompile Include="utility_filesystem.cpp" />
     <ClCompile Include="utility_parser.cpp" />
     <ClCompile Include="utility_serial.cpp" />
@@ -16,13 +15,9 @@
     <ClCompile Include="concurrent_trigger.cpp" />
     <ClCompile Include="concurrent_worker.cpp" />
     <ClCompile Include="concurrent_worker_mutex.cpp" />
-    <ClCompile Include="reflection_modifydata.cpp" />
-    <ClCompile Include="reflection_propertydata.cpp" />
-    <ClCompile Include="reflection_propertylist.cpp" />
     <ClCompile Include="memory_allocator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="reflection_statedata.h" />
     <ClInclude Include="utility_filesystem.h" />
     <ClInclude Include="utility_parser.h" />
     <ClInclude Include="utility_reflection.h" />
@@ -83,25 +78,19 @@
     <ClInclude Include="include_assert.h" />
     <ClInclude Include="include_std.h" />
     <ClInclude Include="interface_singleton.h" />
-    <ClInclude Include="reflection_modifydata.h" />
-    <ClInclude Include="reflection_propertydata.h" />
-    <ClInclude Include="reflection_propertylist.h" />
-    <ClInclude Include="reflection_reflectable.h" />
     <ClInclude Include="memory_allocator.h" />
     <ClInclude Include="export_macros.h" />
     <ClInclude Include="include_utility.h" />
+    <ClInclude Include="reflection_reflectable.h" />
+    <ClInclude Include="reflection_values.h" />
+    <ClInclude Include="reflection_properties.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="reflection_statedata.inl" />
     <None Include="concurrent_dispatcher.inl" />
     <None Include="concurrent_hazard.inl" />
     <None Include="concurrent_pool.inl" />
     <None Include="concurrent_queue.inl" />
     <None Include="interface_singleton.inl" />
-    <None Include="reflection_modifydata.inl" />
-    <None Include="reflection_propertydata.inl" />
-    <None Include="reflection_propertylist.inl" />
-    <None Include="reflection_reflectable.inl" />
     <None Include="memory_allocator.inl" />
   </ItemGroup>
 </Project>

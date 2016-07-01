@@ -32,8 +32,5 @@
     <ClCompile Include="testing_concurrency.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="testing_reflection.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
