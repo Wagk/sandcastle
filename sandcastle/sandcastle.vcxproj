@@ -180,10 +180,6 @@
     <ClCompile Include="concurrent_worker_mutex.cpp" />
     <ClCompile Include="external\json\jsoncpp.cpp" />
     <ClCompile Include="memory_allocator.cpp" />
-    <ClCompile Include="reflection_modifydata.cpp" />
-    <ClCompile Include="reflection_propertydata.cpp" />
-    <ClCompile Include="reflection_propertylist.cpp" />
-    <ClCompile Include="reflection_statedata.cpp" />
     <ClCompile Include="utility_filesystem.cpp" />
     <ClCompile Include="utility_parser.cpp" />
     <ClCompile Include="utility_serial.cpp" />
@@ -246,12 +242,10 @@
     <ClInclude Include="include_std.h" />
     <ClInclude Include="include_utility.h" />
     <ClInclude Include="interface_singleton.h" />
-    <ClInclude Include="reflection_modifydata.h" />
-    <ClInclude Include="reflection_propertydata.h" />
-    <ClInclude Include="reflection_propertylist.h" />
-    <ClInclude Include="reflection_reflectable.h" />
-    <ClInclude Include="reflection_statedata.h" />
     <ClInclude Include="memory_allocator.h" />
+    <ClInclude Include="reflection_properties.h" />
+    <ClInclude Include="reflection_reflectable.h" />
+    <ClInclude Include="reflection_values.h" />
     <ClInclude Include="utility_filesystem.h" />
     <ClInclude Include="utility_parser.h" />
     <ClInclude Include="utility_reflection.h" />
@@ -266,11 +260,6 @@
     <None Include="concurrent_queue.inl" />
     <None Include="interface_singleton.inl" />
     <None Include="memory_allocator.inl" />
-    <None Include="reflection_modifydata.inl" />
-    <None Include="reflection_propertydata.inl" />
-    <None Include="reflection_propertylist.inl" />
-    <None Include="reflection_reflectable.inl" />
-    <None Include="reflection_statedata.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

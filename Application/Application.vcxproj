@@ -231,7 +231,6 @@ copy /y "$(SolutionDir)output\sandcastle_graphics\$(Platform)\$(Configuration)\s
   <ItemGroup>
     <ClCompile Include="sandcastle.cpp" />
     <ClCompile Include="testing_concurrency.cpp" />
-    <ClCompile Include="testing_reflection.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
