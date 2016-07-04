@@ -17,6 +17,9 @@ namespace reflection
 
 	class property_descriptor
 	{
+	public:
+
+	private:
 
 	};
 
