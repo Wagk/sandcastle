@@ -210,3 +210,8 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/sandcastle.VC.db
+/sandcastle_graphics/external/libs/x64/sandcastle_x64_Debug.lib
+/sandcastle.VC.VC.opendb
+/Application/external/libs/x64/sandcastle_x64_Debug.lib
+/Application/external/libs/x64/sandcastle_graphics_x64_Debug.lib
