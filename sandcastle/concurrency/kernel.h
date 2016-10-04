@@ -14,12 +14,14 @@
 #include "thread.h"
 #include "worker.h"
 
+#include "export.h"
+
 namespace sandcastle
 {
 	namespace concurrency
 	{
 
-		class kernel
+		class CONCURRENCY_API kernel
 		{
 		public:
 
