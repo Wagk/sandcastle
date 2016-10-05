@@ -1,11 +1,14 @@
 #ifndef concurrency_job_h__
 #define concurrency_job_h__
 
-namespace sandcastle {
+#include "export.h"
+
+namespace sandcastle 
+{
 	namespace concurrency
 	{
 
-		class job
+		class SANDCASTLE_CONCURRENCY_API job
 		{
 		public:
 

@@ -20,8 +20,7 @@ namespace sandcastle
 {
 	namespace concurrency
 	{
-
-		class CONCURRENCY_API kernel
+		class SANDCASTLE_CONCURRENCY_API kernel
 		{
 		public:
 

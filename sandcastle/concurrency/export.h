@@ -3,11 +3,11 @@
 
 #ifdef CONCURRENCY_EXPORTS
 
-#define CONCURRENCY_API __declspec(dllexport)
+#define SANDCASTLE_CONCURRENCY_API __declspec(dllexport)
 
 #else
 
-#define CONCURRENCY_API __declspec(dllimport)
+#define SANDCASTLE_CONCURRENCY_API __declspec(dllimport)
 
 #endif
 

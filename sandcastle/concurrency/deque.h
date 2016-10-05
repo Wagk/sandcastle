@@ -11,7 +11,8 @@
 		- Make this lockfree
 */
 
-namespace sandcastle {
+namespace sandcastle 
+{
 	namespace concurrency
 	{
 
