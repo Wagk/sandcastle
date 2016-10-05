@@ -114,6 +114,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="batch.h" />
+    <ClInclude Include="counter.h" />
     <ClInclude Include="deque.h" />
     <ClInclude Include="export.h" />
     <ClInclude Include="job.h" />
@@ -122,6 +124,8 @@
     <ClInclude Include="worker.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="batch.cpp" />
+    <ClCompile Include="counter.cpp" />
     <ClCompile Include="deque.cpp" />
     <ClCompile Include="job.cpp" />
     <ClCompile Include="kernel.cpp" />
