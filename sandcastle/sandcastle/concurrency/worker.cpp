@@ -19,28 +19,22 @@ namespace sandcastle
 		{
 			while (_data._stop->load() == false)
 			{
-				job* task = nullptr;
-
-				if (task = _data._work->pop())
-				{
-					task->run();
-				}
-				else
-				{
-					for (deque* elem : _data._steal)
-					{
-						if (task = elem->steal())
-							break;
-					}
-
-					if (task)
-						task->run();
-					else
-					{
-						//sleep
-					}
-				}
+				run_one();
 			}
+		}
+
+		bool worker::run_one()
+		{
+			job* task = nullptr;
+
+			if (task = collect_job())
+			{
+				task->run();
+
+				return true;
+			}
+
+			return false;
 		}
 
 		void worker::submit_job(job* task)
@@ -49,6 +43,24 @@ namespace sandcastle
 				return;
 
 			_data._work->push(task);
+		}
+
+		job * worker::collect_job()
+		{
+			job* task = _data._work->pop();
+
+			if (task)
+				return task;
+			else
+			{
+				for (deque* elem : _data._steal)
+				{
+					if (task = elem->steal())
+						return task;
+				}
+			}
+
+			return nullptr;
 		}
 
 	} //namespace concurrency

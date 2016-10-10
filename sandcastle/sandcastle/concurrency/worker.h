@@ -24,10 +24,13 @@ namespace sandcastle
 
 			void init(const worker_data& info);
 			void run();
+			bool run_one(); 
 
 			void submit_job(job* job);
 
 		private:
+
+			job* collect_job();
 
 			worker_data _data;
 
