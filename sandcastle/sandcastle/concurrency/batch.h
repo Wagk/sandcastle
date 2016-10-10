@@ -6,6 +6,7 @@
 #include <vector>
 #include <atomic>
 #include "job.h"
+#include "counter.h"
 
 namespace sandcastle
 {
@@ -21,6 +22,7 @@ namespace sandcastle
 
 			virtual void func() override;
 
+			counter _ctr;
 			std::vector<job*> _jobs;
 
 		};
