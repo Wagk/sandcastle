@@ -6,17 +6,9 @@
 #include "worker.h"
 #include "deque.h"
 
-namespace sandcastle 
+namespace sandcastle::concurrency::this_thread
 {
-	namespace concurrency
-	{
-
-		namespace this_thread
-		{
-			extern thread_local worker this_worker;
-		}
-
-	} //namespace concurrency
+	extern thread_local worker this_worker;
 }
 
 #endif
