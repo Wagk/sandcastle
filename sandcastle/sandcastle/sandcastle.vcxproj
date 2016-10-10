@@ -133,7 +133,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="concurrency\deque.cpp" />
+    <ClCompile Include="concurrency\job.cpp" />
+    <ClCompile Include="concurrency\kernel.cpp" />
+    <ClCompile Include="concurrency\thread.cpp" />
+    <ClCompile Include="concurrency\worker.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="concurrency\deque.h" />
+    <ClInclude Include="concurrency\export.h" />
+    <ClInclude Include="concurrency\job.h" />
+    <ClInclude Include="concurrency\kernel.h" />
+    <ClInclude Include="concurrency\thread.h" />
+    <ClInclude Include="concurrency\worker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
