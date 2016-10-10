@@ -19,7 +19,10 @@ namespace sandcastle
 		{
 			while (_data._stop->load() == false)
 			{
-				run_one();
+				if (run_one() == false)
+				{
+					//sleep
+				}
 			}
 		}
 

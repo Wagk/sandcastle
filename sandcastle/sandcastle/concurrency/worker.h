@@ -23,6 +23,7 @@ namespace sandcastle
 		public:
 
 			void init(const worker_data& info);
+
 			void run();
 			bool run_one(); 
 
