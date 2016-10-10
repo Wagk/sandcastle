@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="concurrency\batch.cpp" />
+    <ClCompile Include="concurrency\counter.cpp" />
     <ClCompile Include="concurrency\deque.cpp" />
     <ClCompile Include="concurrency\job.cpp" />
     <ClCompile Include="concurrency\kernel.cpp" />
@@ -141,6 +143,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="concurrency\batch.h" />
+    <ClInclude Include="concurrency\counter.h" />
     <ClInclude Include="concurrency\deque.h" />
     <ClInclude Include="concurrency\export.h" />
     <ClInclude Include="concurrency\job.h" />
