@@ -1,30 +1,25 @@
 #include "job.h"
 
-namespace sandcastle
+namespace sandcastle::concurrency
 {
-	namespace concurrency
+	void job::run()
 	{
+		func();
 
-		void job::run()
+		for (counter* ctr : _ctrs)
 		{
-			func();
-
-			for (counter* ctr : _ctrs)
-			{
-				--(*ctr);
-			}
+			--(*ctr);
 		}
+	}
 
-		void job::notify(counter * ctr)
-		{
-			if (ctr)
-				_ctrs.push_back(ctr);
-		}
+	void job::notify(counter * ctr)
+	{
+		if (ctr)
+			_ctrs.push_back(ctr);
+	}
 
-		void job::reset_notify_list()
-		{
-			_ctrs.clear();
-		}
-
-	} //namespace concurrency
+	void job::reset_notify_list()
+	{
+		_ctrs.clear();
+	}
 }

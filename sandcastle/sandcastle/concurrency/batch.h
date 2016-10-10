@@ -8,25 +8,22 @@
 #include "job.h"
 #include "counter.h"
 
-namespace sandcastle
+namespace sandcastle::concurrency
 {
-	namespace concurrency
+	class SANDCASTLE_CONCURRENCY_API batch : public job
 	{
-		class SANDCASTLE_CONCURRENCY_API batch : public job
-		{
-		public:
+	public:
 
-			batch();
+		batch();
 
-		private:
+	private:
 
-			virtual void func() override;
+		virtual void func() override;
 
-			counter _ctr;
-			std::vector<job*> _jobs;
+		counter _ctr;
+		std::vector<job*> _jobs;
 
-		};
-	}
+	};
 }
 
 #endif

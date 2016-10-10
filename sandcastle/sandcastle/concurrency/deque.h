@@ -11,32 +11,27 @@
 		- Make this lockfree
 */
 
-namespace sandcastle 
+namespace sandcastle::concurrency
 {
-	namespace concurrency
+	class deque
 	{
+	public:
 
-		class deque
-		{
-		public:
+		deque();
+		deque(const deque& rhs);
 
-			deque();
-			deque(const deque& rhs);
+		bool empty() const;
 
-			bool empty() const;
+		void push(job* task);
+		job* pop();
+		job* steal();
 
-			void push(job* task);
-			job* pop();
-			job* steal();
+	private:
 
-		private:
+		mutable std::mutex _lock;
+		std::deque<job*> _queue;
 
-			mutable std::mutex _lock;
-			std::deque<job*> _queue;
-
-		};
-
-	} 
+	};
 }
 
 

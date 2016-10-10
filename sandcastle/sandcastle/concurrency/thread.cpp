@@ -1,12 +1,6 @@
 #include "thread.h"
 
-namespace sandcastle
+namespace sandcastle::concurrency::this_thread
 {
-	namespace concurrency
-	{
-		namespace this_thread
-		{
-			thread_local worker this_worker;
-		}
-	} //namespace concurrency
+	thread_local worker this_worker;
 }

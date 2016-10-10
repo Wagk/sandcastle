@@ -3,32 +3,28 @@
 
 #include <atomic>
 
-namespace sandcastle
+namespace sandcastle::concurrency
 {
-	namespace concurrency
+	class counter
 	{
-		class counter
-		{
-		public:
+	public:
 
-			counter(int = 0);
-			counter(const counter&);
+		counter(int = 0);
+		counter(const counter&);
 
-			counter& operator=(int);
-			counter& operator++();
-			counter& operator--();
+		counter& operator=(int);
+		counter& operator++();
+		counter& operator--();
 
-			operator int() const;
-			operator bool() const;
-			bool operator==(const counter&) const;
-			bool operator!=(const counter&) const;
+		operator int() const;
+		bool operator==(const counter&) const;
+		bool operator!=(const counter&) const;
 
-		private:
+	private:
 
-			std::atomic<int> _ctr;
+		std::atomic<int> _ctr;
 
-		};
-	}
+	};
 }
 
 

@@ -7,37 +7,34 @@
 #include "job.h"
 #include "deque.h"
 
-namespace sandcastle
+namespace sandcastle::concurrency
 {
-	namespace concurrency
+	struct worker_data
 	{
-		struct worker_data
-		{
-			deque* _work;
-			std::vector<deque*> _steal;
-			std::atomic<bool>* _stop;
-		};
+		deque* _work;
+		std::vector<deque*> _steal;
+		std::atomic<bool>* _stop;
+	};
 
-		class worker
-		{
-		public:
+	class worker
+	{
+	public:
 
-			void init(const worker_data& info);
+		void init(const worker_data& info);
 
-			void run();
-			bool run_one(); 
+		void run();
+		bool run_one();
 
-			void submit_job(job* job);
+		void submit_job(job* job);
 
-		private:
+	private:
 
-			job* collect_job();
+		job* collect_job();
 
-			worker_data _data;
+		worker_data _data;
 
-		};
+	};
 
-	} //namespace concurrency
 }
 
 #endif

@@ -6,30 +6,25 @@
 
 #include <vector>
 
-namespace sandcastle 
+namespace sandcastle::concurrency
 {
-	namespace concurrency
+	class SANDCASTLE_CONCURRENCY_API job
 	{
+	public:
 
-		class SANDCASTLE_CONCURRENCY_API job
-		{
-		public:
+		void run();
 
-			void run();
+		void notify(counter*);
 
-			void notify(counter*);
+		void reset_notify_list();
 
-			void reset_notify_list();
+	protected:
 
-		protected:
+		virtual void func() = 0;
 
-			virtual void func() = 0;
+		std::vector<counter*> _ctrs;
 
-			std::vector<counter*> _ctrs;
-
-		};
-
-	}
-} 
+	};
+}
 
 #endif

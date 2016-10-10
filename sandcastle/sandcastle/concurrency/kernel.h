@@ -16,41 +16,38 @@
 
 #include "export.h"
 
-namespace sandcastle
+namespace sandcastle::concurrency
 {
-	namespace concurrency
+	class SANDCASTLE_CONCURRENCY_API kernel
 	{
-		class SANDCASTLE_CONCURRENCY_API kernel
+	public:
+
+		static kernel& get()
 		{
-		public:
+			static kernel singleton;
+			return singleton;
+		}
 
-			static kernel& get()
-			{
-				static kernel singleton;
-				return singleton;
-			}
+		void init();
+		void shutdown();
 
-			void init();
-			void shutdown();
+		void launch_main_worker();
 
-			void launch_main_worker();
+	private:
 
-		private:
+		static void launch_worker(worker_data data);
 
-			static void launch_worker(worker_data data);
+		unsigned int _numthreads; //including main thread
 
-			unsigned int _numthreads; //including main thread
+		std::atomic<bool> _stop;
 
-			std::atomic<bool> _stop;
+		worker_data _main_data;
 
-			worker_data _main_data;
+		std::vector < std::thread > _threadpool;
+		std::vector < deque > _queuepool;
 
-			std::vector < std::thread > _threadpool;
-			std::vector < deque > _queuepool;
+	};
 
-		};
-
-	} //namespace concurrency
 }
 
 #endif
