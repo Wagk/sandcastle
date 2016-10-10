@@ -18,6 +18,7 @@ namespace sandcastle
 			counter& operator++();
 			counter& operator--();
 
+			operator int() const;
 			operator bool() const;
 			bool operator==(const counter&) const;
 			bool operator!=(const counter&) const;

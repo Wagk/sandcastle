@@ -37,6 +37,11 @@ namespace sandcastle
 			return *this;
 		}
 
+		counter::operator int() const
+		{
+			return _ctr.load();
+		}
+
 		counter::operator bool() const
 		{
 			return _ctr.load() != 0;
