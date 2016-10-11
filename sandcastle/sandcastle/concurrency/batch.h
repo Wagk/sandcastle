@@ -15,6 +15,12 @@ namespace sandcastle::concurrency
 	public:
 
 		batch();
+		batch(job* job, size_t size = 1);
+
+		void dispatch();
+		void wait();
+
+		void add(job* job, size_t size = 1);
 
 	private:
 

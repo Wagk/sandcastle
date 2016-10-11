@@ -8,18 +8,43 @@ namespace sandcastle::concurrency
 
 	}
 
-	void batch::func()
+	batch::batch(job * job, size_t size)
 	{
-		for (job* job : _jobs)
-		{
-			job->notify(&_ctr);
-			++_ctr;
-			this_thread::this_worker.submit_job(job);
-		}
+		add(job, size);
+	}
 
+	void batch::dispatch()
+	{
+		this_thread::this_worker.submit_job(this);
+	}
+
+	void batch::wait()
+	{
 		while (_ctr > 0)
 		{
 			this_thread::this_worker.run_one();
+		}
+	}
+
+	void batch::add(job * j, size_t size)
+	{
+		for (size_t i = 0; i < size; ++i)
+		{
+			job* t = j + i;
+
+			t->notify(&_ctr);
+			++_ctr;
+
+			_jobs.push_back(t);
+		}
+	}
+
+	void batch::func()
+	{
+		//assume that the jobs are already registered
+		for (job* job : _jobs)
+		{
+			this_thread::this_worker.submit_job(job);
 		}
 	}
 }
