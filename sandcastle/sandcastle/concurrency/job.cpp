@@ -2,6 +2,17 @@
 
 namespace sandcastle::concurrency
 {
+	job::job(worker_affinity affinity)
+		: _affinity(affinity)
+		, _ctrs(0)
+	{
+	}
+
+	worker_affinity job::affinity() const
+	{
+		return _affinity;
+	}
+
 	void job::run()
 	{
 		func();

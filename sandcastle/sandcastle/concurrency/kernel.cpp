@@ -13,10 +13,10 @@ namespace sandcastle::concurrency
 		_queuepool.resize(_numthreads);
 
 		//_queuepool[0] is ALWAYS graphics thread
-		_main_data._stop = &_stop;
-		_main_data._work = &_queuepool[0];
-		_main_data._sleep = &_sleep;
-		_main_data._sleeplock = &_sleeplock;
+		_main_data._stop		= &_stop;
+		_main_data._sleeplock	= &_sleeplock_graphics;
+		_main_data._graphics	= _main_data._work			= &_queuepool[0];
+		_main_data._sleep		= _main_data._sleepgraphics	= &_sleep_graphics;
 
 		for (auto& elem : _queuepool)
 		{
@@ -31,12 +31,14 @@ namespace sandcastle::concurrency
 		{
 			worker_data data;
 
-			data._stop = &_stop;
-			data._work = &_queuepool[i];
-			data._sleep = &_sleep;
-			data._sleeplock = &_sleeplock;
+			data._stop			= &_stop;
+			data._work			= &_queuepool[i];
+			data._sleep			= &_sleep;
+			data._sleeplock		= &_sleeplock;
+			data._graphics		= _main_data._graphics;
+			data._sleepgraphics	= _main_data._sleepgraphics;
 
-			for (size_t j = 1; j < _queuepool.size(); ++j)
+			for (size_t j = 0; j < _queuepool.size(); ++j)
 			{
 				if (data._work == &_queuepool[j])
 					continue;

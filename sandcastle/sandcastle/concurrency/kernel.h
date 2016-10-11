@@ -48,7 +48,10 @@ namespace sandcastle::concurrency
 		std::vector < deque > _queuepool;
 
 		std::mutex _sleeplock;
+		std::mutex _sleeplock_graphics;
+
 		std::condition_variable _sleep;
+		std::condition_variable _sleep_graphics;
 
 	};
 

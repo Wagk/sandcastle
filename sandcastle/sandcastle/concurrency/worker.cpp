@@ -44,9 +44,17 @@ namespace sandcastle::concurrency
 		if (task == nullptr)
 			return;
 
-		_data._work->push(task);
+		if (task->affinity() == GRAPHICS)
+		{
+			_data._graphics->push(task);
+			_data._sleepgraphics->notify_one();
+		}
+		else
+		{
+			_data._work->push(task);
+			_data._sleep->notify_one();
+		}
 
-		_data._sleep->notify_one();
 	}
 
 	job * worker::collect_job()
