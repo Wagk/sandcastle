@@ -10,7 +10,8 @@ namespace sandcastle::concurrency
 	public:
 
 		counter(int = 0);
-		counter(const counter&);
+		counter(const counter& rhs);
+		counter& operator=(const counter& rhs);
 
 		counter& operator=(int);
 		counter& operator++();

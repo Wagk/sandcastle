@@ -14,6 +14,13 @@ namespace sandcastle::concurrency
 
 	}
 
+	counter & counter::operator=(const counter & rhs)
+	{
+		_ctr.store(rhs._ctr.load());
+		
+		return *this;
+	}
+
 	counter & counter::operator=(int i)
 	{
 		_ctr.store(i);
