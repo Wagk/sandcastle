@@ -19,7 +19,7 @@ namespace sandcastle::concurrency
 		{
 			if (run_one() == false)
 			{
-				std::unique_lock<std::mutex> lock(*_data._wake);
+				std::unique_lock<std::mutex> lock(*_data._sleeplock);
 				_data._sleep->wait(lock);
 			}
 		}
