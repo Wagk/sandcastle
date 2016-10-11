@@ -39,6 +39,9 @@
     <ClCompile Include="concurrency\batch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="concurrency\step.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="concurrency\deque.h">
@@ -63,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="concurrency\batch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="concurrency\step.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
