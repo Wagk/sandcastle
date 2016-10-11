@@ -9,6 +9,7 @@
 #include <thread>
 #include <vector>
 #include <atomic>
+#include <condition_variable>
 
 #include "deque.h"
 #include "thread.h"
@@ -45,6 +46,9 @@ namespace sandcastle::concurrency
 
 		std::vector < std::thread > _threadpool;
 		std::vector < deque > _queuepool;
+
+		std::mutex _sleeplock;
+		std::condition_variable _sleep;
 
 	};
 

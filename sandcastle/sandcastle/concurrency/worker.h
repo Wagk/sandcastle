@@ -3,6 +3,7 @@
 
 #include <atomic>
 #include <vector>
+#include <condition_variable>
 
 #include "job.h"
 #include "deque.h"
@@ -14,6 +15,8 @@ namespace sandcastle::concurrency
 		deque* _work;
 		std::vector<deque*> _steal;
 		std::atomic<bool>* _stop;
+		std::condition_variable* _sleep;
+		std::mutex* _sleeplock;
 	};
 
 	class worker

@@ -1,6 +1,7 @@
 #include "worker.h"
 
 #include <cassert>
+#include <thread>
 
 namespace sandcastle::concurrency
 {
@@ -18,7 +19,8 @@ namespace sandcastle::concurrency
 		{
 			if (run_one() == false)
 			{
-				//sleep
+				std::unique_lock<std::mutex> lock(*_data._wake);
+				_data._sleep->wait(lock);
 			}
 		}
 	}
@@ -43,6 +45,8 @@ namespace sandcastle::concurrency
 			return;
 
 		_data._work->push(task);
+
+		_data._sleep->notify_one();
 	}
 
 	job * worker::collect_job()
