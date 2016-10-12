@@ -142,7 +142,7 @@
     <ClCompile Include="concurrency\deque.cpp" />
     <ClCompile Include="concurrency\job.cpp" />
     <ClCompile Include="concurrency\kernel.cpp" />
-    <ClCompile Include="concurrency\step.cpp" />
+    <ClCompile Include="concurrency\sequence.cpp" />
     <ClCompile Include="concurrency\thread.cpp" />
     <ClCompile Include="concurrency\worker.cpp" />
     <ClCompile Include="main.cpp" />
@@ -154,7 +154,7 @@
     <ClInclude Include="concurrency\export.h" />
     <ClInclude Include="concurrency\job.h" />
     <ClInclude Include="concurrency\kernel.h" />
-    <ClInclude Include="concurrency\step.h" />
+    <ClInclude Include="concurrency\sequence.h" />
     <ClInclude Include="concurrency\thread.h" />
     <ClInclude Include="concurrency\worker.h" />
   </ItemGroup>
