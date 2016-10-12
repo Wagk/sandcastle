@@ -10,15 +10,15 @@ namespace sandcastle::concurrency
 {
 	enum worker_affinity
 	{
-		GRAPHICS,
-		NONE
+		AFFINITY_GRAPHICS,
+		AFFINITY_NONE
 	};
 
 	class SANDCASTLE_CONCURRENCY_API job
 	{
 	public:
 
-		job(worker_affinity = NONE);
+		job(worker_affinity = AFFINITY_NONE);
 
 		worker_affinity affinity() const;
 

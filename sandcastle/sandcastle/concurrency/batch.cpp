@@ -4,11 +4,13 @@
 namespace sandcastle::concurrency
 {
 	batch::batch()
+		: job(AFFINITY_NONE)
 	{
 
 	}
 
 	batch::batch(job * job, size_t size)
+		: job(AFFINITY_NONE)
 	{
 		add(job, size);
 	}

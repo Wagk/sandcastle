@@ -44,7 +44,7 @@ namespace sandcastle::concurrency
 		if (task == nullptr)
 			return;
 
-		if (task->affinity() == GRAPHICS)
+		if (task->affinity() == AFFINITY_GRAPHICS)
 		{
 			_data._graphics->push(task);
 			_data._sleepgraphics->notify_one();
