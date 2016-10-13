@@ -7,25 +7,28 @@
 
 /*
 	A batch is a lot of jobs done in parallel
-	a sequence is an ordering of jobs done in sequence
+	a chain is an ordering of jobs done in sequence
 
 	I think they are perpendicular to each other,
-	you can have a batch of sequences and a sequence of batches
+	you can have a batch of chains and a chain of batches
 */
 
 namespace sandcastle::concurrency
 {
-	class sequence : public job
+	class chain : public job
 	{
 	public:
 
-		sequence();
+		chain();
+
+		void push_back(job*);
+		void clear();
 
 	private:
 
 		virtual void func() override;
 		
-		std::vector<job*> _seq;
+		std::vector<job*> _jobs;
 
 	};
 }
