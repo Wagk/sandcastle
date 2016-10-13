@@ -15,11 +15,6 @@ namespace sandcastle::concurrency
 		add(job, size);
 	}
 
-	void batch::dispatch()
-	{
-		this_thread::this_worker.submit_job(this);
-	}
-
 	void batch::wait()
 	{
 		while (_ctr > 0)
