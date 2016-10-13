@@ -20,9 +20,11 @@ namespace sandcastle::concurrency
 
 		job(worker_affinity = AFFINITY_NONE);
 
-		worker_affinity affinity() const;
+		void run();		//blocks
+		void detach();	//does not block
 
-		void run();
+		worker_affinity affinity() const;
+		bool done() const;
 
 		void notify(counter*);
 		void reset_notify_list();
@@ -31,6 +33,8 @@ namespace sandcastle::concurrency
 
 		virtual void func() = 0;
 
+		bool _running = false;
+		bool _done = false;
 		worker_affinity _affinity;
 		std::vector<counter*> _ctrs;
 
