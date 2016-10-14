@@ -24,12 +24,7 @@ namespace sandcastle::concurrency
 	{
 		for (job* const j : _jobs)
 		{
-			this_thread::this_worker.submit_job(j);
-
-			while (j->done() == false)
-			{
-				this_thread::this_worker.run_one();
-			}
+			j->run();
 		}
 	}
 }
