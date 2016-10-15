@@ -5,7 +5,7 @@
 
 namespace sandcastle::concurrency
 {
-	void kernel::init()
+	void kernel::init(job* startjob)
 	{
 		_numthreads = std::thread::hardware_concurrency();
 
@@ -30,7 +30,6 @@ namespace sandcastle::concurrency
 		for (size_t i = 1; i < _queuepool.size(); ++i)
 		{
 			worker_data data;
-
 			data._stop			= &_stop;
 			data._work			= &_queuepool[i];
 			data._sleep			= &_sleep;
@@ -46,9 +45,18 @@ namespace sandcastle::concurrency
 				data._steal.push_back(&_queuepool[j]);
 			}
 
-			_threadpool[i - 1] = std::move(std::thread(&kernel::launch_worker, data));
+			thread_info info;
+			info._data = data;
+			info._thread_id = i;
+
+			_threadpool[i - 1] = std::move(std::thread(&kernel::launch_worker, info));
 		}
 
+		//main worker info
+		this_thread::thread_id = 0;
+		this_thread::this_worker.init(_main_data);
+		this_thread::this_worker.submit_job(startjob);
+		this_thread::this_worker.run();
 	}
 
 	void kernel::shutdown()
@@ -61,14 +69,10 @@ namespace sandcastle::concurrency
 		}
 	}
 
-	void kernel::launch_main_worker()
+	void kernel::launch_worker(thread_info data)
 	{
-		launch_worker(_main_data);
-	}
-
-	void kernel::launch_worker(worker_data data)
-	{
-		this_thread::this_worker.init(data);
+		this_thread::thread_id = data._thread_id;
+		this_thread::this_worker.init(data._data);
 
 		this_thread::this_worker.run();
 	}

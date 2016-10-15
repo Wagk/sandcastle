@@ -19,6 +19,13 @@
 
 namespace sandcastle::concurrency
 {
+
+	struct thread_info
+	{
+		size_t _thread_id;
+		worker_data _data;
+	};
+
 	class SANDCASTLE_CONCURRENCY_API kernel
 	{
 	public:
@@ -29,14 +36,12 @@ namespace sandcastle::concurrency
 			return singleton;
 		}
 
-		void init();
+		void init(job* begin);
 		void shutdown();
-
-		void launch_main_worker();
 
 	private:
 
-		static void launch_worker(worker_data data);
+		static void launch_worker(thread_info data);
 
 		unsigned int _numthreads; //including main thread
 

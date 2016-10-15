@@ -8,6 +8,7 @@
 
 namespace sandcastle::concurrency::this_thread
 {
+	extern thread_local size_t thread_id;
 	extern thread_local worker this_worker;
 }
 
