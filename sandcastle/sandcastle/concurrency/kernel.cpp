@@ -27,7 +27,7 @@ namespace sandcastle::concurrency
 		}
 
 		//other workers
-		for (size_t i = 1; i < _queuepool.size(); ++i)
+		for (size_t i = 1; i < _threadpool.size(); ++i)
 		{
 			worker_data data;
 			data._stop			= &_stop;
@@ -49,7 +49,7 @@ namespace sandcastle::concurrency
 			info._data = data;
 			info._thread_id = i;
 
-			_threadpool[i - 1] = std::move(std::thread(&kernel::launch_worker, info));
+			_threadpool.emplace_back(std::move(std::thread(&kernel::launch_worker, info)));
 		}
 
 		//main worker info

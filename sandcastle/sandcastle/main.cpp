@@ -51,11 +51,11 @@ private:
 template<typename T, typename ...Args>
 sandcastle::concurrency::job* create_jobs(size_t num, Args&&... params)
 {
-	T* jobs = new T[num];
+	sandcastle::concurrency::job* jobs = new T[num];
 
 	for (size_t i = 0; i < num; ++i)
 	{
-		jobs[i].ctr(params...);
+		reinterpret_cast<T*>(jobs + i)->ctr(params...);
 	}
 
 	return jobs;
@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
 	using sandcastle::concurrency::job;
 
 	batch b1;
-	auto jobs = create_jobs<test_job>(10, &counter);
+	sandcastle::concurrency::job* jobs = create_jobs<test_job>(10, &counter);
 	b1.add(jobs, 10);
 
 	chain c1;
