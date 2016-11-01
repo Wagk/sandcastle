@@ -3,10 +3,12 @@
 #include <concurrency/kernel.h>
 #include <concurrency/chain.h>
 #include <concurrency/batch.h>
+#include <concurrency/thread.h>
 #include <atomic>
 #include <mutex>
 #include <string>
 #include <sstream>
+#include <memory>
 
 /*
 	Each thread has a worker object
@@ -25,13 +27,15 @@ struct test_job : public sandcastle::concurrency::job
 {
 public:
 
-	test_job(std::atomic<int>& ref) : _ctr(ref) {}
+	test_job(std::atomic<int>* ref = nullptr) : _ctr(ref) {}
+
+	void ctr(std::atomic<int>* ctr) { _ctr = ctr; }
 
 private:
 
 	virtual void func() override
 	{
-		int i = ++_ctr;
+		int i = ++*_ctr;
 
 		std::ostringstream str;
 
@@ -40,14 +44,21 @@ private:
 		thread_print(str);
 	}
 
-	std::atomic<int>& _ctr;
+	std::atomic<int>* _ctr;
 
 };
 
 template<typename T, typename ...Args>
 sandcastle::concurrency::job* create_jobs(size_t num, Args&&... params)
 {
-	return new T[num](params);
+	T* jobs = new T[num];
+
+	for (size_t i = 0; i < num; ++i)
+	{
+		jobs[i].ctr(params...);
+	}
+
+	return jobs;
 }
 
 int main(int argc, char* argv[])
@@ -59,7 +70,7 @@ int main(int argc, char* argv[])
 	using sandcastle::concurrency::job;
 
 	batch b1;
-	job* jobs = create_jobs<test_job>(10, counter);
+	auto jobs = create_jobs<test_job>(10, &counter);
 	b1.add(jobs, 10);
 
 	chain c1;
