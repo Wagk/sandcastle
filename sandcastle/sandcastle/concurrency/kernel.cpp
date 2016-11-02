@@ -49,7 +49,7 @@ namespace sandcastle::concurrency
 			info._data = data;
 			info._thread_id = i;
 
-			_threadpool.emplace_back(std::move(std::thread(&kernel::launch_worker, info)));
+			_threadpool[i] = std::move(std::thread(&kernel::launch_worker, info));
 		}
 
 		//main worker info

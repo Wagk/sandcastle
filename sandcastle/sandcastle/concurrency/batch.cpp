@@ -9,7 +9,7 @@ namespace sandcastle::concurrency
 
 	}
 
-	batch::batch(job * job, size_t size)
+	batch::batch(job** job, size_t size)
 		: job(AFFINITY_NONE)
 	{
 		add(job, size);
@@ -23,11 +23,14 @@ namespace sandcastle::concurrency
 		}
 	}
 
-	void batch::add(job * j, size_t size)
+	void batch::add(job** j, size_t size)
 	{
+		if (j == nullptr)
+			return;
+
 		for (size_t i = 0; i < size; ++i)
 		{
-			job* t = j + i;
+			job* t = j[i];
 
 			t->notify(&_ctr);
 			++_ctr;

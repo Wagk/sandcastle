@@ -70,7 +70,16 @@ int main(int argc, char* argv[])
 	using sandcastle::concurrency::job;
 
 	batch b1;
-	sandcastle::concurrency::job* jobs = create_jobs<test_job>(10, &counter);
+	test_job* test_jobs = new test_job[10];
+	for (size_t i = 0; i < 10; ++i)
+	{
+		test_jobs[i].ctr(&counter);
+	}
+	sandcastle::concurrency::job** jobs = new sandcastle::concurrency::job*[10];
+	for (size_t i = 0; i < 10; ++i)
+	{
+		jobs[i] = &test_jobs[i];
+	}
 	b1.add(jobs, 10);
 
 	chain c1;
@@ -80,4 +89,5 @@ int main(int argc, char* argv[])
 	sandcastle::concurrency::kernel::get().init(&c1);
 
 	delete[] jobs;
+	delete[] test_jobs;
 }
