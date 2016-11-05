@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sandcastle", "sandcastle\sandcastle.vcxproj", "{A60C8118-B634-411E-8895-C59AEE6B73DB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F775348B-72BD-498C-9AFD-F1FEF581E74F} = {F775348B-72BD-498C-9AFD-F1FEF581E74F}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "concurrency", "concurrency\concurrency.vcxproj", "{F775348B-72BD-498C-9AFD-F1FEF581E74F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,14 @@ Global
 		{A60C8118-B634-411E-8895-C59AEE6B73DB}.Release|x64.Build.0 = Release|x64
 		{A60C8118-B634-411E-8895-C59AEE6B73DB}.Release|x86.ActiveCfg = Release|Win32
 		{A60C8118-B634-411E-8895-C59AEE6B73DB}.Release|x86.Build.0 = Release|Win32
+		{F775348B-72BD-498C-9AFD-F1FEF581E74F}.Debug|x64.ActiveCfg = Debug|x64
+		{F775348B-72BD-498C-9AFD-F1FEF581E74F}.Debug|x64.Build.0 = Debug|x64
+		{F775348B-72BD-498C-9AFD-F1FEF581E74F}.Debug|x86.ActiveCfg = Debug|Win32
+		{F775348B-72BD-498C-9AFD-F1FEF581E74F}.Debug|x86.Build.0 = Debug|Win32
+		{F775348B-72BD-498C-9AFD-F1FEF581E74F}.Release|x64.ActiveCfg = Release|x64
+		{F775348B-72BD-498C-9AFD-F1FEF581E74F}.Release|x64.Build.0 = Release|x64
+		{F775348B-72BD-498C-9AFD-F1FEF581E74F}.Release|x86.ActiveCfg = Release|Win32
+		{F775348B-72BD-498C-9AFD-F1FEF581E74F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
