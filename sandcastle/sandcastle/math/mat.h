@@ -36,7 +36,6 @@ namespace sandcastle::math
 			Array& arr;
 		};
 
-
 		matrix();
 		matrix(const Array2D& arr);
 		matrix(const std::initializer_list<std::initializer_list<T>>& list);
@@ -44,6 +43,12 @@ namespace sandcastle::math
 
 		MatrixRow operator[](unsigned i);
 		const MatrixRow operator[](unsigned i) const;
+
+		T* value_ptr();
+		const T* value_ptr() const;
+		unsigned elements() const;
+		unsigned row_elements() const;
+		unsigned col_elements() const;
 
 		std::array<std::array<T, C>, R> m; // m[R][C]
 

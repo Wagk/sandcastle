@@ -57,6 +57,36 @@ namespace sandcastle::math
 		return MatrixRow(m[i]);
 	}
 
+	template<unsigned R, unsigned C, typename T>
+	T* matrix<R, C, T>::value_ptr()
+	{
+		return &m[0][0];
+	}
+
+	template<unsigned R, unsigned C, typename T>
+	const T* matrix<R, C, T>::value_ptr() const
+	{
+		return &m[0][0];
+	}
+
+	template<unsigned R, unsigned C, typename T>
+	unsigned matrix<R, C, T>::elements() const
+	{
+		return R + C;
+	}
+
+	template<unsigned R, unsigned C, typename T>
+	unsigned matrix<R, C, T>::row_elements() const
+	{
+		return R;
+	}
+
+	template<unsigned R, unsigned C, typename T>
+	unsigned matrix<R, C, T>::col_elements() const
+	{
+		return C;
+	}
+
 	template<unsigned R, unsigned C /*= R*/, typename T /*= float*/>
 	matrix<R, C, T>::matrix()
 	{
@@ -66,9 +96,9 @@ namespace sandcastle::math
 	template<unsigned R, unsigned C, typename T>
 	void identity(matrix<R, C, T>& mat)
 	{
-		for (unsigned i = 0; i < C; ++i)
+		for (unsigned i = 0; i < R; ++i)
 		{
-			for (unsigned j = 0; j < R; ++j)
+			for (unsigned j = 0; j < C; ++j)
 			{
 				if (i == j)
 				{
@@ -85,7 +115,18 @@ namespace sandcastle::math
 	template<unsigned R, unsigned C, typename T>
 	matrix<C, R, T> transpose(const matrix<R, C, T>& mat)
 	{
-		return matrix<C, R, T> mat;
+
+		matrix<C, R, T> tmat;
+
+		for (unsigned i = 0; i < R; ++i)
+		{
+			for (unsigned j = 0; j < C; ++j)
+			{
+				tmat[j][i] = mat[i][j];
+			}
+		}
+
+		return tmat;
 	}
 
 	template<unsigned R, unsigned C /*= R*/, typename T /*= float*/>
@@ -160,10 +201,10 @@ namespace sandcastle::math
 	std::ostream& operator<<(std::ostream& os, const matrix<R, C, T>& mat)
 	{
 		os << "[" << std::endl;
-		for (size_t i = 0; i < R; ++i)
+		for (unsigned i = 0; i < R; ++i)
 		{
 			os << "\t";
-			for (size_t j = 0; j < C; ++j)
+			for (unsigned j = 0; j < C; ++j)
 			{
 				os << mat[i][j] << " ";
 			}

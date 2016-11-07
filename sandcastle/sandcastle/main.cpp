@@ -105,10 +105,25 @@ void math_test()
 		{1, 2},
 		{3, 4}
 	};
+
+	sandcastle::math::matrix<2, 3> m23 = {
+		{1, 2, 3},
+		{4, 5, 6}
+	};
+
+	auto trans = sandcastle::math::transpose(m23);
+	
+	std::cout << m23 << std::endl;
+	std::cout << trans << std::endl;
+
+	for (int i = 0; i < 6; ++i)
+	{
+		std::cout << *(m23.value_ptr() + i) << std::endl;
+	}
 }
 
 int main(int argc, char* argv[])
 {
 	//concurrency_test();
-	//math_test();
+	math_test();
 }
