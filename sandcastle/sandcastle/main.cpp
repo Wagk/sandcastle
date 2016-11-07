@@ -4,6 +4,10 @@
 #include <concurrency/chain.h>
 #include <concurrency/batch.h>
 #include <concurrency/thread.h>
+
+#include <math/vector.h>
+#include <math/matrix.h>
+
 #include <atomic>
 #include <mutex>
 #include <string>
@@ -61,7 +65,7 @@ sandcastle::concurrency::job* create_jobs(size_t num, Args&&... params)
 	return jobs;
 }
 
-int main(int argc, char* argv[])
+void concurrency_test()
 {
 	std::atomic<int> counter(0);
 
@@ -90,4 +94,21 @@ int main(int argc, char* argv[])
 
 	delete[] jobs;
 	delete[] test_jobs;
+}
+
+void math_test()
+{
+	sandcastle::math::vec2 v2 = {
+		0, 1
+	};
+	sandcastle::math::mat2 m2 = {
+		{1, 2},
+		{3, 4}
+	};
+}
+
+int main(int argc, char* argv[])
+{
+	//concurrency_test();
+	math_test();
 }
