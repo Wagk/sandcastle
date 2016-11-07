@@ -3,7 +3,7 @@
 
 #include <array>
 #include <type_traits>
-#include "matrix.h"
+#include "mat.h"
 
 namespace sandcastle::math
 {
@@ -60,11 +60,11 @@ namespace sandcastle::math
 	template<unsigned R, unsigned C /*= R*/, typename T /*= float*/>
 	matrix<R, C, T>::matrix()
 	{
-		SetIdentity(*this);
+		identity(*this);
 	}
 
 	template<unsigned R, unsigned C, typename T>
-	void SetIdentity(matrix<R, C, T>& mat)
+	void identity(matrix<R, C, T>& mat)
 	{
 		for (unsigned i = 0; i < C; ++i)
 		{
@@ -83,7 +83,7 @@ namespace sandcastle::math
 	}
 
 	template<unsigned R, unsigned C, typename T>
-	matrix<C, R, T> Transpose(const matrix<R, C, T>& mat)
+	matrix<C, R, T> transpose(const matrix<R, C, T>& mat)
 	{
 		return matrix<C, R, T> mat;
 	}

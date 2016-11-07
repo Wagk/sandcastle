@@ -71,6 +71,30 @@
     <ClInclude Include="concurrency\chain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="math\mat3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mat4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vec2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vec3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vec4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mat2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\mat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="math\matrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -79,10 +103,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="math\vector.inl">
+    <None Include="math\mat.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="math\matrix.inl">
+    <None Include="math\vec.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

@@ -110,5 +110,5 @@ void math_test()
 int main(int argc, char* argv[])
 {
 	//concurrency_test();
-	math_test();
+	//math_test();
 }

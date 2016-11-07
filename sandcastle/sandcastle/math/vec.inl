@@ -1,7 +1,7 @@
 #ifndef math_vector_inl__
 #define math_vector_inl__
 
-#include "vector.h"
+#include "vec.h"
 
 namespace sandcastle::math
 {
