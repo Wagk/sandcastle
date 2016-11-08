@@ -6,13 +6,18 @@
 namespace sandcastle::math
 {
 
-	class vec2 : public vector<2, float>
+	struct vec2 : public vector<2, float>
 	{
-	public:
 
 		using vector<2, float>::vector;
 
-	private:
+		vec2(float x, float y);
+
+		float x() const { return m[0]; };
+		float y() const { return m[1]; };
+
+		void x(float in) { m[0] = in; };
+		void y(float in) { m[1] = in; };
 
 	};
 

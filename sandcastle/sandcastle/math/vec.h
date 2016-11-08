@@ -13,7 +13,8 @@ namespace sandcastle::math
 	public:
 
 		using arraytype = std::array<T, D>;
-		static const unsigned Size = D;
+
+		unsigned size() const { return D; }
 
 		vector();
 		vector(const std::initializer_list<T>& list);

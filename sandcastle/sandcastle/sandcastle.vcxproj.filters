@@ -42,6 +42,15 @@
     <ClCompile Include="concurrency\chain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="math\vec2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\vec3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\vec4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="concurrency\deque.h">

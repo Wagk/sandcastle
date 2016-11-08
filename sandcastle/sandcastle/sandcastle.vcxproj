@@ -146,6 +146,9 @@
     <ClCompile Include="concurrency\thread.cpp" />
     <ClCompile Include="concurrency\worker.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="math\vec2.cpp" />
+    <ClCompile Include="math\vec3.cpp" />
+    <ClCompile Include="math\vec4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="concurrency\batch.h" />
