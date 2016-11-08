@@ -102,6 +102,7 @@ void math_test()
 		3, 1
 	};
 
+	std::cout << v2.xx() << std::endl << std::endl;
 	std::cout << sandcastle::math::length(v2) << std::endl << std::endl;
 
 	sandcastle::math::mat2 m2 = {

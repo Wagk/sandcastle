@@ -16,6 +16,8 @@ namespace sandcastle::math
 		float x() const { return m[0]; };
 		float y() const { return m[1]; };
 
+		vec2 xx() const { return vec2(m[0], m[0]); }
+		vec2 yy() const { return vec2(m[1], m[1]); }
 		vec2 xy() const { return vec2(m[0], m[1]); }
 		vec2 yx() const { return vec2(m[1], m[0]); }
 
