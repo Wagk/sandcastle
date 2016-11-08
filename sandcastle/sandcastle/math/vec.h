@@ -26,6 +26,12 @@ namespace sandcastle::math
 	};
 
 	template<unsigned D, typename T, typename ReturnType = T>
+	ReturnType length(const vector<D, T>& vec);
+
+	template<unsigned D, typename T, typename ReturnType = T>
+	ReturnType squared_length(const vector<D, T>& vec);
+
+	template<unsigned D, typename T, typename ReturnType = T>
 	ReturnType operator*(const vector<D, T>& v1, const vector<D, T>& v2);
 
 	template<unsigned D, typename T, typename InputT>

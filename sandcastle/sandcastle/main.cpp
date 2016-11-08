@@ -99,8 +99,11 @@ void concurrency_test()
 void math_test()
 {
 	sandcastle::math::vec2 v2 = {
-		0, 1
+		3, 1
 	};
+
+	std::cout << sandcastle::math::length(v2) << std::endl << std::endl;
+
 	sandcastle::math::mat2 m2 = {
 		{1, 2},
 		{3, 4}
