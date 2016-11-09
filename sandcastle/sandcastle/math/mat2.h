@@ -12,7 +12,8 @@ namespace sandcastle::math
 
 		using matrix<2, 2, float>::matrix;
 
-		mat2(const vec2& e1, const vec2& e2);
+		mat2(const vec2& e1 = { 1, 0 }, 
+			 const vec2& e2 = { 0, 1 });
 
 	};
 

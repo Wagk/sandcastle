@@ -13,7 +13,7 @@ namespace sandcastle::math
 
 		using vector<4, float>::vector;
 
-		vec4(float x, float y, float z, float w);
+		vec4(float x = 0.f, float y = 0.f, float z = 0.f, float w = 0.f);
 		vec4(const vec3& rhs, float w);
 		vec4(const vec2& rhs, float z, float w);
 

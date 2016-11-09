@@ -68,7 +68,7 @@ namespace sandcastle::math
 		return ret;
 	}
 
-	template<unsigned D, typename T, typename InputT>
+	template<unsigned D, typename T, typename InputT, typename std::enable_if<std::is_arithmetic<InputT>::value>::type*>
 	vector<D, T>
 		operator*(const vector<D, T>& vec, InputT scale)
 	{
@@ -77,13 +77,13 @@ namespace sandcastle::math
 		return temp;
 	}
 
-	template<unsigned D, typename T, typename InputT>
+	template<unsigned D, typename T, typename InputT, typename std::enable_if<std::is_arithmetic<InputT>::value>::type*>
 	vector<D, T> operator*(InputT scale, const vector<D, T>& vec)
 	{
 		return vec * scale;
 	}
 
-	template<unsigned D, typename T, typename InputT>
+	template<unsigned D, typename T, typename InputT, typename std::enable_if<std::is_arithmetic<InputT>::value>::type*>
 	vector<D, T>& operator*=(vector<D, T>& vec, InputT scale)
 	{
 		for (size_t i = 0; i < D; ++i)

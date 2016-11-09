@@ -12,7 +12,9 @@ namespace sandcastle::math
 
 		using matrix<3, 3, float>::matrix;
 
-		mat3(const vec3& e1, const vec3& e2, const vec3& e3 = { 0, 0, 1 });
+		mat3(const vec3& e1 = { 1, 0, 0 },
+			 const vec3& e2 = { 0, 1, 0 },
+			 const vec3& e3 = { 0, 0, 1 });
 
 	};
 
