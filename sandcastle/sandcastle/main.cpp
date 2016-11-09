@@ -166,5 +166,5 @@ int main(int argc, char* argv[])
 	//concurrency_test();
 	//math_test();
 
-
+	glfw_test();
 }
