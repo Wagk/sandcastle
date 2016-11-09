@@ -145,6 +145,7 @@
     <ClCompile Include="concurrency\chain.cpp" />
     <ClCompile Include="concurrency\thread.cpp" />
     <ClCompile Include="concurrency\worker.cpp" />
+    <ClCompile Include="graphics\hello_triangle.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math\mat2.cpp" />
     <ClCompile Include="math\mat3.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="concurrency\chain.h" />
     <ClInclude Include="concurrency\thread.h" />
     <ClInclude Include="concurrency\worker.h" />
+    <ClInclude Include="graphics\hello_triangle.h" />
     <ClInclude Include="math\mat2.h" />
     <ClInclude Include="math\mat3.h" />
     <ClInclude Include="math\mat4.h" />
