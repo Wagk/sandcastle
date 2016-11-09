@@ -107,12 +107,31 @@ void concurrency_test()
 void math_test()
 {
 	sandcastle::math::vec2 v2 = {
-		0, 1
+		3, 1
 	};
+
+	std::cout << v2.xx() << std::endl << std::endl;
+	std::cout << sandcastle::math::length(v2) << std::endl << std::endl;
+
 	sandcastle::math::mat2 m2 = {
 		{1, 2},
 		{3, 4}
 	};
+
+	sandcastle::math::matrix<2, 3> m23 = {
+		{1, 2, 3},
+		{4, 5, 6}
+	};
+
+	auto trans = sandcastle::math::transpose(m23);
+	
+	std::cout << m23 << std::endl;
+	std::cout << trans << std::endl;
+
+	for (int i = 0; i < 6; ++i)
+	{
+		std::cout << *(m23.value_ptr() + i) << std::endl;
+	}
 }
 
 int glfw_test()

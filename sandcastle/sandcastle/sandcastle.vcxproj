@@ -146,6 +146,12 @@
     <ClCompile Include="concurrency\thread.cpp" />
     <ClCompile Include="concurrency\worker.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="math\mat2.cpp" />
+    <ClCompile Include="math\mat3.cpp" />
+    <ClCompile Include="math\mat4.cpp" />
+    <ClCompile Include="math\vec2.cpp" />
+    <ClCompile Include="math\vec3.cpp" />
+    <ClCompile Include="math\vec4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="concurrency\batch.h" />
@@ -157,12 +163,20 @@
     <ClInclude Include="concurrency\chain.h" />
     <ClInclude Include="concurrency\thread.h" />
     <ClInclude Include="concurrency\worker.h" />
+    <ClInclude Include="math\mat2.h" />
+    <ClInclude Include="math\mat3.h" />
+    <ClInclude Include="math\mat4.h" />
+    <ClInclude Include="math\mat.h" />
     <ClInclude Include="math\matrix.h" />
+    <ClInclude Include="math\vec2.h" />
+    <ClInclude Include="math\vec3.h" />
+    <ClInclude Include="math\vec4.h" />
+    <ClInclude Include="math\vec.h" />
     <ClInclude Include="math\vector.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="math\matrix.inl" />
-    <None Include="math\vector.inl" />
+    <None Include="math\mat.inl" />
+    <None Include="math\vec.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,7 +1,7 @@
 #ifndef math_vector_inl__
 #define math_vector_inl__
 
-#include "vector.h"
+#include "vec.h"
 
 namespace sandcastle::math
 {
@@ -34,6 +34,25 @@ namespace sandcastle::math
 		: m{ 0 }
 	{
 
+	}
+
+	template<unsigned D, typename T, typename ReturnType>
+	ReturnType length(const vector<D, T>& vec)
+	{
+		return (ReturnType)std::sqrt(squared_length(vec));
+	}
+
+	template<unsigned D, typename T, typename ReturnType>
+	ReturnType squared_length(const vector<D, T>& vec)
+	{
+		ReturnType ret{};
+
+		for (T elem : vec.m)
+		{
+			ret += (ReturnType)(elem * elem);
+		}
+
+		return ret;
 	}
 
 	template<unsigned D, typename T, typename ReturnType /*= T*/>
