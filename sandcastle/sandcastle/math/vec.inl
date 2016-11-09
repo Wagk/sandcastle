@@ -1,7 +1,7 @@
 #ifndef math_vector_inl__
 #define math_vector_inl__
 
-#include "vector.h"
+#include "vec.h"
 
 namespace sandcastle::math
 {
@@ -36,6 +36,25 @@ namespace sandcastle::math
 
 	}
 
+	template<unsigned D, typename T, typename ReturnType>
+	ReturnType length(const vector<D, T>& vec)
+	{
+		return (ReturnType)std::sqrt(squared_length(vec));
+	}
+
+	template<unsigned D, typename T, typename ReturnType>
+	ReturnType squared_length(const vector<D, T>& vec)
+	{
+		ReturnType ret{};
+
+		for (T elem : vec.m)
+		{
+			ret += (ReturnType)(elem * elem);
+		}
+
+		return ret;
+	}
+
 	template<unsigned D, typename T, typename ReturnType /*= T*/>
 	ReturnType operator*(const vector<D, T>& v1, const vector<D, T>& v2)
 	{
@@ -49,7 +68,7 @@ namespace sandcastle::math
 		return ret;
 	}
 
-	template<unsigned D, typename T, typename InputT>
+	template<unsigned D, typename T, typename InputT, typename std::enable_if<std::is_arithmetic<InputT>::value>::type*>
 	vector<D, T>
 		operator*(const vector<D, T>& vec, InputT scale)
 	{
@@ -58,13 +77,13 @@ namespace sandcastle::math
 		return temp;
 	}
 
-	template<unsigned D, typename T, typename InputT>
+	template<unsigned D, typename T, typename InputT, typename std::enable_if<std::is_arithmetic<InputT>::value>::type*>
 	vector<D, T> operator*(InputT scale, const vector<D, T>& vec)
 	{
 		return vec * scale;
 	}
 
-	template<unsigned D, typename T, typename InputT>
+	template<unsigned D, typename T, typename InputT, typename std::enable_if<std::is_arithmetic<InputT>::value>::type*>
 	vector<D, T>& operator*=(vector<D, T>& vec, InputT scale)
 	{
 		for (size_t i = 0; i < D; ++i)
