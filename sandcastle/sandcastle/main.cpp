@@ -19,7 +19,7 @@
 #include <glm/vec4.hpp>
 #include <glm/mat4x4.hpp>
 
-//#define GLFW_INCLUDE_VULKAN
+#define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
 /*
@@ -123,7 +123,7 @@ int glfw_test()
 	GLFWwindow* window = glfwCreateWindow(800, 600, "Vulkan window", nullptr, nullptr);
 
 	uint32_t extensionCount = 0;
-	//vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+	vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
 
 	std::cout << extensionCount << " extensions supported" << std::endl;
 
