@@ -11,7 +11,7 @@ namespace sandcastle::math
 
 		using vector<2, float>::vector;
 
-		vec2(float x, float y);
+		vec2(float x = 0.f, float y = 0.f);
 
 		float x() const { return m[0]; };
 		float y() const { return m[1]; };

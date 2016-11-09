@@ -12,7 +12,10 @@ namespace sandcastle::math
 
 		using matrix<4, 4, float>::matrix;
 
-		mat4(const vec4& e1, const vec4& e2, const vec4& e3, const vec4& e4 = {0, 0, 0, 1});
+		mat4(const vec4& e1 = {1, 0, 0, 0},
+			 const vec4& e2 = {0, 1, 0, 0}, 
+			 const vec4& e3 = {0, 0, 1, 0}, 
+			 const vec4& e4 = {0, 0, 0, 1});
 
 	};
 

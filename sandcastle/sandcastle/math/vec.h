@@ -3,6 +3,7 @@
 
 #include <array>
 #include <iostream>
+#include <type_traits>
 
 namespace sandcastle::math
 {
@@ -34,13 +35,13 @@ namespace sandcastle::math
 	template<unsigned D, typename T, typename ReturnType = T>
 	ReturnType operator*(const vector<D, T>& v1, const vector<D, T>& v2);
 
-	template<unsigned D, typename T, typename InputT>
+	template<unsigned D, typename T, typename InputT, typename std::enable_if<std::is_arithmetic<InputT>::value>::type* = nullptr>
 	vector<D, T> operator*(const vector<D, T>& vec, InputT scale);
 
-	template<unsigned D, typename T, typename InputT>
+	template<unsigned D, typename T, typename InputT, typename std::enable_if<std::is_arithmetic<InputT>::value>::type* = nullptr>
 	vector<D, T> operator*(InputT scale, const vector<D, T>& vec);
 
-	template<unsigned D, typename T, typename InputT>
+	template<unsigned D, typename T, typename InputT, typename std::enable_if<std::is_arithmetic<InputT>::value>::type* = nullptr>
 	vector<D, T>& operator*=(vector<D, T>& vec, InputT scale);
 
 	template<unsigned D, typename T>

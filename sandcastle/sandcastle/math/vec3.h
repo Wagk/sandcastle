@@ -13,7 +13,7 @@ namespace sandcastle::math
 		using vector<3, float>::vector;
 
 		vec3(const vec2& rhs, float z);
-		vec3(float x, float y, float z);
+		vec3(float x = 0.f, float y = 0.f, float z = 0.f);
 
 		float x() const { return m[0]; };
 		float y() const { return m[1]; };
