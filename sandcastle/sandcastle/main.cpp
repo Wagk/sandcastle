@@ -4,11 +4,23 @@
 #include <concurrency/chain.h>
 #include <concurrency/batch.h>
 #include <concurrency/thread.h>
+
+#include <math/vector.h>
+#include <math/matrix.h>
+
 #include <atomic>
 #include <mutex>
 #include <string>
 #include <sstream>
 #include <memory>
+
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
+#include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
+
+#define GLFW_INCLUDE_VULKAN
+#include <GLFW/glfw3.h>
 
 /*
 	Each thread has a worker object
@@ -61,7 +73,7 @@ sandcastle::concurrency::job* create_jobs(size_t num, Args&&... params)
 	return jobs;
 }
 
-int main(int argc, char* argv[])
+void concurrency_test()
 {
 	std::atomic<int> counter(0);
 
@@ -90,4 +102,50 @@ int main(int argc, char* argv[])
 
 	delete[] jobs;
 	delete[] test_jobs;
+}
+
+void math_test()
+{
+	sandcastle::math::vec2 v2 = {
+		0, 1
+	};
+	sandcastle::math::mat2 m2 = {
+		{1, 2},
+		{3, 4}
+	};
+}
+
+int glfw_test()
+{
+	glfwInit();
+
+	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+	GLFWwindow* window = glfwCreateWindow(800, 600, "Vulkan window", nullptr, nullptr);
+
+	uint32_t extensionCount = 0;
+	vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+
+	std::cout << extensionCount << " extensions supported" << std::endl;
+
+	glm::mat4 matrix;
+	glm::vec4 vec;
+	auto test = matrix * vec;
+
+	while (!glfwWindowShouldClose(window)) {
+		glfwPollEvents();
+	}
+
+	glfwDestroyWindow(window);
+
+	glfwTerminate();
+
+	return 0;
+}
+
+int main(int argc, char* argv[])
+{
+	//concurrency_test();
+	//math_test();
+
+
 }

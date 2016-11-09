@@ -71,5 +71,19 @@
     <ClInclude Include="concurrency\chain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="math\matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="math\vector.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="math\matrix.inl">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
