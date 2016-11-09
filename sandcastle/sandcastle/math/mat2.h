@@ -2,17 +2,17 @@
 #define math_matrix_2_h__
 
 #include <math/mat.h>
+#include <math/vec2.h>
 
 namespace sandcastle::math
 {
 
-	class mat2 : public matrix<2, 2, float>
+	struct mat2 : public matrix<2, 2, float>
 	{
-	public:
 
 		using matrix<2, 2, float>::matrix;
 
-	private:
+		mat2(const vec2& e1, const vec2& e2);
 
 	};
 

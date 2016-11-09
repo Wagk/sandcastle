@@ -2,17 +2,17 @@
 #define math_matrix_3_h__
 
 #include <math/mat.h>
+#include <math/vec3.h>
 
 namespace sandcastle::math
 {
 
-	class mat3 : public matrix<3, 3, float>
+	struct mat3 : public matrix<3, 3, float>
 	{
-	public:
 
 		using matrix<3, 3, float>::matrix;
 
-	private:
+		mat3(const vec3& e1, const vec3& e2, const vec3& e3 = { 0, 0, 1 });
 
 	};
 
