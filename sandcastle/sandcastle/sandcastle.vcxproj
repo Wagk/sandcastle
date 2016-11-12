@@ -145,6 +145,7 @@
     <ClCompile Include="concurrency\chain.cpp" />
     <ClCompile Include="concurrency\thread.cpp" />
     <ClCompile Include="concurrency\worker.cpp" />
+    <ClCompile Include="io\serial.cpp" />
     <ClCompile Include="lib\lib_json\json_reader.cpp" />
     <ClCompile Include="lib\lib_json\json_value.cpp" />
     <ClCompile Include="lib\lib_json\json_writer.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="concurrency\chain.h" />
     <ClInclude Include="concurrency\thread.h" />
     <ClInclude Include="concurrency\worker.h" />
+    <ClInclude Include="io\serial.h" />
     <ClInclude Include="lib\GLFW\glfw3.h" />
     <ClInclude Include="lib\GLFW\glfw3native.h" />
     <ClInclude Include="lib\json\allocator.h" />
