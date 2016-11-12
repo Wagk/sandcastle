@@ -145,6 +145,9 @@
     <ClCompile Include="concurrency\chain.cpp" />
     <ClCompile Include="concurrency\thread.cpp" />
     <ClCompile Include="concurrency\worker.cpp" />
+    <ClCompile Include="lib\lib_json\json_reader.cpp" />
+    <ClCompile Include="lib\lib_json\json_value.cpp" />
+    <ClCompile Include="lib\lib_json\json_writer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math\mat2.cpp" />
     <ClCompile Include="math\mat3.cpp" />
@@ -163,6 +166,20 @@
     <ClInclude Include="concurrency\chain.h" />
     <ClInclude Include="concurrency\thread.h" />
     <ClInclude Include="concurrency\worker.h" />
+    <ClInclude Include="lib\GLFW\glfw3.h" />
+    <ClInclude Include="lib\GLFW\glfw3native.h" />
+    <ClInclude Include="lib\json\allocator.h" />
+    <ClInclude Include="lib\json\assertions.h" />
+    <ClInclude Include="lib\json\autolink.h" />
+    <ClInclude Include="lib\json\config.h" />
+    <ClInclude Include="lib\json\features.h" />
+    <ClInclude Include="lib\json\forwards.h" />
+    <ClInclude Include="lib\json\json.h" />
+    <ClInclude Include="lib\json\reader.h" />
+    <ClInclude Include="lib\json\value.h" />
+    <ClInclude Include="lib\json\version.h" />
+    <ClInclude Include="lib\json\writer.h" />
+    <ClInclude Include="lib\lib_json\json_tool.h" />
     <ClInclude Include="math\mat2.h" />
     <ClInclude Include="math\mat3.h" />
     <ClInclude Include="math\mat4.h" />
@@ -175,6 +192,7 @@
     <ClInclude Include="math\vector.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="lib\lib_json\json_valueiterator.inl" />
     <None Include="math\mat.inl" />
     <None Include="math\vec.inl" />
   </ItemGroup>
