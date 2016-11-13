@@ -72,6 +72,9 @@
     <ClCompile Include="io\serial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="io\value.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="concurrency\deque.h">
@@ -174,6 +177,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="io\serial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io\value.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
