@@ -22,6 +22,8 @@
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
+#include <graphics/hello_triangle.h>
+
 /*
 	Each thread has a worker object
 */
@@ -161,10 +163,24 @@ int glfw_test()
 	return 0;
 }
 
+void graphics_test()
+{
+	sandcastle::graphics::simpletriangle triangle;
+
+	try
+	{
+		triangle.run();
+	}
+	catch (const std::runtime_error& err)
+	{
+		std::cerr << err.what() << std::endl;
+	}
+}
+
 int main(int argc, char* argv[])
 {
 	//concurrency_test();
 	//math_test();
 
-	glfw_test();
+	graphics_test();
 }

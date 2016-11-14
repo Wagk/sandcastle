@@ -164,6 +164,7 @@
     <ClInclude Include="concurrency\chain.h" />
     <ClInclude Include="concurrency\thread.h" />
     <ClInclude Include="concurrency\worker.h" />
+    <ClInclude Include="graphics\vkhandle.h" />
     <ClInclude Include="graphics\hello_triangle.h" />
     <ClInclude Include="math\mat2.h" />
     <ClInclude Include="math\mat3.h" />

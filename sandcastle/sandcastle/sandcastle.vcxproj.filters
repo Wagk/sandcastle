@@ -125,6 +125,9 @@
     <ClInclude Include="graphics\hello_triangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="graphics\vkhandle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="math\mat.inl">
