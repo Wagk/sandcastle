@@ -13,9 +13,14 @@ namespace sandcastle::graphics
 	public:
 		
 		vkhandle() : vkhandle([](T, VkAllocationCallbacks*) {}) {}
+
+		vkhandle(std::function<void(T, VkAllocationCallbacks*)> deletef)
+			: _deleter([=](T obj) {deletef(obj, nullptr); }) {}
+
 		vkhandle(const vkhandle<VkInstance>& instance,
 			std::function<void(VkInstance, T, VkAllocationCallbacks*)> deletef)
 			: _deleter([&instance, deletef](T obj) {deletef(instance, obj, nullptr); }) {}
+
 		vkhandle(const vkhandle<VkDevice>& device, 
 			std::function<void(VkDevice, T, VkAllocationCallbacks*)> deletef)
 			: _deleter([&device, deletef](T obj) {deletef(device, obj, nullptr); }) {}
@@ -61,7 +66,7 @@ namespace sandcastle::graphics
 			}
 		}
 
-	}
+	};
 
 }
 

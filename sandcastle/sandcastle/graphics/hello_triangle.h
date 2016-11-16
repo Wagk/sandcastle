@@ -1,8 +1,13 @@
 #ifndef graphics_hello_triangle_h__
 #define graphics_hello_triangle_h__
 
+#include <vector>
+#include <iostream>
+
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
+
+#include "vkhandle.h"
 
 namespace sandcastle::graphics
 {
@@ -17,6 +22,7 @@ namespace sandcastle::graphics
 		{
 
 			init();
+			initvulkan();
 			main_loop();
 
 		}
@@ -24,6 +30,7 @@ namespace sandcastle::graphics
 	private:
 
 		GLFWwindow* _window;
+		vkhandle<VkInstance> _instance{vkDestroyInstance};
 
 		void init()
 		{
@@ -37,11 +44,55 @@ namespace sandcastle::graphics
 
 		}
 
+		void initvulkan()
+		{
+			createinstance();
+		}
+
 		void main_loop()
 		{
 
-			while (!glfwWindowShouldClose(_window)) {
+			while (!glfwWindowShouldClose(_window)) 
+			{
 				glfwPollEvents();
+			}
+
+		}
+
+		void createinstance()
+		{
+
+			VkApplicationInfo appinfo = {};
+			appinfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
+			appinfo.pApplicationName = "Hello Triangle";
+			appinfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
+			appinfo.pEngineName = "No Engine";
+			appinfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
+			appinfo.apiVersion = VK_API_VERSION_1_0;
+
+			unsigned int glfw_extension_count = 0;
+			const char** glfw_extensions = glfwGetRequiredInstanceExtensions(&glfw_extension_count);
+
+			VkInstanceCreateInfo createinfo = {};
+			createinfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+			createinfo.pApplicationInfo = &appinfo;
+			createinfo.enabledExtensionCount = glfw_extension_count;
+			createinfo.ppEnabledExtensionNames = glfw_extensions;
+			createinfo.enabledLayerCount = 0;
+
+			VkResult result = vkCreateInstance(&createinfo, nullptr, _instance.replace());
+
+			uint32_t extension_count = 0;
+			vkEnumerateInstanceExtensionProperties(nullptr, &extension_count, nullptr);
+
+			std::vector<VkExtensionProperties> extensions(extension_count);
+
+			vkEnumerateInstanceExtensionProperties(nullptr, &extension_count, extensions.data());
+
+			std::cout << "Available Extensions:" << std::endl;
+			for (const auto& exts : extensions)
+			{
+				std::cout << "\t" << exts.extensionName << std::endl;
 			}
 
 		}
