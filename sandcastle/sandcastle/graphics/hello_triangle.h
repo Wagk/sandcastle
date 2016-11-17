@@ -59,6 +59,21 @@ namespace sandcastle::graphics
 
 		}
 
+		//assumes the instance is already initialized
+		std::vector<VkExtensionProperties> enumerateExtensions() const
+		{
+
+			uint32_t extension_count = 0;
+			vkEnumerateInstanceExtensionProperties(nullptr, &extension_count, nullptr);
+
+			std::vector<VkExtensionProperties> extensions(extension_count);
+
+			vkEnumerateInstanceExtensionProperties(nullptr, &extension_count, extensions.data());
+
+			return extensions;
+
+		}
+
 		void createinstance()
 		{
 
@@ -82,12 +97,7 @@ namespace sandcastle::graphics
 
 			VkResult result = vkCreateInstance(&createinfo, nullptr, _instance.replace());
 
-			uint32_t extension_count = 0;
-			vkEnumerateInstanceExtensionProperties(nullptr, &extension_count, nullptr);
-
-			std::vector<VkExtensionProperties> extensions(extension_count);
-
-			vkEnumerateInstanceExtensionProperties(nullptr, &extension_count, extensions.data());
+			std::vector<VkExtensionProperties> extensions = enumerateExtensions();
 
 			std::cout << "Available Extensions:" << std::endl;
 			for (const auto& exts : extensions)
