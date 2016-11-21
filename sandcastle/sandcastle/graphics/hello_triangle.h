@@ -95,7 +95,10 @@ namespace sandcastle::graphics
 			createinfo.ppEnabledExtensionNames = glfw_extensions;
 			createinfo.enabledLayerCount = 0;
 
-			VkResult result = vkCreateInstance(&createinfo, nullptr, _instance.replace());
+			if (vkCreateInstance(&createinfo, nullptr, _instance.replace()) != VK_SUCCESS)
+			{
+				throw std::runtime_error("Failed to create instance!");
+			}
 
 			std::vector<VkExtensionProperties> extensions = enumerateExtensions();
 
