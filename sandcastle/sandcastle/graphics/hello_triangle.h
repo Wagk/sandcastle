@@ -27,6 +27,8 @@ namespace sandcastle::graphics
 		void main_loop();
 		std::vector<VkExtensionProperties> enumerateExtensions() const;
 
+		bool check_validation_layer_support();
+
 		void createinstance();
 
 	};

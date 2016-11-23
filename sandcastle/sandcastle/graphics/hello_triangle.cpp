@@ -1,11 +1,23 @@
 #include "hello_triangle.h"
+#include <vector>
+#include <string>
 
 namespace sandcastle::graphics
 {
 	const int width = 800;
 	const int height = 600;
 
-	inline void simpletriangle::run()
+	const std::vector<const char*> validationlayers = {
+		"VK_LAYER_LUNARG_standard_validation"
+	};
+
+#ifdef NDEBUG
+	const bool enablevalidationlayers = false;
+#else
+	const bool enablevalidationlayers = true;
+#endif
+
+	void simpletriangle::run()
 	{
 
 		init();
@@ -14,7 +26,7 @@ namespace sandcastle::graphics
 
 	}
 
-	inline void simpletriangle::init()
+	void simpletriangle::init()
 	{
 
 		glfwInit();
@@ -26,12 +38,12 @@ namespace sandcastle::graphics
 
 	}
 
-	inline void simpletriangle::initvulkan()
+	void simpletriangle::initvulkan()
 	{
 		createinstance();
 	}
 
-	inline void simpletriangle::main_loop()
+	void simpletriangle::main_loop()
 	{
 
 		while (!glfwWindowShouldClose(_window))
@@ -42,7 +54,7 @@ namespace sandcastle::graphics
 	}
 
 	//assumes the instance is already initialized
-	inline std::vector<VkExtensionProperties> simpletriangle::enumerateExtensions() const
+	std::vector<VkExtensionProperties> simpletriangle::enumerateExtensions() const
 	{
 
 		uint32_t extension_count = 0;
@@ -56,8 +68,42 @@ namespace sandcastle::graphics
 
 	}
 
-	inline void simpletriangle::createinstance()
+	bool simpletriangle::check_validation_layer_support()
 	{
+		uint32_t layercount;
+
+		vkEnumerateInstanceLayerProperties(&layercount, nullptr);
+
+		std::vector<VkLayerProperties> availablelayers(layercount);
+		vkEnumerateInstanceLayerProperties(&layercount, availablelayers.data());
+
+		bool every_layer_supported = true;
+		for (const std::string& layer : validationlayers)
+		{
+			bool this_layer_supported = false;
+
+			for (const auto& avail : availablelayers)
+			{
+				if (std::strcmp(avail.layerName , layer.c_str()) == 0)
+				{
+					this_layer_supported = true;
+					break;
+				}
+			}
+
+			if (this_layer_supported == false)
+				every_layer_supported = false;
+		}
+
+		return every_layer_supported;
+	}
+
+	void simpletriangle::createinstance()
+	{
+		if (enablevalidationlayers && check_validation_layer_support() == false)
+		{
+			throw std::runtime_error("validation layers requested, but not available!~");
+		}
 
 		VkApplicationInfo appinfo = {};
 		appinfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
@@ -75,7 +121,14 @@ namespace sandcastle::graphics
 		createinfo.pApplicationInfo = &appinfo;
 		createinfo.enabledExtensionCount = glfw_extension_count;
 		createinfo.ppEnabledExtensionNames = glfw_extensions;
-		createinfo.enabledLayerCount = 0;
+		
+		if(enablevalidationlayers == false)
+			createinfo.enabledLayerCount = 0;
+		else
+		{
+			createinfo.enabledLayerCount = validationlayers.size();
+			createinfo.ppEnabledLayerNames = validationlayers.data();
+		}
 
 		if (vkCreateInstance(&createinfo, nullptr, _instance.replace()) != VK_SUCCESS)
 		{
