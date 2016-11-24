@@ -6,15 +6,27 @@
 namespace sandcastle::io::serial
 {
 
-	class interface
+    template<typename T>
+	class serializable
 	{
 	public:
 
-		virtual value data() const = 0;
-		virtual void data(const value&) = 0;
+        virtual void operator<<(serial::value);
+        virtual void operator>>(serial::value);
 
 	};
 	
+    /*
+     *  A a;
+     *  a >> value >> json;
+     *  a >> value >> son;
+     *
+     *  class A : serializable<A>
+     *  {
+     *
+     *  };
+     *
+     * */
 }
 
 #endif
