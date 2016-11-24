@@ -5,18 +5,52 @@
 #include <vector>
 #include <memory>
 
+/*
+ * Previously we attempted to unify the interfaces by using a single monolithic
+ * object. This time we try to unify the interfaces by using iterators
+ *
+ * `iterator_base` can probably be a base class, but the core
+ * workhorse of the iterator would probably be a templated object
+ * much like the std iterators
+ *
+ */
+
 namespace sandcastle::io::serial
 {
+    class value;
 
-    //values can store either actual PODs or other values
-    class value_base
+    class iterator_base
     {
-        public:
+    public:
 
-        private:
+        virtual value& operator*() = 0;
+        virtual const value& operator*() const = 0;
+        virtual bool operator==(const iterator_base& rhs) const;
+
+        virtual iterator_base& operator++() = 0;
+
+    private:
     };
 
-	class struct_value : public value_base
+    //values can store either actual PODs or other values
+    class value
+    {
+    public:
+
+        using iterator = iterator_base;
+        
+        value(const std::string& type);
+
+        virtual iterator_base begin() = 0;
+        virtual iterator_base end() = 0;
+
+    private:
+
+        std::string _type;
+        
+    };
+
+	class struct_value : public value
 	{
 	public:
 
@@ -41,20 +75,31 @@ namespace sandcastle::io::serial
 
 	};
 
-    class array_value : public value_base
+    class array_value : public value
     {
+        public:
+
+            array_value(const std::string& type);
+
+            value& operator[](size_t index);
+            const value& operator[](size_t index) const;
+
+        private:
+
+            std::vector<std::unique_ptr<value>> _values;
 
     };
 
-    class stored_value : public value_base
+    template<typename T>
+    class data_value : public value
     {
+        public:
 
-    }
 
-    //example
-    void operator>>(value val, json son)
-    {
-        
+
+            T value() const;
+
+        private:
     }
 
 }
