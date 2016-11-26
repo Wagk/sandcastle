@@ -75,6 +75,18 @@
     <ClCompile Include="io\value.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="io\reflection_propertydata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\reflection_propertylist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\reflection_statedata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\reflection_modifydata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="concurrency\deque.h">
@@ -182,6 +194,21 @@
     <ClInclude Include="io\value.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="io\reflection_modifydata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io\reflection_propertydata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io\reflection_propertylist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io\reflection_reflectable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io\reflection_statedata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="math\mat.inl">
@@ -191,6 +218,21 @@
       <Filter>Header Files</Filter>
     </None>
     <None Include="lib\lib_json\json_valueiterator.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="io\reflection_modifydata.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="io\reflection_propertydata.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="io\reflection_propertylist.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="io\reflection_reflectable.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="io\reflection_statedata.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
