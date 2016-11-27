@@ -1,12 +1,12 @@
 /*!************************************************************
-Created:	2016/04/20
+Created:	2016/04/15
 Intent:
 
 **************************************************************/
-#ifndef reflection_propertydata_inl__
-#define reflection_propertydata_inl__
+#ifndef reflection_metaclass_inl__
+#define reflection_metaclass_inl__
 
-#include "reflection_propertydata.h"
+#include "reflectable.h"
 
 namespace sandcastle::io::serial
 {

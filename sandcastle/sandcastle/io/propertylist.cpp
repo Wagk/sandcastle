@@ -3,9 +3,8 @@
   Note	:
 
 **************************************************************/
-#include "reflection_propertylist.h"
-
-#include "include_assert.h"
+#include "propertylist.h"
+#include <string>
 
 namespace sandcastle::io::serial
 {
@@ -14,7 +13,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  propertylist::propertylist()
+  property_list::property_list()
     : m_typename("")
     , m_arraycount(0)
     , m_defaultvalue("")
@@ -26,7 +25,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  propertylist& propertylist::operator[](const std::string& name)
+  property_list& property_list::operator[](const std::string& name)
   {
     return m_memberlists[name];
   }
@@ -34,7 +33,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  void propertylist::Swap(propertylist& rhs)
+  void property_list::Swap(property_list& rhs)
   {
     std::swap(m_typename, rhs.m_typename);
     std::swap(m_arraycount, rhs.m_arraycount);
@@ -44,7 +43,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  bool propertylist::Validate() const
+  bool property_list::Validate() const
   {
     if (m_typename == "" || m_arraycount == 0)
       return false;
@@ -61,7 +60,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  std::string propertylist::PODstd::stringify(PODType type)
+  std::string property_list::PODStringify(PODType type)
   {
     switch (type)
     {
@@ -106,9 +105,9 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  propertylist& propertylist::operator=(const propertylist& rhs)
+  property_list& property_list::operator=(const property_list& rhs)
   {
-    propertylist temp(rhs);
+    property_list temp(rhs);
     temp.Swap(*this);
 
     return *this;

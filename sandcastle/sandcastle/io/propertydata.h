@@ -44,8 +44,6 @@
 #ifndef reflection_propertydata_h__
 #define reflection_propertydata_h__
 
-#include "include_std.h"
-
 #include <type_traits>
 
 namespace sandcastle::io::serial
@@ -53,7 +51,7 @@ namespace sandcastle::io::serial
 
   class serializable;
 
-  enum DataLayoutType
+  enum data_layout_type
   {
     STRUCT,
     ARRAY,
@@ -62,14 +60,14 @@ namespace sandcastle::io::serial
 
   //helper types
   template<typename T>
-  using MirroredType = typename std::enable_if<std::is_base_of<serializable, T>::value == true, T>::type;
+  using mirrored_type = typename std::enable_if<std::is_base_of<serializable, T>::value == true, T>::type;
   template<typename T>
-  using NonMirroredType = typename std::enable_if<std::is_base_of<serializable, T>::value == false, T>::type;
+  using non_mirrored_type = typename std::enable_if<std::is_base_of<serializable, T>::value == false, T>::type;
 
 
 } //namespace sandcastle::io::serial
 
-#include "reflection_propertydata.inl"
+#include "propertydata.inl"
 
 #endif // reflection_propertydata_h__
 /*!************************************************************

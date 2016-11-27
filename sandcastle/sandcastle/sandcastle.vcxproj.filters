@@ -75,16 +75,16 @@
     <ClCompile Include="io\value.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="io\reflection_propertydata.cpp">
+    <ClCompile Include="io\statedata.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="io\reflection_propertylist.cpp">
+    <ClCompile Include="io\modifydata.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="io\reflection_statedata.cpp">
+    <ClCompile Include="io\propertydata.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="io\reflection_modifydata.cpp">
+    <ClCompile Include="io\propertylist.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -194,19 +194,19 @@
     <ClInclude Include="io\value.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="io\reflection_modifydata.h">
+    <ClInclude Include="io\statedata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="io\reflection_propertydata.h">
+    <ClInclude Include="io\modifydata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="io\reflection_propertylist.h">
+    <ClInclude Include="io\propertydata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="io\reflection_reflectable.h">
+    <ClInclude Include="io\propertylist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="io\reflection_statedata.h">
+    <ClInclude Include="io\reflectable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -220,19 +220,19 @@
     <None Include="lib\lib_json\json_valueiterator.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="io\reflection_modifydata.inl">
+    <None Include="io\statedata.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="io\reflection_propertydata.inl">
+    <None Include="io\modifydata.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="io\reflection_propertylist.inl">
+    <None Include="io\propertydata.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="io\reflection_reflectable.inl">
+    <None Include="io\propertylist.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="io\reflection_statedata.inl">
+    <None Include="io\reflectable.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

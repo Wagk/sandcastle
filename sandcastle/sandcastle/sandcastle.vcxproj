@@ -145,11 +145,11 @@
     <ClCompile Include="concurrency\chain.cpp" />
     <ClCompile Include="concurrency\thread.cpp" />
     <ClCompile Include="concurrency\worker.cpp" />
-    <ClCompile Include="io\reflection_modifydata.cpp" />
-    <ClCompile Include="io\reflection_propertydata.cpp" />
-    <ClCompile Include="io\reflection_propertylist.cpp" />
-    <ClCompile Include="io\reflection_statedata.cpp" />
+    <ClCompile Include="io\modifydata.cpp" />
+    <ClCompile Include="io\propertydata.cpp" />
+    <ClCompile Include="io\propertylist.cpp" />
     <ClCompile Include="io\serial.cpp" />
+    <ClCompile Include="io\statedata.cpp" />
     <ClCompile Include="io\value.cpp" />
     <ClCompile Include="lib\lib_json\json_reader.cpp" />
     <ClCompile Include="lib\lib_json\json_value.cpp" />
@@ -172,12 +172,12 @@
     <ClInclude Include="concurrency\chain.h" />
     <ClInclude Include="concurrency\thread.h" />
     <ClInclude Include="concurrency\worker.h" />
-    <ClInclude Include="io\reflection_modifydata.h" />
-    <ClInclude Include="io\reflection_propertydata.h" />
-    <ClInclude Include="io\reflection_propertylist.h" />
-    <ClInclude Include="io\reflection_reflectable.h" />
-    <ClInclude Include="io\reflection_statedata.h" />
+    <ClInclude Include="io\modifydata.h" />
+    <ClInclude Include="io\propertydata.h" />
+    <ClInclude Include="io\propertylist.h" />
+    <ClInclude Include="io\reflectable.h" />
     <ClInclude Include="io\serial.h" />
+    <ClInclude Include="io\statedata.h" />
     <ClInclude Include="io\value.h" />
     <ClInclude Include="lib\GLFW\glfw3.h" />
     <ClInclude Include="lib\GLFW\glfw3native.h" />
@@ -205,11 +205,11 @@
     <ClInclude Include="math\vector.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="io\reflection_modifydata.inl" />
-    <None Include="io\reflection_propertydata.inl" />
-    <None Include="io\reflection_propertylist.inl" />
-    <None Include="io\reflection_reflectable.inl" />
-    <None Include="io\reflection_statedata.inl" />
+    <None Include="io\modifydata.inl" />
+    <None Include="io\propertydata.inl" />
+    <None Include="io\propertylist.inl" />
+    <None Include="io\reflectable.inl" />
+    <None Include="io\statedata.inl" />
     <None Include="lib\lib_json\json_valueiterator.inl" />
     <None Include="math\mat.inl" />
     <None Include="math\vec.inl" />

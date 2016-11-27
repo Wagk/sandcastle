@@ -3,10 +3,10 @@
 	Note	:
 		
 **************************************************************/
-#include "reflection_modifydata.h"
+#include "modifydata.h"
 
 #include <cassert>
-#include <std::string>
+#include <string>
 
 namespace sandcastle::io::serial
 {
@@ -14,7 +14,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  Modifydata& Modifydata::operator[](const std::std::string& name)
+  modify_data& modify_data::operator[](const std::string& name)
   {
     assert(m_layout == STRUCT);
 
@@ -24,7 +24,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  const Modifydata& Modifydata::operator[](const std::std::string& name) const
+  const modify_data& modify_data::operator[](const std::string& name) const
   {
     assert(m_layout == STRUCT);
 
@@ -34,7 +34,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  Modifydata& Modifydata::operator[](size_t index)
+  modify_data& modify_data::operator[](size_t index)
   {
     assert(m_layout == STRUCT && index < m_arrayfields.size());
 
@@ -44,7 +44,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  const Modifydata& Modifydata::operator[](size_t index) const
+  const modify_data& modify_data::operator[](size_t index) const
   {
     assert(m_layout == STRUCT && index < m_arrayfields.size());
 
@@ -54,7 +54,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  bool Modifydata::ToModify(const std::std::string& name) const
+  bool modify_data::to_modify(const std::string& name) const
   {
     return m_modify;
   }

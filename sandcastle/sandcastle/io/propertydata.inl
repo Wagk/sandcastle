@@ -1,20 +1,24 @@
 /*!************************************************************
-	Created	:	2016/04/19
-	Note	:
-		
+Created:	2016/04/20
+Intent:
+
 **************************************************************/
-#include "reflection_propertydata.h"
-#include "include_assert.h"
+#ifndef reflection_propertydata_inl__
+#define reflection_propertydata_inl__
+
+#include "propertydata.h"
 
 namespace sandcastle::io::serial
 {
 
+
+
 } //namespace sandcastle::io::serial
 
 
+#endif
 /*!************************************************************
-	Todo:
-			
-	References:
-		
+  Todo:
+
 **************************************************************/
+

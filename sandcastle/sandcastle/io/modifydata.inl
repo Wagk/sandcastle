@@ -9,41 +9,41 @@
 	Note	:
 		
 **************************************************************/
-#ifndef reflection_statedata_inl__
-#define reflection_statedata_inl__
+#ifndef reflection_modifydata_inl__
+#define reflection_modifydata_inl__
 
-#include "reflection_statedata.h"
-
+#include "modifydata.h"
 #include <sstream>
 
 namespace sandcastle::io::serial
 {
-
   /*!************************************************************
-  this guy we just stream over
+
   **************************************************************/
   template<typename T>
-  void statedata::operator<<(const NonMirroredType<T>& value)
+  bool sandcastle::io::serial::modify_data::operator>>(non_mirrored_type<T>& value)
   {
-    std::ostd::stringstream ostr;
+    assert(m_layout == LEAF);
 
-    ostr << value;
-    m_leaf_field; = ostr.str();
-    m_layout = LEAF;
+    str::istd::stringstream(m_field) >> value;
+
+    return true;
   }
 
   /*!************************************************************
 
   **************************************************************/
   template<typename T>
-  void statedata::operator<<(const MirroredType<T>& value)
+  bool sandcastle::io::serial::modify_data::operator>>(mirrored_type<T>& value)
   {
-    *this = value.State();
+    assert(m_layout == LEAF);
+
+    return value.Modify(*this);
   }
 
 } //namespace sandcastle::io::serial
 
-#endif // reflection_statedata_h__
+#endif // reflection_modifydata_h__
 /*!************************************************************
 	Todo:
 			

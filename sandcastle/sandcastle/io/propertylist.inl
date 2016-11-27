@@ -1,24 +1,30 @@
 /*!************************************************************
-Created:	2016/04/15
-Intent:
-
+	Created	:	2016/04/22
+	Intent	:		
+		
+	Usage	:
+		```
+			
+		```
+	Note	:
+		
 **************************************************************/
-#ifndef reflection_metaclass_inl__
-#define reflection_metaclass_inl__
+#ifndef reflection_propertylist_inl__
+#define reflection_propertylist_inl__
 
-#include "reflection_reflectable.h"
+#include "propertylist.h"
 
 namespace sandcastle::io::serial
 {
 
-
-
 } //namespace sandcastle::io::serial
 
-
-#endif
+#endif // reflection_propertylist_h__
 /*!************************************************************
-  Todo:
-
+	Todo:
+			
+	References:
+		
 **************************************************************/
+
 

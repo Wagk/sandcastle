@@ -36,9 +36,10 @@
 #ifndef reflection_propertylist_h__
 #define reflection_propertylist_h__
 
-#include "include_std.h"
-#include "reflection_propertydata.h"
+#include "propertydata.h"
 #include <type_traits>
+
+#include <map>
 
 namespace sandcastle::io::serial
 {
@@ -65,31 +66,31 @@ namespace sandcastle::io::serial
   };
 
   //property list
-  class propertylist
+  class property_list
   {
   public:
 
     template<typename T>
-    using TrivialType = typename std::enable_if < 
+    using trivial_type = typename std::enable_if < 
       std::is_fundamental<T>::value == true &&
       std::is_void<T>::value == false &&
       std::is_null_pointer<T>::value == false, T > ::type;
     template<typename T>
-    using NonTrivialType = typename std::enable_if <
+    using non_trivial_type = typename std::enable_if <
       std::is_fundamental<T>::value == false ||
       std::is_void<T>::value == true ||
       std::is_null_pointer<T>::value == true, T > ::type;
 
-    propertylist();
+    property_list();
     //template<typename T>
     //propertylist(PODType type, unsigned count = 1, const TrivialType<T>& defaultval = T());
     template<typename T>
-    propertylist(const std::string& type_std::string, unsigned count = 1, const NonTrivialType<T>& defaultval = T());
+    property_list(const std::string& typestring, unsigned count = 1, const non_trivial_type<T>& defaultval = T());
 
-    propertylist& operator=(const propertylist& rhs);
-    propertylist& operator[](const std::string& name);
+    property_list& operator=(const property_list& rhs);
+    property_list& operator[](const std::string& name);
 
-    void Swap(propertylist& rhs);
+    void Swap(property_list& rhs);
     /*!************************************************************
       FullName :	sandcastle::io::serial::propertylist::Validate
       Returns  :	bool, true if the propertylist and all its sublists are valid
@@ -105,21 +106,21 @@ namespace sandcastle::io::serial
 
   private:
 
-    std::string PODstd::stringify(PODType type);
+    std::string PODStringify(PODType type);
 
-    DataLayoutType m_type;
+    data_layout_type m_type;
 
     std::string m_typename;
     unsigned m_arraycount; //is it an array?
     std::string m_defaultvalue;
 
-    Map<std::string, propertylist> m_memberlists;
+    std::map<std::string, property_list> m_memberlists;
 
   };
 
 } //namespace sandcastle::io::serial
 
-#include "reflection_propertylist.inl"
+#include "propertylist.inl"
 
 #endif // reflection_propertylist_h__
 /*!************************************************************

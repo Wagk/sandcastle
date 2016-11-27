@@ -3,19 +3,18 @@
   Note	:
 
 **************************************************************/
-#include "reflection_statedata.h"
+#include "statedata.h"
 
-#include "include_assert.h"
-#include "reflection_reflectable.h"
+#include <cassert>
+#include "reflectable.h"
 
 namespace sandcastle::io::serial
 {
 
-
   /*!************************************************************
 
   **************************************************************/
-  statedata::statedata(DataLayoutType layout /*= LEAF*/)
+  state_data::state_data(data_layout_type layout /*= LEAF*/)
     : m_layout(layout)
     , m_leaf_field()
     , m_array_field()
@@ -27,7 +26,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  statedata::statedata(size_t array_count)
+  state_data::state_data(size_t array_count)
     : m_layout(ARRAY)
     , m_leaf_field()
     , m_array_field(array_count)
@@ -39,7 +38,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  statedata& statedata::operator[](const std::string& name)
+  state_data& state_data::operator[](const std::string& name)
   {
     assert(m_layout == STRUCT);
 
@@ -49,7 +48,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  const statedata& statedata::operator[](const std::string& name) const
+  const state_data& state_data::operator[](const std::string& name) const
   {
     assert(m_layout == STRUCT);
 
@@ -59,7 +58,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  statedata& statedata::operator[](size_t index)
+  state_data& state_data::operator[](size_t index)
   {
     assert(m_layout == ARRAY);
 
@@ -69,7 +68,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  const statedata& statedata::operator[](size_t index) const
+  const state_data& state_data::operator[](size_t index) const
   {
     assert(m_layout == ARRAY);
 
@@ -79,7 +78,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  void statedata::Pushback(const statedata& data)
+  void state_data::Pushback(const state_data& data)
   {
     assert(m_layout == ARRAY);
 
@@ -89,7 +88,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  void statedata::Popback()
+  void state_data::Popback()
   {
     assert(m_layout == ARRAY);
 
@@ -99,7 +98,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  size_t statedata::Size() const
+  size_t state_data::Size() const
   {
     assert(m_layout == ARRAY);
 
@@ -109,7 +108,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  DataLayoutType statedata::LayoutType() const
+  data_layout_type state_data::LayoutType() const
   {
     return m_layout;
   }

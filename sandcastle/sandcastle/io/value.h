@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include <memory>
 
 /*
@@ -19,88 +20,68 @@ namespace sandcastle::io::serial
 {
     class value;
 
-    class iterator_base
-    {
-    public:
+ //   //values can store either actual PODs or other values
+ //   class value
+ //   {
+ //   public:
 
-        virtual value& operator*() = 0;
-        virtual const value& operator*() const = 0;
-        virtual bool operator==(const iterator_base& rhs) const;
+ //       value(const std::string& type);
 
-        virtual iterator_base& operator++() = 0;
+	//	virtual void		string(const std::string&) = 0;
+	//	virtual std::string string() const = 0;
 
-    private:
-    };
+ //   private:
 
-    //values can store either actual PODs or other values
-    class value
-    {
-    public:
+ //       std::string _type;
+ //       
+ //   };
 
-        using iterator = iterator_base;
-        
-        value(const std::string& type);
+	//class struct_value : public value
+	//{
+	//public:
 
-        virtual iterator_base begin() = 0;
-        virtual iterator_base end() = 0;
+ //       struct_value(const std::string& type);
 
-    private:
+ //       value& operator[](const std::string& key);
+ //       const value& operator[](const std::string& key) const;
 
-        std::string _type;
-        
-    };
+	//	virtual void		string(const std::string&) override;
+	//	virtual std::string string() const override;
 
-	class struct_value : public value
-	{
-	public:
+	//private:
 
-        nested_value(const std::string& type);
+ //       std::map<std::string, std::unique_ptr<value>> _keypairs;
 
-        value& operator[](const std::string& key);
-        const value& operator[](const std::string& key) const;
+	//};
 
-	private:
+ //   class array_value : public value
+ //   {
+	//public:
 
-        size_t find_key_index(const std::string& key);
+	//	array_value(const std::string& type);
 
-        struct value_pair
-        {
-            size_t                  _hash;
-            std::string             _key;
-            std::unique_ptr<value>  _value;
-        };
+	//	value& operator[](size_t index);
+	//	const value& operator[](size_t index) const;
 
-        std::string             _type;
-        std::vector<value_pair> _keypairs;
+	//	virtual void		string(const std::string&) override;
+	//	virtual std::string string() const override;
 
-	};
+	//private:
 
-    class array_value : public value
-    {
-        public:
+	//	std::vector<std::unique_ptr<value>> _values;
 
-            array_value(const std::string& type);
+ //   };
 
-            value& operator[](size_t index);
-            const value& operator[](size_t index) const;
+ //   template<typename T>
+ //   class data_value : public value
+ //   {
+	//public:
 
-        private:
+	//	virtual void		string(const std::string&) override;
+	//	virtual std::string string() const override;
 
-            std::vector<std::unique_ptr<value>> _values;
-
-    };
-
-    template<typename T>
-    class data_value : public value
-    {
-        public:
-
-
-
-            T value() const;
-
-        private:
-    }
+	//private:
+	//};
 
 }
 
