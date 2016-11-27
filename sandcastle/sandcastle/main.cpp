@@ -14,6 +14,8 @@
 #include <sstream>
 #include <memory>
 
+#include <io/reflectable.h>
+
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/vec4.hpp>
@@ -159,6 +161,19 @@ int glfw_test()
 	glfwTerminate();
 
 	return 0;
+}
+
+void reflection_test()
+{
+	using namespace sandcastle::io::serial;
+
+	//struct A : serializable
+	//{
+	//	virtual property_list properties() const override; //populates the propertylist
+	//	virtual state_data state() const override;
+	//	virtual bool state(const modify_data& data) override; //extracts propertydata and manipulates it
+	//};
+
 }
 
 int main(int argc, char* argv[])

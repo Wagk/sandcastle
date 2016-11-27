@@ -21,7 +21,7 @@ namespace sandcastle::io::serial
 
     virtual property_list properties() const = 0; //populates the propertylist
     virtual state_data state() const = 0;
-    virtual bool modify(const modify_data& data) = 0; //extracts propertydata and manipulates it
+    virtual bool state(const modify_data& data) = 0; //extracts propertydata and manipulates it
 
   };
 

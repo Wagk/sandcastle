@@ -60,8 +60,6 @@ namespace sandcastle::io::serial
 
   };
 
-  
-
 } //namespace sandcastle::io::serial
 
 #include "modifydata.inl"

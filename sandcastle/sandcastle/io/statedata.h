@@ -22,18 +22,19 @@ namespace sandcastle::io::serial
     state_data(data_layout_type layout = LEAF);
     state_data(size_t array_count);
 
-    //nested accessors
+    //dict accessors
     state_data& operator[](const std::string& name);
     const state_data& operator[](const std::string& name) const;
 
     //array accessors
     state_data& operator[](size_t index);
     const state_data& operator[](size_t index) const;
-    void Pushback(const state_data& data);
-    void Popback();
 
-    size_t Size() const;
-    data_layout_type LayoutType() const;
+    void push_back(const state_data& data);
+    void pop_back();
+
+    size_t size() const;
+    data_layout_type layout_type() const;
 
     //"getters"
     template<typename T>
@@ -46,7 +47,8 @@ namespace sandcastle::io::serial
     data_layout_type m_layout; //if true, we use `m_arrayfields`, false we use `m_subfields`
 
     std::string m_leaf_field;; //used only for leaf nodes to hold std::string data
-    std::vector<state_data> m_array_field; std::map<std::string, state_data> m_struct_field; 
+	std::vector<state_data> m_array_field; 
+	std::map<std::string, state_data> m_struct_field; 
   };
 
 } //namespace sandcastle::io::serial

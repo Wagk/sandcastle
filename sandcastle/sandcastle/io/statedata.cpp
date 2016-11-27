@@ -78,7 +78,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  void state_data::Pushback(const state_data& data)
+  void state_data::push_back(const state_data& data)
   {
     assert(m_layout == ARRAY);
 
@@ -88,7 +88,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  void state_data::Popback()
+  void state_data::pop_back()
   {
     assert(m_layout == ARRAY);
 
@@ -98,7 +98,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  size_t state_data::Size() const
+  size_t state_data::size() const
   {
     assert(m_layout == ARRAY);
 
@@ -108,7 +108,7 @@ namespace sandcastle::io::serial
   /*!************************************************************
 
   **************************************************************/
-  data_layout_type state_data::LayoutType() const
+  data_layout_type state_data::layout_type() const
   {
     return m_layout;
   }
