@@ -25,6 +25,7 @@ namespace sandcastle::io::serial
 
   };
 
+
 } //namespace sandcastle::io::serial
 
 #include "reflectable.inl"

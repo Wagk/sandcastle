@@ -87,6 +87,9 @@
     <ClCompile Include="io\propertylist.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="io\json.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="concurrency\deque.h">
@@ -207,6 +210,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="io\reflectable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io\json.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

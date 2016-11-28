@@ -145,6 +145,7 @@
     <ClCompile Include="concurrency\chain.cpp" />
     <ClCompile Include="concurrency\thread.cpp" />
     <ClCompile Include="concurrency\worker.cpp" />
+    <ClCompile Include="io\json.cpp" />
     <ClCompile Include="io\modifydata.cpp" />
     <ClCompile Include="io\propertydata.cpp" />
     <ClCompile Include="io\propertylist.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="concurrency\chain.h" />
     <ClInclude Include="concurrency\thread.h" />
     <ClInclude Include="concurrency\worker.h" />
+    <ClInclude Include="io\json.h" />
     <ClInclude Include="io\modifydata.h" />
     <ClInclude Include="io\propertydata.h" />
     <ClInclude Include="io\propertylist.h" />
