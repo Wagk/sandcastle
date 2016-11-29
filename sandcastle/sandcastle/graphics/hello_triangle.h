@@ -31,6 +31,16 @@ namespace sandcastle::graphics
 
 		void createinstance();
 
+		static VKAPI_ATTR VkBool32 VKAPI_CALL debugcallback(
+			VkDebugReportFlagsEXT flags,
+			VkDebugReportObjectTypeEXT objtype,
+			uint64_t obj,
+			size_t location,
+			int32_t code,
+			const char* layerprefix,
+			const char* msg,
+			void* userdata);
+
 	};
 }
 

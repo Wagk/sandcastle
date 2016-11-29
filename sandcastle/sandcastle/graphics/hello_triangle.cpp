@@ -144,4 +144,19 @@ namespace sandcastle::graphics
 		}
 
 	}
+
+	VKAPI_ATTR VkBool32 VKAPI_CALL simpletriangle::debugcallback(
+		VkDebugReportFlagsEXT flags, 
+		VkDebugReportObjectTypeEXT objtype, 
+		uint64_t obj, 
+		size_t location, 
+		int32_t code, 
+		const char * layerprefix, 
+		const char * msg, 
+		void * userdata)
+	{
+		std::cerr << "validation layer" << msg << std::endl;
+
+		return VK_FALSE;
+	}
 }
