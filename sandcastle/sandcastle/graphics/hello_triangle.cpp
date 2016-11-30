@@ -14,14 +14,14 @@ namespace sandcastle::graphics
 #ifdef NDEBUG
 	const bool enablevalidationlayers = false;
 #else
-	const bool enablevalidationlayers = true;
+	const bool enable_validation_layers = true;
 #endif
 
 	void simpletriangle::run()
 	{
 
 		init();
-		initvulkan();
+		init_vulkan();
 		main_loop();
 
 	}
@@ -38,9 +38,10 @@ namespace sandcastle::graphics
 
 	}
 
-	void simpletriangle::initvulkan()
+	void simpletriangle::init_vulkan()
 	{
-		createinstance();
+		create_instance();
+		setup_debug_callback();
 	}
 
 	void simpletriangle::main_loop()
@@ -54,7 +55,7 @@ namespace sandcastle::graphics
 	}
 
 	//assumes the instance is already initialized
-	std::vector<VkExtensionProperties> simpletriangle::enumerateExtensions() const
+	std::vector<VkExtensionProperties> simpletriangle::enumerate_extensions() const
 	{
 
 		uint32_t extension_count = 0;
@@ -66,6 +67,26 @@ namespace sandcastle::graphics
 
 		return extensions;
 
+	}
+
+	std::vector<const char*> simpletriangle::get_required_extensions()
+	{
+		std::vector<const char*> extensions;
+
+		unsigned int glfw_extension_count = 0;
+		const char** glfw_extensions = glfwGetRequiredInstanceExtensions(&glfw_extension_count);
+
+		for (unsigned int i = 0; i < glfw_extension_count; ++i)
+		{
+			extensions.push_back(glfw_extensions[i]);
+		}
+
+		if (enable_validation_layers)
+		{
+			extensions.push_back(VK_EXT_DEBUG_REPORT_EXTENSION_NAME);
+		}
+
+		return extensions;
 	}
 
 	bool simpletriangle::check_validation_layer_support()
@@ -98,9 +119,9 @@ namespace sandcastle::graphics
 		return every_layer_supported;
 	}
 
-	void simpletriangle::createinstance()
+	void simpletriangle::create_instance()
 	{
-		if (enablevalidationlayers && check_validation_layer_support() == false)
+		if (enable_validation_layers && check_validation_layer_support() == false)
 		{
 			throw std::runtime_error("validation layers requested, but not available!~");
 		}
@@ -122,7 +143,11 @@ namespace sandcastle::graphics
 		createinfo.enabledExtensionCount = glfw_extension_count;
 		createinfo.ppEnabledExtensionNames = glfw_extensions;
 		
-		if(enablevalidationlayers == false)
+		auto extensions = get_required_extensions();
+		createinfo.enabledExtensionCount = extensions.size();
+		createinfo.ppEnabledExtensionNames = extensions.data();
+
+		if(enable_validation_layers == false)
 			createinfo.enabledLayerCount = 0;
 		else
 		{
@@ -135,17 +160,17 @@ namespace sandcastle::graphics
 			throw std::runtime_error("Failed to create instance!");
 		}
 
-		std::vector<VkExtensionProperties> extensions = enumerateExtensions();
+		std::vector<VkExtensionProperties> enumerate = enumerate_extensions();
 
 		std::cout << "Available Extensions:" << std::endl;
-		for (const auto& exts : extensions)
+		for (const auto& exts : enumerate)
 		{
 			std::cout << "\t" << exts.extensionName << std::endl;
 		}
 
 	}
 
-	VKAPI_ATTR VkBool32 VKAPI_CALL simpletriangle::debugcallback(
+	VKAPI_ATTR VkBool32 VKAPI_CALL simpletriangle::debugcallback_fn(
 		VkDebugReportFlagsEXT flags, 
 		VkDebugReportObjectTypeEXT objtype, 
 		uint64_t obj, 
@@ -158,5 +183,56 @@ namespace sandcastle::graphics
 		std::cerr << "validation layer" << msg << std::endl;
 
 		return VK_FALSE;
+	}
+
+	VkResult simpletriangle::CreateDebugReportCallbackEXT(
+		VkInstance instance, 
+		const VkDebugReportCallbackCreateInfoEXT* pcreateinfo,
+		const VkAllocationCallbacks* palloc, 
+		VkDebugReportCallbackEXT* pcallback
+		)
+	{
+		auto func = (PFN_vkCreateDebugReportCallbackEXT)vkGetInstanceProcAddr(_instance,
+																			"vkCreateDebugReportCallbackEXT");
+		if (func)
+		{
+			return func(instance, pcreateinfo, palloc, pcallback);
+		}
+		else
+		{
+			return VK_ERROR_EXTENSION_NOT_PRESENT;
+		}
+
+	}
+
+	void simpletriangle::DestroyDebugReportCallbackEXT(
+		VkInstance instance, 
+		VkDebugReportCallbackEXT callback, 
+		const VkAllocationCallbacks * palloc)
+	{
+		auto func = (PFN_vkDestroyDebugReportCallbackEXT) vkGetInstanceProcAddr(instance,
+			"vkDestroyDebugReportCallbackEXT");
+
+		if (func)
+		{
+			func(instance, callback, palloc);
+		}
+	}
+
+	void simpletriangle::setup_debug_callback()
+	{
+		if (!enable_validation_layers)
+			return;
+
+		VkDebugReportCallbackCreateInfoEXT createinfo = {};
+		createinfo.sType = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT;
+		createinfo.flags = VK_DEBUG_REPORT_ERROR_BIT_EXT | VK_DEBUG_REPORT_WARNING_BIT_EXT;
+		createinfo.pfnCallback = debugcallback_fn;
+
+		if (CreateDebugReportCallbackEXT(_instance, &createinfo, nullptr, _debug_callback.replace()) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to set up debug callback!");
+		}
+
 	}
 }

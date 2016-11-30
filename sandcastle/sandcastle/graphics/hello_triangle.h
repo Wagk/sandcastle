@@ -19,19 +19,19 @@ namespace sandcastle::graphics
 
 	private:
 
-		GLFWwindow* _window;
-		vkhandle<VkInstance> _instance{vkDestroyInstance};
 
 		void init();
-		void initvulkan();
+		void init_vulkan();
 		void main_loop();
-		std::vector<VkExtensionProperties> enumerateExtensions() const;
+		std::vector<VkExtensionProperties> enumerate_extensions() const;
+
+		std::vector<const char*> get_required_extensions();
 
 		bool check_validation_layer_support();
 
-		void createinstance();
+		void create_instance();
 
-		static VKAPI_ATTR VkBool32 VKAPI_CALL debugcallback(
+		static VKAPI_ATTR VkBool32 VKAPI_CALL debugcallback_fn(
 			VkDebugReportFlagsEXT flags,
 			VkDebugReportObjectTypeEXT objtype,
 			uint64_t obj,
@@ -41,6 +41,18 @@ namespace sandcastle::graphics
 			const char* msg,
 			void* userdata);
 
+		void setup_debug_callback();
+		VkResult CreateDebugReportCallbackEXT(VkInstance instance,
+											const VkDebugReportCallbackCreateInfoEXT* pcreateinfo,
+											const VkAllocationCallbacks* palloc,
+											VkDebugReportCallbackEXT* pcallback);
+		
+		static void DestroyDebugReportCallbackEXT(VkInstance instance,
+			VkDebugReportCallbackEXT callback, const VkAllocationCallbacks* palloc);
+
+		GLFWwindow* _window;
+		vkhandle<VkInstance> _instance{vkDestroyInstance};
+		vkhandle<VkDebugReportCallbackEXT> _debug_callback{ _instance, DestroyDebugReportCallbackEXT };
 	};
 }
 
