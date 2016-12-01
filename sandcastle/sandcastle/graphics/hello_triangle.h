@@ -31,6 +31,8 @@ namespace sandcastle::graphics
 
 		void create_instance();
 
+		void pick_physical_device();
+
 		static VKAPI_ATTR VkBool32 VKAPI_CALL debugcallback_fn(
 			VkDebugReportFlagsEXT flags,
 			VkDebugReportObjectTypeEXT objtype,

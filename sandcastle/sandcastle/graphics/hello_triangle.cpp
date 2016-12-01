@@ -170,6 +170,10 @@ namespace sandcastle::graphics
 
 	}
 
+	void simpletriangle::pick_physical_device()
+	{
+	}
+
 	VKAPI_ATTR VkBool32 VKAPI_CALL simpletriangle::debugcallback_fn(
 		VkDebugReportFlagsEXT flags, 
 		VkDebugReportObjectTypeEXT objtype, 
