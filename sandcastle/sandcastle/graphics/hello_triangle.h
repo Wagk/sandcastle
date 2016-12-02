@@ -55,6 +55,7 @@ namespace sandcastle::graphics
 		GLFWwindow* _window;
 		vkhandle<VkInstance> _instance{vkDestroyInstance};
 		vkhandle<VkDebugReportCallbackEXT> _debug_callback{ _instance, DestroyDebugReportCallbackEXT };
+		VkPhysicalDevice _physical_device = VK_NULL_HANDLE;
 	};
 }
 

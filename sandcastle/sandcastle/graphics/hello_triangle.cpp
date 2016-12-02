@@ -172,6 +172,16 @@ namespace sandcastle::graphics
 
 	void simpletriangle::pick_physical_device()
 	{
+		uint32_t device_count = 0;
+		vkEnumeratePhysicalDevices(_instance, &device_count, nullptr);
+
+		if (device_count == 0)
+		{
+			throw std::runtime_error("Failed to find GPU's with Vulkan Support!");
+		}
+
+		std::vector<VkPhysicalDevice> devices(device_count);
+		vkEnumeratePhysicalDevices(_instance, &device_count, devices.data());
 	}
 
 	VKAPI_ATTR VkBool32 VKAPI_CALL simpletriangle::debugcallback_fn(
