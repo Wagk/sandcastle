@@ -19,7 +19,6 @@ namespace sandcastle::graphics
 
 	private:
 
-
 		void init();
 		void init_vulkan();
 		void main_loop();
@@ -32,6 +31,7 @@ namespace sandcastle::graphics
 		void create_instance();
 
 		void pick_physical_device();
+		bool is_device_suitable(VkPhysicalDevice device);
 
 		static VKAPI_ATTR VkBool32 VKAPI_CALL debugcallback_fn(
 			VkDebugReportFlagsEXT flags,

@@ -182,6 +182,23 @@ namespace sandcastle::graphics
 
 		std::vector<VkPhysicalDevice> devices(device_count);
 		vkEnumeratePhysicalDevices(_instance, &device_count, devices.data());
+
+		for (const auto& device : devices)
+		{
+			if (is_device_suitable(device))
+			{
+				_physical_device = device;
+				break;
+			}
+		}
+		
+		if (_physical_device == VK_NULL_HANDLE)
+			throw std::runtime_error("failed to find a suitable GPU!");
+	}
+
+	bool simpletriangle::is_device_suitable(VkPhysicalDevice device)
+	{
+		return true;
 	}
 
 	VKAPI_ATTR VkBool32 VKAPI_CALL simpletriangle::debugcallback_fn(
