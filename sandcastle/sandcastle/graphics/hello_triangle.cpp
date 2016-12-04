@@ -198,7 +198,14 @@ namespace sandcastle::graphics
 
 	bool simpletriangle::is_device_suitable(VkPhysicalDevice device)
 	{
-		return true;
+		VkPhysicalDeviceProperties device_properties;
+		VkPhysicalDeviceFeatures device_features;
+
+		vkGetPhysicalDeviceProperties(_physical_device, &device_properties);
+		vkGetPhysicalDeviceFeatures(_physical_device, &device_features);
+
+		return	device_properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU &&
+				device_features.geometryShader;
 	}
 
 	VKAPI_ATTR VkBool32 VKAPI_CALL simpletriangle::debugcallback_fn(
