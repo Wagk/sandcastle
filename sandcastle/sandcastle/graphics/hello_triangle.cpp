@@ -42,6 +42,8 @@ namespace sandcastle::graphics
 	{
 		create_instance();
 		setup_debug_callback();
+		pick_physical_device();
+		create_logical_device();
 	}
 
 	void simpletriangle::main_loop()
@@ -194,6 +196,11 @@ namespace sandcastle::graphics
 		
 		if (_physical_device == VK_NULL_HANDLE)
 			throw std::runtime_error("failed to find a suitable GPU!");
+	}
+
+	void simpletriangle::create_logical_device()
+	{
+
 	}
 
 	bool simpletriangle::is_device_suitable(VkPhysicalDevice device)
