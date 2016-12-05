@@ -144,14 +144,14 @@ namespace sandcastle::graphics
 		createinfo.ppEnabledExtensionNames = glfw_extensions;
 		
 		auto extensions = get_required_extensions();
-		createinfo.enabledExtensionCount = extensions.size();
+		createinfo.enabledExtensionCount = (uint32_t)extensions.size();
 		createinfo.ppEnabledExtensionNames = extensions.data();
 
 		if(enable_validation_layers == false)
 			createinfo.enabledLayerCount = 0;
 		else
 		{
-			createinfo.enabledLayerCount = validationlayers.size();
+			createinfo.enabledLayerCount = (uint32_t)validationlayers.size();
 			createinfo.ppEnabledLayerNames = validationlayers.data();
 		}
 
@@ -198,14 +198,17 @@ namespace sandcastle::graphics
 
 	bool simpletriangle::is_device_suitable(VkPhysicalDevice device)
 	{
-		VkPhysicalDeviceProperties device_properties;
-		VkPhysicalDeviceFeatures device_features;
+		////example of finding a card that has a geometry shader
+		//VkPhysicalDeviceProperties device_properties;
+		//VkPhysicalDeviceFeatures device_features;
 
-		vkGetPhysicalDeviceProperties(_physical_device, &device_properties);
-		vkGetPhysicalDeviceFeatures(_physical_device, &device_features);
+		//vkGetPhysicalDeviceProperties(_physical_device, &device_properties);
+		//vkGetPhysicalDeviceFeatures(_physical_device, &device_features);
 
-		return	device_properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU &&
-				device_features.geometryShader;
+		//return	device_properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU &&
+		//		device_features.geometryShader;
+
+		return find_queue_families(device).is_complete();
 	}
 
 	VKAPI_ATTR VkBool32 VKAPI_CALL simpletriangle::debugcallback_fn(
@@ -255,6 +258,29 @@ namespace sandcastle::graphics
 		{
 			func(instance, callback, palloc);
 		}
+	}
+
+	simpletriangle::queue_family_indices simpletriangle::find_queue_families(VkPhysicalDevice device)
+	{
+		queue_family_indices indices;
+
+		uint32_t queue_family_count = 0;
+		vkGetPhysicalDeviceQueueFamilyProperties(device, &queue_family_count, nullptr);
+
+		std::vector<VkQueueFamilyProperties> queue_families(queue_family_count);
+		vkGetPhysicalDeviceQueueFamilyProperties(device, &queue_family_count, queue_families.data());
+
+		for (int i = 0, s = (int)queue_families.size(); i < s; ++i)
+		{
+			if (queue_families[i].queueCount > 0 && 
+				queue_families[i].queueFlags & VK_QUEUE_GRAPHICS_BIT)
+				indices.graphics_family = i;
+
+			if (indices.is_complete())
+				break;
+		}
+
+		return indices;
 	}
 
 	void simpletriangle::setup_debug_callback()

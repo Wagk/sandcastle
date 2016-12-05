@@ -52,6 +52,16 @@ namespace sandcastle::graphics
 		static void DestroyDebugReportCallbackEXT(VkInstance instance,
 			VkDebugReportCallbackEXT callback, const VkAllocationCallbacks* palloc);
 
+		struct queue_family_indices
+		{
+			int graphics_family = -1;
+			bool is_complete() {
+				return graphics_family >= 0;
+			}
+		};
+
+		queue_family_indices find_queue_families(VkPhysicalDevice device);
+
 		GLFWwindow* _window;
 		vkhandle<VkInstance> _instance{vkDestroyInstance};
 		vkhandle<VkDebugReportCallbackEXT> _debug_callback{ _instance, DestroyDebugReportCallbackEXT };
