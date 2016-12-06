@@ -200,7 +200,13 @@ namespace sandcastle::graphics
 
 	void simpletriangle::create_logical_device()
 	{
+		queue_family_indices indices = find_queue_families(_physical_device);
 
+		VkDeviceQueueCreateInfo queue_create_info = {};
+
+		queue_create_info.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+		queue_create_info.queueFamilyIndex = indices.graphics_family;
+		queue_create_info.queueCount = 1;
 	}
 
 	bool simpletriangle::is_device_suitable(VkPhysicalDevice device)
