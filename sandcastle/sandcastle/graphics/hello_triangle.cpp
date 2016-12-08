@@ -210,6 +210,31 @@ namespace sandcastle::graphics
 
 		float queue_priority = 1.f;
 		queue_create_info.pQueuePriorities = &queue_priority;
+
+		VkPhysicalDeviceFeatures device_features = {};
+
+		VkDeviceCreateInfo device_create_info = {};
+		device_create_info.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
+		device_create_info.pQueueCreateInfos = &queue_create_info;
+		device_create_info.queueCreateInfoCount = 1;
+		device_create_info.pEnabledFeatures = &device_features;
+
+		device_create_info.enabledExtensionCount = 0;
+
+		if (enable_validation_layers) {
+			device_create_info.enabledLayerCount = validationlayers.size();
+			device_create_info.ppEnabledLayerNames = validationlayers.data();
+		}
+		else {
+			device_create_info.enabledLayerCount = 0;
+		}
+
+		if (vkCreateDevice(_physical_device, &device_create_info, nullptr, _device.replace()) 
+			!= VK_SUCCESS) {
+			throw std::runtime_error("failed to create logical device!");
+		}
+
+		vkGetDeviceQueue(_device, indices.graphics_family, 0, &_graphics_queue);
 	}
 
 	bool simpletriangle::is_device_suitable(VkPhysicalDevice device)
