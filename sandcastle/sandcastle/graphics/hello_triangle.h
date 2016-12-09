@@ -67,6 +67,7 @@ namespace sandcastle::graphics
 		vkhandle<VkInstance> _instance{vkDestroyInstance};
 		vkhandle<VkDevice> _device{ vkDestroyDevice };
 		vkhandle<VkDebugReportCallbackEXT> _debug_callback{ _instance, DestroyDebugReportCallbackEXT };
+		vkhandle<VkSurfaceKHR> _surface{ instance, vkDestroySurfaceKHR };
 		VkPhysicalDevice _physical_device = VK_NULL_HANDLE;
 		VkQueue _graphics_queue;
 	};
