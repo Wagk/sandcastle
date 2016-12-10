@@ -172,6 +172,10 @@ namespace sandcastle::graphics
 
 	}
 
+	void simpletriangle::create_surface()
+	{
+	}
+
 	void simpletriangle::pick_physical_device()
 	{
 		uint32_t device_count = 0;
