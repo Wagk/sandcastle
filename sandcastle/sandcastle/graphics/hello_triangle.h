@@ -65,9 +65,9 @@ namespace sandcastle::graphics
 		queue_family_indices find_queue_families(VkPhysicalDevice device);
 
 		GLFWwindow* _window;
-		vkhandle<VkInstance> _instance{vkDestroyInstance};
-		vkhandle<VkDevice> _device{ vkDestroyDevice };
-		vkhandle<VkDebugReportCallbackEXT> _debug_callback{ _instance, DestroyDebugReportCallbackEXT };
+		vkhandle<VkInstance> _instance{vkDestroyInstance}; //this is the vulkan instance, we need to boot one everytime we start
+		vkhandle<VkDevice> _device{ vkDestroyDevice }; //this is the logical device
+		vkhandle<VkDebugReportCallbackEXT> _debug_callback{ _instance, DestroyDebugReportCallbackEXT }; //this is the validation layer callback:w
 		vkhandle<VkSurfaceKHR> _surface{ instance, vkDestroySurfaceKHR };
 		VkPhysicalDevice _physical_device = VK_NULL_HANDLE;
 		VkQueue _graphics_queue;
