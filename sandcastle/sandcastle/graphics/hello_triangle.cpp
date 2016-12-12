@@ -174,6 +174,10 @@ namespace sandcastle::graphics
 
 	void simpletriangle::create_surface()
 	{
+		if (glfwCreateWindowSurface(_instance, _window, nullptr, _surface.replace()) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to create window surface!");
+		}
 	}
 
 	void simpletriangle::pick_physical_device()
