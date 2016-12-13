@@ -46,31 +46,37 @@ namespace sandcastle::graphics
 			void* userdata);
 
 		void setup_debug_callback();
-		VkResult CreateDebugReportCallbackEXT(VkInstance instance,
-											const VkDebugReportCallbackCreateInfoEXT* pcreateinfo,
-											const VkAllocationCallbacks* palloc,
-											VkDebugReportCallbackEXT* pcallback);
+		VkResult CreateDebugReportCallbackEXT(
+			VkInstance instance,
+			const VkDebugReportCallbackCreateInfoEXT* pcreateinfo,
+			const VkAllocationCallbacks* palloc,
+			VkDebugReportCallbackEXT* pcallback);
 		
-		static void DestroyDebugReportCallbackEXT(VkInstance instance,
-			VkDebugReportCallbackEXT callback, const VkAllocationCallbacks* palloc);
+		static void DestroyDebugReportCallbackEXT(
+			VkInstance instance,
+			VkDebugReportCallbackEXT callback, 
+			const VkAllocationCallbacks* palloc);
 
-		struct queue_family_indices
-		{
-			int graphics_family = -1;
+		struct queue_family_indices {
+			int _graphics_family = -1;
+			int _presentation_family = -1;
 			bool is_complete() {
-				return graphics_family >= 0;
+				return _graphics_family >= 0 && _presentation_family >= 0;
 			}
 		};
 
 		queue_family_indices find_queue_families(VkPhysicalDevice device);
 
-		GLFWwindow* _window;
+		GLFWwindow* _window; //glfw object
 		vkhandle<VkInstance> _instance{vkDestroyInstance}; //this is the vulkan instance, we need to boot one everytime we start
 		vkhandle<VkDevice> _device{ vkDestroyDevice }; //this is the logical device
 		vkhandle<VkDebugReportCallbackEXT> _debug_callback{ _instance, DestroyDebugReportCallbackEXT }; //this is the validation layer callback:w
-		vkhandle<VkSurfaceKHR> _surface{ instance, vkDestroySurfaceKHR };
-		VkPhysicalDevice _physical_device = VK_NULL_HANDLE;
-		VkQueue _graphics_queue;
+		vkhandle<VkSurfaceKHR> _surface{ _instance, vkDestroySurfaceKHR }; //the surface to draw onto
+		VkPhysicalDevice _physical_device = VK_NULL_HANDLE; //the physical device
+
+		//apparently being able to handle draw commands doesn't mean you can render to screen
+		VkQueue _graphics_queue; 
+		VkQueue _presentation_queue;
 	};
 }
 

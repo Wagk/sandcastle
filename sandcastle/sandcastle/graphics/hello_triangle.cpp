@@ -1,6 +1,7 @@
 #include "hello_triangle.h"
 #include <vector>
 #include <string>
+#include <set>
 
 namespace sandcastle::graphics
 {
@@ -208,25 +209,34 @@ namespace sandcastle::graphics
 
 	void simpletriangle::create_logical_device()
 	{
+		//get all the queue families
 		queue_family_indices indices = find_queue_families(_physical_device);
 
-		VkDeviceQueueCreateInfo queue_create_info = {};
-
-		queue_create_info.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-		queue_create_info.queueFamilyIndex = indices.graphics_family;
-		queue_create_info.queueCount = 1;
+		std::vector<VkDeviceQueueCreateInfo> queue_create_infos = {};
+		std::set<int> unique_queue_families = { indices._graphics_family, 
+												indices._presentation_family };
 
 		float queue_priority = 1.f;
-		queue_create_info.pQueuePriorities = &queue_priority;
+		for (int queue_family : unique_queue_families) {
+			
+			//for each of them generate a queue_create_info struct
+			VkDeviceQueueCreateInfo queue_create_info = {};
+			queue_create_info.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+			queue_create_info.queueFamilyIndex = queue_family;
+			queue_create_info.queueCount = 1;
+			queue_create_info.pQueuePriorities = &queue_priority;
+
+			queue_create_infos.push_back(queue_create_info);
+		}
 
 		VkPhysicalDeviceFeatures device_features = {};
 
+		//create the device with all the queue_create_infos
 		VkDeviceCreateInfo device_create_info = {};
 		device_create_info.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-		device_create_info.pQueueCreateInfos = &queue_create_info;
-		device_create_info.queueCreateInfoCount = 1;
+		device_create_info.pQueueCreateInfos = queue_create_infos.data();
+		device_create_info.queueCreateInfoCount = static_cast<uint32_t>(queue_create_infos.size());
 		device_create_info.pEnabledFeatures = &device_features;
-
 		device_create_info.enabledExtensionCount = 0;
 
 		if (enable_validation_layers) {
@@ -237,12 +247,15 @@ namespace sandcastle::graphics
 			device_create_info.enabledLayerCount = 0;
 		}
 
+		//call the thing and pray
 		if (vkCreateDevice(_physical_device, &device_create_info, nullptr, _device.replace()) 
 			!= VK_SUCCESS) {
 			throw std::runtime_error("failed to create logical device!");
 		}
 
-		vkGetDeviceQueue(_device, indices.graphics_family, 0, &_graphics_queue);
+		//once we initialised and set it up, grab the needed handles
+		vkGetDeviceQueue(_device, indices._graphics_family, 0, &_graphics_queue);
+		vkGetDeviceQueue(_device, indices._presentation_family, 0, &_presentation_queue);
 	}
 
 	bool simpletriangle::is_device_suitable(VkPhysicalDevice device)
@@ -321,9 +334,17 @@ namespace sandcastle::graphics
 
 		for (int i = 0, s = (int)queue_families.size(); i < s; ++i)
 		{
+			VkBool32 presentation_support = false;
+
+			vkGetPhysicalDeviceSurfaceSupportKHR(device, i, _surface, &presentation_support);
+
 			if (queue_families[i].queueCount > 0 && 
 				queue_families[i].queueFlags & VK_QUEUE_GRAPHICS_BIT)
-				indices.graphics_family = i;
+				indices._graphics_family = i;
+
+			if (queue_families[i].queueCount > 0 && presentation_support) {
+				indices._presentation_family = i;
+			}
 
 			if (indices.is_complete())
 				break;
