@@ -8,8 +8,12 @@ namespace sandcastle::graphics
 	const int width = 800;
 	const int height = 600;
 
-	const std::vector<const char*> validationlayers = {
+	const std::vector<const char*> validation_layers = {
 		"VK_LAYER_LUNARG_standard_validation"
+	};
+
+	const std::vector<const char*> device_extensions = {
+		VK_KHR_SWAPCHAIN_EXTENSION_NAME
 	};
 
 #ifdef NDEBUG
@@ -102,7 +106,7 @@ namespace sandcastle::graphics
 		vkEnumerateInstanceLayerProperties(&layercount, availablelayers.data());
 
 		bool every_layer_supported = true;
-		for (const std::string& layer : validationlayers)
+		for (const std::string& layer : validation_layers)
 		{
 			bool this_layer_supported = false;
 
@@ -154,8 +158,8 @@ namespace sandcastle::graphics
 			createinfo.enabledLayerCount = 0;
 		else
 		{
-			createinfo.enabledLayerCount = (uint32_t)validationlayers.size();
-			createinfo.ppEnabledLayerNames = validationlayers.data();
+			createinfo.enabledLayerCount = (uint32_t)validation_layers.size();
+			createinfo.ppEnabledLayerNames = validation_layers.data();
 		}
 
 		if (vkCreateInstance(&createinfo, nullptr, _instance.replace()) != VK_SUCCESS)
@@ -240,8 +244,8 @@ namespace sandcastle::graphics
 		device_create_info.enabledExtensionCount = 0;
 
 		if (enable_validation_layers) {
-			device_create_info.enabledLayerCount = validationlayers.size();
-			device_create_info.ppEnabledLayerNames = validationlayers.data();
+			device_create_info.enabledLayerCount = validation_layers.size();
+			device_create_info.ppEnabledLayerNames = validation_layers.data();
 		}
 		else {
 			device_create_info.enabledLayerCount = 0;
