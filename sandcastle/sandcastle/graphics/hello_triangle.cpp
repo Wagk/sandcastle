@@ -274,7 +274,16 @@ namespace sandcastle::graphics
 		//return	device_properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU &&
 		//		device_features.geometryShader;
 
-		return find_queue_families(device).is_complete();
+		queue_family_indices indices = find_queue_families(device);
+
+		bool extensions_supported = check_device_extension_support(device);
+
+		return indices.is_complete() && extensions_supported;
+	}
+
+	bool simpletriangle::check_device_extension_support(VkPhysicalDevice device)
+	{
+		return true;
 	}
 
 	VKAPI_ATTR VkBool32 VKAPI_CALL simpletriangle::debugcallback_fn(

@@ -34,6 +34,7 @@ namespace sandcastle::graphics
 		void pick_physical_device();
 		void create_logical_device();
 		bool is_device_suitable(VkPhysicalDevice device);
+		bool check_device_extension_support(VkPhysicalDevice device);
 
 		static VKAPI_ATTR VkBool32 VKAPI_CALL debugcallback_fn(
 			VkDebugReportFlagsEXT flags,
