@@ -47,6 +47,7 @@ namespace sandcastle::graphics
 	{
 		create_instance();
 		setup_debug_callback();
+		create_surface();
 		pick_physical_device();
 		create_logical_device();
 	}
@@ -241,7 +242,8 @@ namespace sandcastle::graphics
 		device_create_info.pQueueCreateInfos = queue_create_infos.data();
 		device_create_info.queueCreateInfoCount = static_cast<uint32_t>(queue_create_infos.size());
 		device_create_info.pEnabledFeatures = &device_features;
-		device_create_info.enabledExtensionCount = 0;
+		device_create_info.enabledExtensionCount = device_extensions.size();
+		device_create_info.ppEnabledExtensionNames = device_extensions.data();
 
 		if (enable_validation_layers) {
 			device_create_info.enabledLayerCount = validation_layers.size();
@@ -278,12 +280,33 @@ namespace sandcastle::graphics
 
 		bool extensions_supported = check_device_extension_support(device);
 
-		return indices.is_complete() && extensions_supported;
+		bool swap_chain_adequate = false;
+		if (extensions_supported)
+		{
+			swap_chain_support_details swap_chain_support = query_swap_chain_support(device);
+			swap_chain_adequate = swap_chain_support._formats.empty() == false &&
+								  swap_chain_support._present_modes.empty() == false;
+		}
+
+		return indices.is_complete() && extensions_supported && swap_chain_adequate;
 	}
 
 	bool simpletriangle::check_device_extension_support(VkPhysicalDevice device)
 	{
-		return true;
+		uint32_t extension_count;
+		vkEnumerateDeviceExtensionProperties(device, nullptr, &extension_count, nullptr);
+
+		std::vector<VkExtensionProperties> available_extensions(extension_count);
+		vkEnumerateDeviceExtensionProperties(device, nullptr, &extension_count, available_extensions.data());
+		
+		std::set<std::string> required_extensions(device_extensions.begin(), device_extensions.end());
+
+		//match available extensions with required extensions. make sure everything is there
+		for (const VkExtensionProperties& extension : available_extensions) {
+			required_extensions.erase(extension.extensionName);
+		}
+
+		return required_extensions.empty() == true;
 	}
 
 	VKAPI_ATTR VkBool32 VKAPI_CALL simpletriangle::debugcallback_fn(
@@ -296,7 +319,7 @@ namespace sandcastle::graphics
 		const char * msg, 
 		void * userdata)
 	{
-		std::cerr << "validation layer" << msg << std::endl;
+		std::cerr << "validation layer " << msg << std::endl;
 
 		return VK_FALSE;
 	}
@@ -347,15 +370,17 @@ namespace sandcastle::graphics
 
 		for (int i = 0, s = (int)queue_families.size(); i < s; ++i)
 		{
-			VkBool32 presentation_support = false;
-
-			vkGetPhysicalDeviceSurfaceSupportKHR(device, i, _surface, &presentation_support);
-
 			if (queue_families[i].queueCount > 0 && 
 				queue_families[i].queueFlags & VK_QUEUE_GRAPHICS_BIT)
+			{ 
 				indices._graphics_family = i;
+			}
 
-			if (queue_families[i].queueCount > 0 && presentation_support) {
+			VkBool32 presentation_support = false;
+			vkGetPhysicalDeviceSurfaceSupportKHR(device, i, _surface, &presentation_support);
+
+			if (queue_families[i].queueCount > 0 && presentation_support) 
+			{
 				indices._presentation_family = i;
 			}
 
@@ -364,6 +389,30 @@ namespace sandcastle::graphics
 		}
 
 		return indices;
+	}
+
+	simpletriangle::swap_chain_support_details simpletriangle::query_swap_chain_support(VkPhysicalDevice device)
+	{
+		swap_chain_support_details details;
+		vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, _surface, &details._capabilities);
+
+		uint32_t format_count;
+		vkGetPhysicalDeviceSurfaceFormatsKHR(device, _surface, &format_count, nullptr);
+
+		if (format_count != 0) {
+			details._formats.resize(format_count);
+			vkGetPhysicalDeviceSurfaceFormatsKHR(device, _surface, &format_count, details._formats.data());
+		}
+
+		uint32_t present_mode_count;
+		vkGetPhysicalDeviceSurfacePresentModesKHR(device, _surface, &present_mode_count, nullptr);
+
+		if (present_mode_count != 0) {
+			details._formats.resize(present_mode_count);
+			vkGetPhysicalDeviceSurfacePresentModesKHR(device, _surface, &present_mode_count, details._present_modes.data());
+		}
+
+		return details;
 	}
 
 	void simpletriangle::setup_debug_callback()

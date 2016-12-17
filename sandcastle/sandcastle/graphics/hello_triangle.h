@@ -68,6 +68,14 @@ namespace sandcastle::graphics
 
 		queue_family_indices find_queue_families(VkPhysicalDevice device);
 
+		struct swap_chain_support_details {
+			VkSurfaceCapabilitiesKHR _capabilities;
+			std::vector<VkSurfaceFormatKHR> _formats;
+			std::vector<VkPresentModeKHR> _present_modes;
+		};
+
+		swap_chain_support_details query_swap_chain_support(VkPhysicalDevice device);
+
 		GLFWwindow* _window; //glfw object
 		vkhandle<VkInstance> _instance{vkDestroyInstance}; //this is the vulkan instance, we need to boot one everytime we start
 		vkhandle<VkDevice> _device{ vkDestroyDevice }; //this is the logical device
