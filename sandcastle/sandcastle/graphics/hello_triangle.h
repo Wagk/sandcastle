@@ -75,6 +75,7 @@ namespace sandcastle::graphics
 		};
 
 		swap_chain_support_details query_swap_chain_support(VkPhysicalDevice device);
+		VkSurfaceFormatKHR choose_swap_surface_format(const std::vector<VkSurfaceFormatKHR>& available_formats);
 
 		GLFWwindow* _window; //glfw object
 		vkhandle<VkInstance> _instance{vkDestroyInstance}; //this is the vulkan instance, we need to boot one everytime we start

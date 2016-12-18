@@ -415,6 +415,23 @@ namespace sandcastle::graphics
 		return details;
 	}
 
+	VkSurfaceFormatKHR simpletriangle::choose_swap_surface_format(const std::vector<VkSurfaceFormatKHR>& available_formats)
+	{
+		if (available_formats.size() == 1 && available_formats.front().format == VK_FORMAT_UNDEFINED)
+			return{ VK_FORMAT_B8G8R8A8_UNORM, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR };
+
+		for (const auto& available_format : available_formats)
+		{
+			if (available_format.format == VK_FORMAT_B8G8R8A8_UNORM &&
+				available_format.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
+			{
+				return available_format;
+			}
+		}
+
+		return available_formats.front();
+	}
+
 	void simpletriangle::setup_debug_callback()
 	{
 		if (!enable_validation_layers)
