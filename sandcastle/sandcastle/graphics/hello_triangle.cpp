@@ -2,11 +2,13 @@
 #include <vector>
 #include <string>
 #include <set>
+#include <limits>
+#include <algorithm>
 
 namespace sandcastle::graphics
 {
-	const int width = 800;
-	const int height = 600;
+	const int g_width = 800;
+	const int g_height = 600;
 
 	const std::vector<const char*> validation_layers = {
 		"VK_LAYER_LUNARG_standard_validation"
@@ -30,7 +32,6 @@ namespace sandcastle::graphics
 		main_loop();
 
 	}
-
 	void simpletriangle::init()
 	{
 
@@ -39,7 +40,7 @@ namespace sandcastle::graphics
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-		_window = glfwCreateWindow(width, height, "Vulkan", nullptr, nullptr);
+		_window = glfwCreateWindow(g_width, g_height, "Vulkan", nullptr, nullptr);
 
 	}
 
@@ -50,6 +51,7 @@ namespace sandcastle::graphics
 		create_surface();
 		pick_physical_device();
 		create_logical_device();
+		create_swap_chain();
 	}
 
 	void simpletriangle::main_loop()
@@ -184,6 +186,11 @@ namespace sandcastle::graphics
 		{
 			throw std::runtime_error("failed to create window surface!");
 		}
+	}
+
+	void simpletriangle::create_swap_chain()
+	{
+
 	}
 
 	void simpletriangle::pick_physical_device()
@@ -430,6 +437,36 @@ namespace sandcastle::graphics
 		}
 
 		return available_formats.front();
+	}
+
+	VkPresentModeKHR simpletriangle::choose_swap_present_mode(const std::vector<VkPresentModeKHR>& available_presents)
+	{
+		for (const auto& available_mode : available_presents)
+		{
+			if (available_mode == VK_PRESENT_MODE_MAILBOX_KHR)
+			{
+				return available_mode;
+			}
+		}
+
+		return VK_PRESENT_MODE_FIFO_KHR;
+	}
+
+	VkExtent2D simpletriangle::choose_swap_extent(const VkSurfaceCapabilitiesKHR & capabilities)
+	{
+		if (capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max())
+			return capabilities.currentExtent;
+		else
+		{
+			VkExtent2D actual_extent = { g_width, g_height };
+
+			actual_extent.width = std::max(capabilities.minImageExtent.width, 
+				std::min(capabilities.maxImageExtent.width, actual_extent.width));
+			actual_extent.height = std::max(capabilities.minImageExtent.height, 
+				std::min(capabilities.maxImageExtent.height, actual_extent.height));
+
+			return actual_extent;
+		}
 	}
 
 	void simpletriangle::setup_debug_callback()
