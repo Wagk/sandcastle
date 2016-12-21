@@ -190,11 +190,16 @@ namespace sandcastle::graphics
 
 	void simpletriangle::create_swap_chain()
 	{
-		swap_chain_support_details sc_support = query_swap_chain_support(_physical_device);
+		swap_chain_support_details swap_chain_support = query_swap_chain_support(_physical_device);
 
-		VkSurfaceFormatKHR surface_format = choose_swap_surface_format(sc_support._formats);
-		VkPresentModeKHR present_mode = choose_swap_present_mode(sc_support._present_modes);
-		VkExtent2D extent = choose_swap_extent(sc_support._capabilities);
+		VkSurfaceFormatKHR surface_format = choose_swap_surface_format(swap_chain_support._formats);
+		VkPresentModeKHR present_mode = choose_swap_present_mode(swap_chain_support._present_modes);
+		VkExtent2D extent = choose_swap_extent(swap_chain_support._capabilities);
+
+		uint32_t image_count = swap_chain_support._capabilities.minImageCount + 1;
+		if (swap_chain_support._capabilities.maxImageCount > 0 && image_count > swap_chain_support._capabilities.maxImageCount) {
+			image_count = swap_chain_support._capabilities.maxImageCount;
+		}
 	}
 
 	void simpletriangle::pick_physical_device()
