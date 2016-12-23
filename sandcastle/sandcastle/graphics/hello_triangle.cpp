@@ -188,6 +188,7 @@ namespace sandcastle::graphics
 		}
 	}
 
+	//a swap chain is a queue of image buffers to be drawn onto the screen
 	void simpletriangle::create_swap_chain()
 	{
 		swap_chain_support_details swap_chain_support = query_swap_chain_support(_physical_device);
@@ -200,7 +201,39 @@ namespace sandcastle::graphics
 		if (swap_chain_support._capabilities.maxImageCount > 0 && image_count > swap_chain_support._capabilities.maxImageCount) {
 			image_count = swap_chain_support._capabilities.maxImageCount;
 		}
+
+		VkSwapchainCreateInfoKHR create_info = {};
+		create_info.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
+		create_info.surface = _surface;
+
+		create_info.minImageCount = image_count;
+		create_info.imageFormat = surface_format.format;
+		create_info.imageColorSpace = surface_format.colorSpace;
+		create_info.imageExtent = extent;
+		create_info.imageArrayLayers = 1;
+		create_info.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT; //this will need to change when we draw to some separate buffer first
+
+		queue_family_indices indices = find_queue_families(_physical_device);
+		uint32_t queue_family_indice_array[] = { (uint32_t)indices._graphics_family, (uint32_t)indices._presentation_family };
+
+		if (indices._graphics_family != indices._presentation_family)
+		{
+			//Images can be used across multiple queue families without explicit ownership transfers.
+			create_info.imageSharingMode = VK_SHARING_MODE_CONCURRENT;
+			create_info.queueFamilyIndexCount = 2;
+			create_info.pQueueFamilyIndices = queue_family_indice_array;
+		}
+		else
+		{
+			//An image is owned by one queue family at a time and ownership must be 
+			//explicitly transfered before using it in another queue family. 
+			//This option offers the best performance.
+			create_info.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
+			create_info.queueFamilyIndexCount = 0;
+			create_info.pQueueFamilyIndices = nullptr;
+		}
 	}
+
 
 	void simpletriangle::pick_physical_device()
 	{
