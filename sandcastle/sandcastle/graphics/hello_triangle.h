@@ -81,10 +81,17 @@ namespace sandcastle::graphics
 		VkExtent2D choose_swap_extent(const VkSurfaceCapabilitiesKHR& capabilities);
 
 		GLFWwindow* _window; //glfw object
+
 		vkhandle<VkInstance> _instance{vkDestroyInstance}; //this is the vulkan instance, we need to boot one everytime we start
 		vkhandle<VkDevice> _device{ vkDestroyDevice }; //this is the logical device
 		vkhandle<VkDebugReportCallbackEXT> _debug_callback{ _instance, DestroyDebugReportCallbackEXT }; //this is the validation layer callback:w
 		vkhandle<VkSurfaceKHR> _surface{ _instance, vkDestroySurfaceKHR }; //the surface to draw onto
+		vkhandle<VkSwapchainKHR> _swap_chain{ _device, vkDestroySwapchainKHR };
+
+		std::vector<VkImage> _swap_chain_images;
+		VkFormat _swap_chain_image_format;
+		VkExtent2D _swap_chain_extent;
+
 		VkPhysicalDevice _physical_device = VK_NULL_HANDLE; //the physical device
 
 		//apparently being able to handle draw commands doesn't mean you can render to screen

@@ -207,9 +207,9 @@ namespace sandcastle::graphics
 		create_info.surface = _surface;
 
 		create_info.minImageCount = image_count;
-		create_info.imageFormat = surface_format.format;
+		create_info.imageFormat = _swap_chain_image_format = surface_format.format;
 		create_info.imageColorSpace = surface_format.colorSpace;
-		create_info.imageExtent = extent;
+		create_info.imageExtent = _swap_chain_extent = extent;
 		create_info.imageArrayLayers = 1;
 		create_info.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT; //this will need to change when we draw to some separate buffer first
 
@@ -232,6 +232,22 @@ namespace sandcastle::graphics
 			create_info.queueFamilyIndexCount = 0;
 			create_info.pQueueFamilyIndices = nullptr;
 		}
+
+		create_info.preTransform = swap_chain_support._capabilities.currentTransform;
+		create_info.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
+		create_info.presentMode = present_mode;
+		create_info.clipped = VK_TRUE;
+		create_info.oldSwapchain = VK_NULL_HANDLE; //this might get iffy
+
+		if (vkCreateSwapchainKHR(_device, &create_info, nullptr, _swap_chain.replace()) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to create swap chain!");
+		}
+
+		//get swapchain image handles
+		vkGetSwapchainImagesKHR(_device, _swap_chain, &image_count, nullptr);
+		_swap_chain_images.resize(image_count);
+		vkGetSwapchainImagesKHR(_device, _swap_chain, &image_count, _swap_chain_images.data());
 	}
 
 
@@ -457,7 +473,7 @@ namespace sandcastle::graphics
 		vkGetPhysicalDeviceSurfacePresentModesKHR(device, _surface, &present_mode_count, nullptr);
 
 		if (present_mode_count != 0) {
-			details._formats.resize(present_mode_count);
+			details._present_modes.resize(present_mode_count);
 			vkGetPhysicalDeviceSurfacePresentModesKHR(device, _surface, &present_mode_count, details._present_modes.data());
 		}
 
