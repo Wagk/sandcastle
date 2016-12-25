@@ -52,6 +52,7 @@ namespace sandcastle::graphics
 		pick_physical_device();
 		create_logical_device();
 		create_swap_chain();
+		create_image_views();
 	}
 
 	void simpletriangle::main_loop()

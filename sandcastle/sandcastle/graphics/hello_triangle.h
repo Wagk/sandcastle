@@ -76,6 +76,7 @@ namespace sandcastle::graphics
 		};
 
 		swap_chain_support_details query_swap_chain_support(VkPhysicalDevice device);
+
 		VkSurfaceFormatKHR choose_swap_surface_format(const std::vector<VkSurfaceFormatKHR>& available_formats);
 		VkPresentModeKHR choose_swap_present_mode(const std::vector<VkPresentModeKHR>& avaiable_presents);
 		VkExtent2D choose_swap_extent(const VkSurfaceCapabilitiesKHR& capabilities);
@@ -91,6 +92,9 @@ namespace sandcastle::graphics
 		std::vector<VkImage> _swap_chain_images;
 		VkFormat _swap_chain_image_format;
 		VkExtent2D _swap_chain_extent;
+
+		std::vector<vkhandle<VkImageView>> _swap_chain_image_views;
+		void create_image_views();
 
 		VkPhysicalDevice _physical_device = VK_NULL_HANDLE; //the physical device
 
