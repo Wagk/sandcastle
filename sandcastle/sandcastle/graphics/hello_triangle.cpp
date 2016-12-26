@@ -53,6 +53,7 @@ namespace sandcastle::graphics
 		create_logical_device();
 		create_swap_chain();
 		create_image_views();
+		create_graphics_pipeline();
 	}
 
 	void simpletriangle::main_loop()
@@ -525,6 +526,37 @@ namespace sandcastle::graphics
 				std::min(capabilities.maxImageExtent.height, actual_extent.height));
 
 			return actual_extent;
+		}
+	}
+
+	void simpletriangle::create_graphics_pipeline()
+	{
+	}
+
+	void simpletriangle::create_image_views()
+	{
+		_swap_chain_image_views.resize(_swap_chain_images.size(), vkhandle<VkImageView>{_device, vkDestroyImageView});
+
+		for (uint32_t i = 0; i < _swap_chain_images.size(); ++i)
+		{
+			VkImageViewCreateInfo create_info = {};
+			create_info.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+			create_info.image = _swap_chain_images[i];
+			create_info.viewType = VK_IMAGE_VIEW_TYPE_2D;
+			create_info.format = _swap_chain_image_format;
+			create_info.components.r = create_info.components.g 
+				= create_info.components.b = create_info.components.a 
+				= VK_COMPONENT_SWIZZLE_IDENTITY;
+			create_info.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+			create_info.subresourceRange.baseMipLevel = 0;
+			create_info.subresourceRange.levelCount = 1;
+			create_info.subresourceRange.baseArrayLayer = 0;
+			create_info.subresourceRange.layerCount = 1;
+
+			if (vkCreateImageView(_device, &create_info, nullptr, _swap_chain_image_views[i].replace()) != VK_SUCCESS)
+			{
+				throw std::runtime_error("failed to create image views!");
+			}
 		}
 	}
 

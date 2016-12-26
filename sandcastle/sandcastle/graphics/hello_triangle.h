@@ -81,6 +81,8 @@ namespace sandcastle::graphics
 		VkPresentModeKHR choose_swap_present_mode(const std::vector<VkPresentModeKHR>& avaiable_presents);
 		VkExtent2D choose_swap_extent(const VkSurfaceCapabilitiesKHR& capabilities);
 
+		void create_graphics_pipeline();
+
 		GLFWwindow* _window; //glfw object
 
 		vkhandle<VkInstance> _instance{vkDestroyInstance}; //this is the vulkan instance, we need to boot one everytime we start
