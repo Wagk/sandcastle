@@ -416,8 +416,7 @@ namespace sandcastle::graphics
 		VkDebugReportCallbackEXT callback, 
 		const VkAllocationCallbacks * palloc)
 	{
-		auto func = (PFN_vkDestroyDebugReportCallbackEXT) vkGetInstanceProcAddr(instance,
-			"vkDestroyDebugReportCallbackEXT");
+		auto func = (PFN_vkDestroyDebugReportCallbackEXT) vkGetInstanceProcAddr(instance, "vkDestroyDebugReportCallbackEXT");
 
 		if (func)
 		{
