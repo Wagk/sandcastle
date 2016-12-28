@@ -559,6 +559,11 @@ namespace sandcastle::graphics
 		}
 	}
 
+	std::string simpletriangle::read_file(const std::string & file)
+	{
+		return std::string();
+	}
+
 	void simpletriangle::setup_debug_callback()
 	{
 		if (!enable_validation_layers)

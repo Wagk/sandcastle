@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+#include <fstream>
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -102,6 +103,8 @@ namespace sandcastle::graphics
 		//apparently being able to handle draw commands doesn't mean you can render to screen
 		VkQueue _graphics_queue; 
 		VkQueue _presentation_queue;
+
+		static std::string read_file(const std::string& file);
 	};
 }
 
