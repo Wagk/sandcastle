@@ -178,6 +178,8 @@
     <ClInclude Include="math\vector.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="graphics\shaders\shader.frag" />
+    <None Include="graphics\shaders\shader.vert" />
     <None Include="math\mat.inl" />
     <None Include="math\vec.inl" />
   </ItemGroup>
