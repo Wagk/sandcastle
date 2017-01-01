@@ -559,9 +559,22 @@ namespace sandcastle::graphics
 		}
 	}
 
-	std::string simpletriangle::read_file(const std::string & file)
+	std::vector<char> simpletriangle::read_file(const std::string & file)
 	{
-		return std::string();
+		std::ifstream ifs(file, std::ios::ate | std::ios::binary);
+
+		if (ifs.is_open() == false)
+		{
+			throw std::runtime_error("failed to open file");
+		}
+
+		size_t file_size = (size_t)ifs.tellg();
+		std::vector<char> buffer(file_size);
+
+		ifs.seekg(0);
+		ifs.read(buffer.data(), file_size);
+
+		return buffer;
 	}
 
 	void simpletriangle::setup_debug_callback()

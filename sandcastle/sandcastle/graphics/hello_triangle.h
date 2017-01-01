@@ -104,7 +104,7 @@ namespace sandcastle::graphics
 		VkQueue _graphics_queue; 
 		VkQueue _presentation_queue;
 
-		static std::string read_file(const std::string& file);
+		static std::vector<char> read_file(const std::string& file);
 	};
 }
 
