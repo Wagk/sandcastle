@@ -530,6 +530,29 @@ namespace sandcastle::graphics
 
 	void simpletriangle::create_graphics_pipeline()
 	{
+		//these are generated via glslangValidator.exe with the V flag
+		auto vert_spv = read_binary("shaders/vert.spv");
+		auto frag_spv = read_binary("shaders/frag.spv");
+
+		vkhandle<VkShaderModule> vert_shader_module{ _device, vkDestroyShaderModule };
+		vkhandle<VkShaderModule> frag_shader_module{ _device, vkDestroyShaderModule };
+
+		create_shader_module(vert_spv, vert_shader_module);
+		create_shader_module(frag_spv, frag_shader_module);
+
+		VkPipelineShaderStageCreateInfo vert_shader_stage_info = {};
+		vert_shader_stage_info.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+		vert_shader_stage_info.stage = VK_SHADER_STAGE_VERTEX_BIT;
+		vert_shader_stage_info.module = vert_shader_module;
+		vert_shader_stage_info.pName = "main"; //shaders can choose which shader to pipe to now. what?
+
+		VkPipelineShaderStageCreateInfo frag_shader_stage_info = {};
+		frag_shader_stage_info.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+		frag_shader_stage_info.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
+		frag_shader_stage_info.module = frag_shader_module;
+		frag_shader_stage_info.pName = "main"; //shaders can choose which shader to pipe to now. what?
+
+		VkPipelineShaderStageCreateInfo shader_stages[] = {vert_shader_stage_info, frag_shader_stage_info};
 	}
 
 	void simpletriangle::create_image_views()
@@ -559,7 +582,7 @@ namespace sandcastle::graphics
 		}
 	}
 
-	std::vector<char> simpletriangle::read_file(const std::string & file)
+	std::vector<char> simpletriangle::read_binary(const std::string & file)
 	{
 		std::ifstream ifs(file, std::ios::ate | std::ios::binary);
 
@@ -575,6 +598,19 @@ namespace sandcastle::graphics
 		ifs.read(buffer.data(), file_size);
 
 		return buffer;
+	}
+
+	void simpletriangle::create_shader_module(const std::vector<char>& code, vkhandle<VkShaderModule>& shader)
+	{
+		VkShaderModuleCreateInfo create_info = {};
+		create_info.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+		create_info.codeSize = code.size();
+		create_info.pCode = (uint32_t*)code.data();
+
+		if (vkCreateShaderModule(_device, &create_info, nullptr, shader.replace()) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to create shader module!");
+		}
 	}
 
 	void simpletriangle::setup_debug_callback()

@@ -104,7 +104,8 @@ namespace sandcastle::graphics
 		VkQueue _graphics_queue; 
 		VkQueue _presentation_queue;
 
-		static std::vector<char> read_file(const std::string& file);
+		static std::vector<char> read_binary(const std::string& file);
+		void create_shader_module(const std::vector<char>& code, vkhandle<VkShaderModule>& shader);
 	};
 }
 
