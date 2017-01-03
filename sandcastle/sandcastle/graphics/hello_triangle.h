@@ -106,6 +106,8 @@ namespace sandcastle::graphics
 
 		static std::vector<char> read_binary(const std::string& file);
 		void create_shader_module(const std::vector<char>& code, vkhandle<VkShaderModule>& shader);
+
+		vkhandle<VkPipelineLayout> _pipeline_layout{ _device, vkDestroyPipelineLayout };
 	};
 }
 
