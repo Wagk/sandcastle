@@ -83,6 +83,7 @@ namespace sandcastle::graphics
 		VkExtent2D choose_swap_extent(const VkSurfaceCapabilitiesKHR& capabilities);
 
 		void create_graphics_pipeline();
+		void create_render_pass();
 
 		GLFWwindow* _window; //glfw object
 
@@ -108,6 +109,7 @@ namespace sandcastle::graphics
 		void create_shader_module(const std::vector<char>& code, vkhandle<VkShaderModule>& shader);
 
 		vkhandle<VkPipelineLayout> _pipeline_layout{ _device, vkDestroyPipelineLayout };
+		vkhandle<VkRenderPass> _render_pass{ _device, vkDestroyRenderPass };
 	};
 }
 
