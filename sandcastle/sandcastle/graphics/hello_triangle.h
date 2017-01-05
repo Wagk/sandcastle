@@ -110,6 +110,7 @@ namespace sandcastle::graphics
 
 		vkhandle<VkPipelineLayout> _pipeline_layout{ _device, vkDestroyPipelineLayout };
 		vkhandle<VkRenderPass> _render_pass{ _device, vkDestroyRenderPass };
+		vkhandle<VkPipeline> _graphics_pipeline{ _device, vkDestroyPipeline };
 	};
 }
 
