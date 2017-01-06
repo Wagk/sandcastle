@@ -55,6 +55,7 @@ namespace sandcastle::graphics
 		create_image_views();
 		create_render_pass();
 		create_graphics_pipeline();
+		create_frame_buffers();
 	}
 
 	void simpletriangle::main_loop()
@@ -714,6 +715,32 @@ namespace sandcastle::graphics
 		if (vkCreateRenderPass(_device, &render_pass_info, nullptr, _render_pass.replace()) != VK_SUCCESS)
 		{
 			throw std::runtime_error("failed to create render pass!");
+		}
+	}
+
+	void simpletriangle::create_frame_buffers()
+	{
+		_swap_chain_frame_buffers.resize(_swap_chain_image_views.size(), vkhandle<VkFramebuffer>{_device, vkDestroyFramebuffer});
+
+		for (size_t i = 0; i < _swap_chain_image_views.size(); ++i)
+		{
+			VkImageView attachments[] = {
+				_swap_chain_image_views[i]
+			};
+
+			VkFramebufferCreateInfo frame_buffer_info = {};
+			frame_buffer_info.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
+			frame_buffer_info.renderPass = _render_pass;
+			frame_buffer_info.attachmentCount = 1;
+			frame_buffer_info.pAttachments = attachments;
+			frame_buffer_info.width = _swap_chain_extent.width;
+			frame_buffer_info.height = _swap_chain_extent.height;
+			frame_buffer_info.layers = 1;
+
+			if (vkCreateFramebuffer(_device, &frame_buffer_info, nullptr, _swap_chain_frame_buffers[i].replace()) != VK_SUCCESS)
+			{
+				throw std::runtime_error("failed to create framebuffer!");
+			}
 		}
 	}
 

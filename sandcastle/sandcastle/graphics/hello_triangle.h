@@ -84,6 +84,7 @@ namespace sandcastle::graphics
 
 		void create_graphics_pipeline();
 		void create_render_pass();
+		void create_frame_buffers();
 
 		GLFWwindow* _window; //glfw object
 
@@ -111,6 +112,7 @@ namespace sandcastle::graphics
 		vkhandle<VkPipelineLayout> _pipeline_layout{ _device, vkDestroyPipelineLayout };
 		vkhandle<VkRenderPass> _render_pass{ _device, vkDestroyRenderPass };
 		vkhandle<VkPipeline> _graphics_pipeline{ _device, vkDestroyPipeline };
+		std::vector<vkhandle<VkFramebuffer>> _swap_chain_frame_buffers;
 	};
 }
 
