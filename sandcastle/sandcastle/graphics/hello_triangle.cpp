@@ -56,6 +56,7 @@ namespace sandcastle::graphics
 		create_render_pass();
 		create_graphics_pipeline();
 		create_frame_buffers();
+		create_command_pool();
 	}
 
 	void simpletriangle::main_loop()
@@ -800,6 +801,11 @@ namespace sandcastle::graphics
 		{
 			throw std::runtime_error("failed to create shader module!");
 		}
+	}
+
+	void simpletriangle::create_command_pool()
+	{
+
 	}
 
 	void simpletriangle::setup_debug_callback()

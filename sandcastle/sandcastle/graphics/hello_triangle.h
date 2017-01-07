@@ -113,6 +113,10 @@ namespace sandcastle::graphics
 		vkhandle<VkRenderPass> _render_pass{ _device, vkDestroyRenderPass };
 		vkhandle<VkPipeline> _graphics_pipeline{ _device, vkDestroyPipeline };
 		std::vector<vkhandle<VkFramebuffer>> _swap_chain_frame_buffers;
+
+		void create_command_pool();
+
+		vkhandle<VkCommandPool> _command_pool{ _device, vkDestroyCommandPool };
 	};
 }
 
