@@ -65,7 +65,9 @@ namespace sandcastle::graphics
 		while (!glfwWindowShouldClose(_window))
 		{
 			glfwPollEvents();
+			draw_frame();
 		}
+
 
 	}
 

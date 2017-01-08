@@ -23,6 +23,7 @@ namespace sandcastle::graphics
 		void init();
 		void init_vulkan();
 		void main_loop();
+		void draw_frame();
 		std::vector<VkExtensionProperties> enumerate_extensions() const;
 
 		std::vector<const char*> get_required_extensions();
@@ -119,6 +120,11 @@ namespace sandcastle::graphics
 
 		vkhandle<VkCommandPool> _command_pool{ _device, vkDestroyCommandPool };
 		std::vector<VkCommandBuffer> _command_buffers;
+
+		void create_semaphores();
+
+		vkhandle<VkSemaphore> _image_available_semaphore{ _device, vkDestroySemaphore };
+		vkhandle<VkSemaphore> _render_finished_semaphore{ _device, vkDestroySemaphore };
 	};
 }
 
