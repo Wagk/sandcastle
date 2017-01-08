@@ -115,8 +115,10 @@ namespace sandcastle::graphics
 		std::vector<vkhandle<VkFramebuffer>> _swap_chain_frame_buffers;
 
 		void create_command_pool();
+		void create_command_buffers();
 
 		vkhandle<VkCommandPool> _command_pool{ _device, vkDestroyCommandPool };
+		std::vector<VkCommandBuffer> _command_buffers;
 	};
 }
 

@@ -805,7 +805,66 @@ namespace sandcastle::graphics
 
 	void simpletriangle::create_command_pool()
 	{
+		queue_family_indices queue_family_indices = find_queue_families(_physical_device);
 
+		VkCommandPoolCreateInfo pool_info = {};
+		pool_info.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+		pool_info.queueFamilyIndex = queue_family_indices._graphics_family;
+		pool_info.flags = 0;
+
+		if (vkCreateCommandPool(_device, &pool_info, nullptr, _command_pool.replace()) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to create command pool!");
+		}
+	}
+
+	void simpletriangle::create_command_buffers()
+	{
+		_command_buffers.resize(_swap_chain_frame_buffers.size());
+
+		VkCommandBufferAllocateInfo alloc_info = {};
+		alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+		alloc_info.commandPool = _command_pool;
+		alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+		alloc_info.commandBufferCount = (uint32_t) _command_buffers.size();
+
+		if (vkAllocateCommandBuffers(_device, &alloc_info, _command_buffers.data()) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to allocate command buffers!");
+		}
+
+		for (size_t i = 0; i < _command_buffers.size(); ++i)
+		{
+			VkCommandBufferBeginInfo begin_info = {};
+			begin_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+			begin_info.flags = VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT;
+			begin_info.pInheritanceInfo = nullptr;
+
+			vkBeginCommandBuffer(_command_buffers[i], &begin_info);
+
+			VkRenderPassBeginInfo render_pass_info = {};
+			render_pass_info.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+			render_pass_info.renderPass = _render_pass;
+			render_pass_info.framebuffer = _swap_chain_frame_buffers[i];
+			render_pass_info.renderArea.offset = { 0, 0 };
+			render_pass_info.renderArea.extent = _swap_chain_extent;
+
+			VkClearValue clear_color = { 0.f, 0.f, 0.f, 1.f };
+			render_pass_info.clearValueCount = 1;
+			render_pass_info.pClearValues = &clear_color;
+
+			vkCmdBeginRenderPass(_command_buffers[i], &render_pass_info, VK_SUBPASS_CONTENTS_INLINE);
+			vkCmdBindPipeline(_command_buffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, _graphics_pipeline);
+
+			vkCmdDraw(_command_buffers[i], 3, 1, 0, 0);
+
+			vkCmdEndRenderPass(_command_buffers[i]);
+
+			if (vkEndCommandBuffer(_command_buffers[i]) != VK_SUCCESS)
+			{
+				throw std::runtime_error("failed to record command buffer!");
+			}
+		}
 	}
 
 	void simpletriangle::setup_debug_callback()
