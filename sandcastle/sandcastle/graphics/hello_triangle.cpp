@@ -57,6 +57,7 @@ namespace sandcastle::graphics
 		create_graphics_pipeline();
 		create_frame_buffers();
 		create_command_pool();
+		create_semaphores();
 	}
 
 	void simpletriangle::main_loop()
@@ -68,6 +69,11 @@ namespace sandcastle::graphics
 			draw_frame();
 		}
 
+
+	}
+
+	void simpletriangle::draw_frame()
+	{
 
 	}
 
@@ -866,6 +872,18 @@ namespace sandcastle::graphics
 			{
 				throw std::runtime_error("failed to record command buffer!");
 			}
+		}
+	}
+
+	void simpletriangle::create_semaphores()
+	{
+		VkSemaphoreCreateInfo semaphore_info = {};
+		semaphore_info.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+
+		if (vkCreateSemaphore(_device, &semaphore_info, nullptr, _image_available_semaphore.replace()) != VK_SUCCESS ||
+			vkCreateSemaphore(_device, &semaphore_info, nullptr, _render_finished_semaphore.replace()) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to create semaphores!");
 		}
 	}
 
