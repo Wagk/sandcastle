@@ -57,6 +57,7 @@ namespace sandcastle::graphics
 		create_graphics_pipeline();
 		create_frame_buffers();
 		create_command_pool();
+		create_command_buffers();
 		create_semaphores();
 	}
 
@@ -69,12 +70,49 @@ namespace sandcastle::graphics
 			draw_frame();
 		}
 
-
+		vkDeviceWaitIdle(_device);
 	}
 
 	void simpletriangle::draw_frame()
 	{
+		uint32_t image_index;
 
+		vkAcquireNextImageKHR(_device, _swap_chain, std::numeric_limits<uint32_t>::max(), 
+			_image_available_semaphore, VK_NULL_HANDLE, &image_index);
+
+		VkSubmitInfo submit_info = {};
+
+		VkSemaphore wait_semaphores[] = { _image_available_semaphore };
+		VkPipelineStageFlags wait_stages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
+		submit_info.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+		submit_info.waitSemaphoreCount = 1;
+		submit_info.pWaitSemaphores = wait_semaphores;
+		submit_info.pWaitDstStageMask = wait_stages;
+		submit_info.commandBufferCount = 1;
+		submit_info.pCommandBuffers = &_command_buffers[image_index];
+
+		VkSemaphore signal_semaphores[] = { _render_finished_semaphore };
+		submit_info.signalSemaphoreCount = 1;
+		submit_info.pSignalSemaphores = signal_semaphores;
+
+		if (vkQueueSubmit(_graphics_queue, 1, &submit_info, VK_NULL_HANDLE) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to submit draw command buffer!");
+		}
+
+		VkPresentInfoKHR present_info = {};
+		present_info.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
+		present_info.waitSemaphoreCount = 1;
+		present_info.pWaitSemaphores = signal_semaphores;
+		
+		VkSwapchainKHR swap_chains[] = { _swap_chain };
+		present_info.swapchainCount = 1;
+		present_info.pSwapchains = swap_chains;
+		present_info.pImageIndices = &image_index;
+
+		present_info.pResults = nullptr;
+
+		vkQueuePresentKHR(_presentation_queue, &present_info);
 	}
 
 	//assumes the instance is already initialized
@@ -714,12 +752,22 @@ namespace sandcastle::graphics
 		subpass.colorAttachmentCount = 1;
 		subpass.pColorAttachments = &color_attachment_ref;
 
+		VkSubpassDependency dependencies = {};
+		dependencies.srcSubpass = VK_SUBPASS_EXTERNAL;
+		dependencies.dstSubpass = 0;
+		dependencies.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+		dependencies.srcAccessMask = 0;
+		dependencies.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+		dependencies.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+
 		VkRenderPassCreateInfo render_pass_info = {};
 		render_pass_info.sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
 		render_pass_info.attachmentCount = 1;
 		render_pass_info.pAttachments = &color_attachment;
 		render_pass_info.subpassCount = 1;
 		render_pass_info.pSubpasses = &subpass;
+		render_pass_info.dependencyCount = 1;
+		render_pass_info.pDependencies = &dependencies;
 
 		if (vkCreateRenderPass(_device, &render_pass_info, nullptr, _render_pass.replace()) != VK_SUCCESS)
 		{
@@ -886,7 +934,7 @@ namespace sandcastle::graphics
 			throw std::runtime_error("failed to create semaphores!");
 		}
 	}
-
+	
 	void simpletriangle::setup_debug_callback()
 	{
 		if (!enable_validation_layers)
