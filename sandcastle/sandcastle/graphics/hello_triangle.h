@@ -33,6 +33,7 @@ namespace sandcastle::graphics
 		void create_instance();
 		void create_surface();
 		void create_swap_chain();
+		void recreate_swap_chain();
 
 		void pick_physical_device();
 		void create_logical_device();
@@ -88,6 +89,8 @@ namespace sandcastle::graphics
 		void create_frame_buffers();
 
 		GLFWwindow* _window; //glfw object
+
+		static void on_window_resize(GLFWwindow* window, int width, int height);
 
 		VkPhysicalDevice _physical_device = VK_NULL_HANDLE; //the physical device
 		vkhandle<VkInstance> _instance{vkDestroyInstance}; //this is the vulkan instance, we need to boot one everytime we start

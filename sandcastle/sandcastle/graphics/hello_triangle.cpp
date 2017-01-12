@@ -42,6 +42,9 @@ namespace sandcastle::graphics
 
 		_window = glfwCreateWindow(g_width, g_height, "Vulkan", nullptr, nullptr);
 
+		glfwSetWindowUserPointer(_window, this);
+		glfwSetWindowSizeCallback(_window, simpletriangle::on_window_resize);
+
 	}
 
 	void simpletriangle::init_vulkan()
@@ -77,8 +80,18 @@ namespace sandcastle::graphics
 	{
 		uint32_t image_index;
 
-		vkAcquireNextImageKHR(_device, _swap_chain, std::numeric_limits<uint32_t>::max(), 
+		VkResult result = vkAcquireNextImageKHR(_device, _swap_chain, std::numeric_limits<uint32_t>::max(), 
 			_image_available_semaphore, VK_NULL_HANDLE, &image_index);
+
+		if (result == VK_ERROR_OUT_OF_DATE_KHR)
+		{
+			recreate_swap_chain();
+			return;
+		}
+		else if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
+		{
+			throw std::runtime_error("failed to acquire swap chain image!");
+		}
 
 		VkSubmitInfo submit_info = {};
 
@@ -112,7 +125,12 @@ namespace sandcastle::graphics
 
 		present_info.pResults = nullptr;
 
-		vkQueuePresentKHR(_presentation_queue, &present_info);
+		result = vkQueuePresentKHR(_presentation_queue, &present_info);
+
+		if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR)
+			recreate_swap_chain();
+		else if (result != VK_SUCCESS)
+			throw std::runtime_error("failed to present swap chain image!");
 	}
 
 	//assumes the instance is already initialized
@@ -288,17 +306,34 @@ namespace sandcastle::graphics
 		create_info.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
 		create_info.presentMode = present_mode;
 		create_info.clipped = VK_TRUE;
-		create_info.oldSwapchain = VK_NULL_HANDLE; //this might get iffy
 
-		if (vkCreateSwapchainKHR(_device, &create_info, nullptr, _swap_chain.replace()) != VK_SUCCESS)
+		VkSwapchainKHR old_swap_chain = _swap_chain;
+		create_info.oldSwapchain = old_swap_chain;
+
+		VkSwapchainKHR new_swap_chain;
+		if (vkCreateSwapchainKHR(_device, &create_info, nullptr, &new_swap_chain) != VK_SUCCESS)
 		{
 			throw std::runtime_error("failed to create swap chain!");
 		}
+
+		_swap_chain = new_swap_chain;
 
 		//get swapchain image handles
 		vkGetSwapchainImagesKHR(_device, _swap_chain, &image_count, nullptr);
 		_swap_chain_images.resize(image_count);
 		vkGetSwapchainImagesKHR(_device, _swap_chain, &image_count, _swap_chain_images.data());
+	}
+
+	void simpletriangle::recreate_swap_chain()
+	{
+		vkDeviceWaitIdle(_device);
+
+		create_swap_chain();
+		create_image_views();
+		create_render_pass();
+		create_graphics_pipeline();
+		create_frame_buffers();
+		create_command_buffers();
 	}
 
 	void simpletriangle::pick_physical_device()
@@ -801,6 +836,14 @@ namespace sandcastle::graphics
 		}
 	}
 
+	void simpletriangle::on_window_resize(GLFWwindow * window, int width, int height)
+	{
+		if (width == 0 || height == 0) return;
+
+		simpletriangle* app = reinterpret_cast<simpletriangle*>(glfwGetWindowUserPointer(window));
+		app->recreate_swap_chain();
+	}
+
 	void simpletriangle::create_image_views()
 	{
 		_swap_chain_image_views.resize(_swap_chain_images.size(), vkhandle<VkImageView>{_device, vkDestroyImageView});
@@ -876,6 +919,11 @@ namespace sandcastle::graphics
 
 	void simpletriangle::create_command_buffers()
 	{
+		if (_command_buffers.empty() == false)
+		{
+			vkFreeCommandBuffers(_device, _command_pool, _command_buffers.size(), _command_buffers.data());
+		}
+
 		_command_buffers.resize(_swap_chain_frame_buffers.size());
 
 		VkCommandBufferAllocateInfo alloc_info = {};
