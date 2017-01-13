@@ -18,6 +18,12 @@ namespace sandcastle::graphics
 		VK_KHR_SWAPCHAIN_EXTENSION_NAME
 	};
 
+	const std::vector<vertex> vertices = {
+		{{0.f, -0.5f}, {1.f, 0.f, 0.f}},
+		{{0.5f, 0.5f}, {0.f, 1.f, 0.f}},
+		{{-0.5f, 0.5f}, {0.f, 0.f, 1.f}}
+	};
+
 #ifdef NDEBUG
 	const bool enablevalidationlayers = false;
 #else
@@ -637,12 +643,15 @@ namespace sandcastle::graphics
 
 		VkPipelineShaderStageCreateInfo shader_stages[] = {vert_shader_stage_info, frag_shader_stage_info};
 
+		auto binding_description = vertex::get_binding_description();
+		auto attribute_descriptions = vertex::get_attribute_descriptions();
+
 		VkPipelineVertexInputStateCreateInfo vertex_input_info = {};
 		vertex_input_info.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-		vertex_input_info.vertexBindingDescriptionCount = 0;
-		vertex_input_info.pVertexBindingDescriptions = nullptr;
-		vertex_input_info.vertexAttributeDescriptionCount = 0;
-		vertex_input_info.pVertexAttributeDescriptions = nullptr;
+		vertex_input_info.vertexBindingDescriptionCount = 1;
+		vertex_input_info.pVertexBindingDescriptions = &binding_description;
+		vertex_input_info.vertexAttributeDescriptionCount = attribute_descriptions.size();
+		vertex_input_info.pVertexAttributeDescriptions = attribute_descriptions.data();
 
 		VkPipelineInputAssemblyStateCreateInfo input_assembly_info = {};
 		input_assembly_info.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
@@ -998,5 +1007,32 @@ namespace sandcastle::graphics
 			throw std::runtime_error("failed to set up debug callback!");
 		}
 
+	}
+
+	VkVertexInputBindingDescription vertex::get_binding_description()
+	{
+		VkVertexInputBindingDescription binding_description = {};
+		binding_description.binding = 0;
+		binding_description.stride = sizeof vertex;
+		binding_description.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
+
+		return binding_description;
+	}
+
+	std::array<VkVertexInputAttributeDescription, 2> vertex::get_attribute_descriptions()
+	{
+		std::array<VkVertexInputAttributeDescription, 2> attribute_descriptions = {};
+
+		attribute_descriptions[0].binding = 0;
+		attribute_descriptions[0].location = 0;
+		attribute_descriptions[0].format = VK_FORMAT_R32G32_SFLOAT;
+		attribute_descriptions[0].offset = offsetof(vertex, _pos);
+
+		attribute_descriptions[1].binding = 0;
+		attribute_descriptions[1].location = 1;
+		attribute_descriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT;
+		attribute_descriptions[1].offset = offsetof(vertex, _color);
+
+		return attribute_descriptions;
 	}
 }

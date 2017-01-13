@@ -2,8 +2,11 @@
 #define graphics_hello_triangle_h__
 
 #include <vector>
+#include <array>
 #include <iostream>
 #include <fstream>
+
+#include <glm/glm.hpp>
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -12,6 +15,16 @@
 
 namespace sandcastle::graphics
 {
+	
+	struct vertex
+	{
+		glm::vec2 _pos;
+		glm::vec3 _color;
+
+		static VkVertexInputBindingDescription get_binding_description();
+		static std::array<VkVertexInputAttributeDescription, 2> get_attribute_descriptions();
+	};
+
 	class simpletriangle
 	{
 	public:
