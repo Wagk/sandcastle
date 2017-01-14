@@ -66,6 +66,7 @@ namespace sandcastle::graphics
 		create_graphics_pipeline();
 		create_frame_buffers();
 		create_command_pool();
+		create_vertex_buffer();
 		create_command_buffers();
 		create_semaphores();
 	}
@@ -990,6 +991,39 @@ namespace sandcastle::graphics
 		{
 			throw std::runtime_error("failed to create semaphores!");
 		}
+	}
+
+	void simpletriangle::create_vertex_buffer()
+	{
+		VkBufferCreateInfo buffer_info = {};
+		buffer_info.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
+		buffer_info.size = sizeof(vertices[0]) * vertices.size();
+		buffer_info.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
+		buffer_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+
+		if (vkCreateBuffer(_device, &buffer_info, nullptr, _vertex_buffer.replace()) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to create vertex buffer!");
+		}
+
+		VkMemoryRequirements mem_reqs;
+		vkGetBufferMemoryRequirements(_device, _vertex_buffer, &mem_reqs);
+	}
+
+	uint32_t simpletriangle::find_memory_type(uint32_t typefilter, VkMemoryPropertyFlags properties)
+	{
+		VkPhysicalDeviceMemoryProperties mem_properties;
+		vkGetPhysicalDeviceMemoryProperties(_physical_device, &mem_properties);
+
+		for (uint32_t i = 0; i < mem_properties.memoryTypeCount; ++i)
+		{
+			if ((typefilter & (1 << i)) && ((mem_properties.memoryTypes[i].propertyFlags & properties) == properties))
+			{
+				return i;
+			}
+		}
+
+		throw std::runtime_error("failed to find suitable memory type!");
 	}
 	
 	void simpletriangle::setup_debug_callback()

@@ -141,6 +141,10 @@ namespace sandcastle::graphics
 
 		vkhandle<VkSemaphore> _image_available_semaphore{ _device, vkDestroySemaphore };
 		vkhandle<VkSemaphore> _render_finished_semaphore{ _device, vkDestroySemaphore };
+
+		void create_vertex_buffer();
+		uint32_t find_memory_type(uint32_t typefilter, VkMemoryPropertyFlags properties);
+		vkhandle<VkBuffer> _vertex_buffer{ _device, vkDestroyBuffer };
 	};
 }
 
