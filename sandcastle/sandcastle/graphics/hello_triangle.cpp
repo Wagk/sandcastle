@@ -1008,6 +1008,12 @@ namespace sandcastle::graphics
 
 		VkMemoryRequirements mem_reqs;
 		vkGetBufferMemoryRequirements(_device, _vertex_buffer, &mem_reqs);
+
+		VkMemoryAllocateInfo alloc_info = {};
+		alloc_info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+		alloc_info.allocationSize = mem_reqs.size;
+		alloc_info.memoryTypeIndex = find_memory_type(mem_reqs.memoryTypeBits, 
+			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
 	}
 
 	uint32_t simpletriangle::find_memory_type(uint32_t typefilter, VkMemoryPropertyFlags properties)
