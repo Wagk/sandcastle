@@ -144,7 +144,9 @@ namespace sandcastle::graphics
 
 		void create_vertex_buffer();
 		uint32_t find_memory_type(uint32_t typefilter, VkMemoryPropertyFlags properties);
+
 		vkhandle<VkBuffer> _vertex_buffer{ _device, vkDestroyBuffer };
+		vkhandle<VkDeviceMemory> _vertex_buffer_memory{ _device, vkFreeMemory };
 	};
 }
 

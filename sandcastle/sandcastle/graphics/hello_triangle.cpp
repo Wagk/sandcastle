@@ -970,6 +970,10 @@ namespace sandcastle::graphics
 			vkCmdBeginRenderPass(_command_buffers[i], &render_pass_info, VK_SUBPASS_CONTENTS_INLINE);
 			vkCmdBindPipeline(_command_buffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, _graphics_pipeline);
 
+			VkBuffer vertex_buffers[] = { _vertex_buffer };
+			VkDeviceSize offsets[] = { 0 };
+			vkCmdBindVertexBuffers(_command_buffers[i], 0, 1, vertex_buffers, offsets);
+
 			vkCmdDraw(_command_buffers[i], 3, 1, 0, 0);
 
 			vkCmdEndRenderPass(_command_buffers[i]);
@@ -979,6 +983,7 @@ namespace sandcastle::graphics
 				throw std::runtime_error("failed to record command buffer!");
 			}
 		}
+
 	}
 
 	void simpletriangle::create_semaphores()
@@ -1014,6 +1019,18 @@ namespace sandcastle::graphics
 		alloc_info.allocationSize = mem_reqs.size;
 		alloc_info.memoryTypeIndex = find_memory_type(mem_reqs.memoryTypeBits, 
 			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
+
+		if(vkAllocateMemory(_device, &alloc_info, nullptr, _vertex_buffer_memory.replace()) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to allocate vertex buffer memory!");
+		}
+
+		vkBindBufferMemory(_device, _vertex_buffer, _vertex_buffer_memory, 0);
+
+		void* data;
+		vkMapMemory(_device, _vertex_buffer_memory, 0, buffer_info.size, 0, &data);
+		std::memcpy(data, vertices.data(), (size_t) buffer_info.size);
+		vkUnmapMemory(_device, _vertex_buffer_memory);
 	}
 
 	uint32_t simpletriangle::find_memory_type(uint32_t typefilter, VkMemoryPropertyFlags properties)
