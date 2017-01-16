@@ -1048,6 +1048,10 @@ namespace sandcastle::graphics
 
 		throw std::runtime_error("failed to find suitable memory type!");
 	}
+
+	void simpletriangle::create_buffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, vkhandle<VkBuffer>& buffer, vkhandle<VkDeviceMemory> buffer_memory)
+	{
+	}
 	
 	void simpletriangle::setup_debug_callback()
 	{

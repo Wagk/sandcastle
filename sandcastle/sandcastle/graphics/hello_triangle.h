@@ -147,6 +147,9 @@ namespace sandcastle::graphics
 
 		vkhandle<VkBuffer> _vertex_buffer{ _device, vkDestroyBuffer };
 		vkhandle<VkDeviceMemory> _vertex_buffer_memory{ _device, vkFreeMemory };
+
+		void create_buffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, 
+			vkhandle<VkBuffer>& buffer, vkhandle<VkDeviceMemory> buffer_memory);
 	};
 }
 
