@@ -1000,36 +1000,15 @@ namespace sandcastle::graphics
 
 	void simpletriangle::create_vertex_buffer()
 	{
-		VkBufferCreateInfo buffer_info = {};
-		buffer_info.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
-		buffer_info.size = sizeof(vertices[0]) * vertices.size();
-		buffer_info.usage = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT;
-		buffer_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+		VkDeviceSize buffer_size = sizeof(vertices[0]) * vertices.size();
 
-		if (vkCreateBuffer(_device, &buffer_info, nullptr, _vertex_buffer.replace()) != VK_SUCCESS)
-		{
-			throw std::runtime_error("failed to create vertex buffer!");
-		}
-
-		VkMemoryRequirements mem_reqs;
-		vkGetBufferMemoryRequirements(_device, _vertex_buffer, &mem_reqs);
-
-		VkMemoryAllocateInfo alloc_info = {};
-		alloc_info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-		alloc_info.allocationSize = mem_reqs.size;
-		alloc_info.memoryTypeIndex = find_memory_type(mem_reqs.memoryTypeBits, 
-			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
-
-		if(vkAllocateMemory(_device, &alloc_info, nullptr, _vertex_buffer_memory.replace()) != VK_SUCCESS)
-		{
-			throw std::runtime_error("failed to allocate vertex buffer memory!");
-		}
-
-		vkBindBufferMemory(_device, _vertex_buffer, _vertex_buffer_memory, 0);
-
+		create_buffer(buffer_size, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, 
+			_vertex_buffer, _vertex_buffer_memory);
+		
 		void* data;
-		vkMapMemory(_device, _vertex_buffer_memory, 0, buffer_info.size, 0, &data);
-		std::memcpy(data, vertices.data(), (size_t) buffer_info.size);
+		vkMapMemory(_device, _vertex_buffer_memory, 0, buffer_size, 0, &data);
+		std::memcpy(data, vertices.data(), (size_t) buffer_size);
 		vkUnmapMemory(_device, _vertex_buffer_memory);
 	}
 
@@ -1049,8 +1028,33 @@ namespace sandcastle::graphics
 		throw std::runtime_error("failed to find suitable memory type!");
 	}
 
-	void simpletriangle::create_buffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, vkhandle<VkBuffer>& buffer, vkhandle<VkDeviceMemory> buffer_memory)
+	void simpletriangle::create_buffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, 
+		vkhandle<VkBuffer>& buffer, vkhandle<VkDeviceMemory>& buffer_memory)
 	{
+		VkBufferCreateInfo buffer_info = {};
+		buffer_info.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
+		buffer_info.size = size;
+		buffer_info.usage = usage;
+		buffer_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+
+		if (vkCreateBuffer(_device, &buffer_info, nullptr, buffer.replace()) != VK_SUCCESS) {
+			throw std::runtime_error("failed to create buffer!");
+		}
+
+		VkMemoryRequirements mem_reqs;
+		vkGetBufferMemoryRequirements(_device, buffer, &mem_reqs);
+
+		VkMemoryAllocateInfo alloc_info = {};
+		alloc_info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+		alloc_info.allocationSize = mem_reqs.size;
+		alloc_info.memoryTypeIndex = find_memory_type(mem_reqs.memoryTypeBits, properties);
+
+		if(vkAllocateMemory(_device, &alloc_info, nullptr, buffer_memory.replace()) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to allocate vertex buffer memory!");
+		}
+
+		vkBindBufferMemory(_device, buffer, buffer_memory, 0);
 	}
 	
 	void simpletriangle::setup_debug_callback()
