@@ -150,6 +150,7 @@ namespace sandcastle::graphics
 
 		void create_buffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, 
 			vkhandle<VkBuffer>& buffer, vkhandle<VkDeviceMemory>& buffer_memory);
+		void copy_buffer(VkBuffer src_buffer, VkBuffer dst_buffer, VkDeviceSize size);
 	};
 }
 

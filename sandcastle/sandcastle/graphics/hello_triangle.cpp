@@ -1002,14 +1002,23 @@ namespace sandcastle::graphics
 	{
 		VkDeviceSize buffer_size = sizeof(vertices[0]) * vertices.size();
 
-		create_buffer(buffer_size, VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+		vkhandle<VkBuffer> staging_buffer{ _device, vkDestroyBuffer };
+		vkhandle<VkDeviceMemory> staging_buffer_memory{ _device, vkFreeMemory };
+
+		create_buffer(buffer_size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
 			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, 
-			_vertex_buffer, _vertex_buffer_memory);
+			staging_buffer, staging_buffer_memory);
 		
 		void* data;
-		vkMapMemory(_device, _vertex_buffer_memory, 0, buffer_size, 0, &data);
+		vkMapMemory(_device, staging_buffer_memory, 0, buffer_size, 0, &data);
 		std::memcpy(data, vertices.data(), (size_t) buffer_size);
-		vkUnmapMemory(_device, _vertex_buffer_memory);
+		vkUnmapMemory(_device, staging_buffer_memory);
+
+		create_buffer(buffer_size, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+			VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, 
+			_vertex_buffer, _vertex_buffer_memory);
+
+		copy_buffer(staging_buffer, _vertex_buffer, buffer_size);
 	}
 
 	uint32_t simpletriangle::find_memory_type(uint32_t typefilter, VkMemoryPropertyFlags properties)
@@ -1055,6 +1064,43 @@ namespace sandcastle::graphics
 		}
 
 		vkBindBufferMemory(_device, buffer, buffer_memory, 0);
+	}
+
+	void simpletriangle::copy_buffer(VkBuffer src_buffer, VkBuffer dst_buffer, VkDeviceSize size)
+	{
+		VkCommandBufferAllocateInfo alloc_info = {};
+		alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+		alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+		alloc_info.commandPool = _command_pool;
+		alloc_info.commandBufferCount = 1;
+
+		VkCommandBuffer command_buffer;
+		vkAllocateCommandBuffers(_device, &alloc_info, &command_buffer);
+
+		VkCommandBufferBeginInfo begin_info = {};
+		begin_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+		begin_info.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+
+		vkBeginCommandBuffer(command_buffer, &begin_info);
+
+		VkBufferCopy copy_region = {};
+		copy_region.srcOffset = 0;
+		copy_region.dstOffset = 0;
+		copy_region.size = size;
+		
+		vkCmdCopyBuffer(command_buffer, src_buffer, dst_buffer, 1, &copy_region);
+
+		vkEndCommandBuffer(command_buffer);
+
+		VkSubmitInfo submit_info = {};
+		submit_info.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+		submit_info.commandBufferCount = 1;
+		submit_info.pCommandBuffers = &command_buffer;
+
+		vkQueueSubmit(_graphics_queue, 1, &submit_info, VK_NULL_HANDLE);
+		vkQueueWaitIdle(_graphics_queue);
+
+		vkFreeCommandBuffers(_device, _command_pool, 1, &command_buffer);
 	}
 	
 	void simpletriangle::setup_debug_callback()
