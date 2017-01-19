@@ -19,9 +19,14 @@ namespace sandcastle::graphics
 	};
 
 	const std::vector<vertex> vertices = {
-		{{0.f, -0.5f}, {1.f, 0.f, 0.f}},
-		{{0.5f, 0.5f}, {0.f, 1.f, 0.f}},
-		{{-0.5f, 0.5f}, {0.f, 0.f, 1.f}}
+		{{-0.5f, -0.5f}, {1.f, 0.f, 0.f}},
+		{{0.f, -0.5f}, {0.f, 1.f, 0.f}},
+		{{0.5f, 0.5f}, {0.f, 0.f, 1.f}},
+		{{-0.5f, 0.5f}, {1.f, 1.f, 1.f}}
+	};
+
+	const std::vector<uint16_t> indices = {
+		0, 1, 2, 2, 3, 0
 	};
 
 #ifdef NDEBUG
@@ -67,6 +72,7 @@ namespace sandcastle::graphics
 		create_frame_buffers();
 		create_command_pool();
 		create_vertex_buffer();
+		create_index_buffer();
 		create_command_buffers();
 		create_semaphores();
 	}
@@ -1037,7 +1043,11 @@ namespace sandcastle::graphics
 		throw std::runtime_error("failed to find suitable memory type!");
 	}
 
-	void simpletriangle::create_buffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, 
+	void simpletriangle::create_index_buffer()
+	{
+	}
+
+	void simpletriangle::create_buffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties,
 		vkhandle<VkBuffer>& buffer, vkhandle<VkDeviceMemory>& buffer_memory)
 	{
 		VkBufferCreateInfo buffer_info = {};
