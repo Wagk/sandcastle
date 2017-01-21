@@ -1046,6 +1046,9 @@ namespace sandcastle::graphics
 	void simpletriangle::create_index_buffer()
 	{
 		VkDeviceSize buffer_size = sizeof(indices[0]) * indices.size();
+        
+        vkhandle<VkBuffer> staging_buffer{_device, vkDestroyBuffer};
+        vkhandle<VkDeviceMemory> staging_buffer_memory{_device, vkFreeMemory};
 	}
 
 	void simpletriangle::create_buffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties,
