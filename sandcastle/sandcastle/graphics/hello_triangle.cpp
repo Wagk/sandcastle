@@ -20,7 +20,7 @@ namespace sandcastle::graphics
 
 	const std::vector<vertex> vertices = {
 		{{-0.5f, -0.5f}, {1.f, 0.f, 0.f}},
-		{{0.f, -0.5f}, {0.f, 1.f, 0.f}},
+		{{0.5f, -0.5f}, {0.f, 1.f, 0.f}},
 		{{0.5f, 0.5f}, {0.f, 0.f, 1.f}},
 		{{-0.5f, 0.5f}, {1.f, 1.f, 1.f}}
 	};
@@ -979,8 +979,10 @@ namespace sandcastle::graphics
 			VkBuffer vertex_buffers[] = { _vertex_buffer };
 			VkDeviceSize offsets[] = { 0 };
 			vkCmdBindVertexBuffers(_command_buffers[i], 0, 1, vertex_buffers, offsets);
+			vkCmdBindIndexBuffer(_command_buffers[i], _index_buffer, 0, VK_INDEX_TYPE_UINT16);
 
-			vkCmdDraw(_command_buffers[i], 3, 1, 0, 0);
+			//vkCmdDraw(_command_buffers[i], 3, 1, 0, 0);
+			vkCmdDrawIndexed(_command_buffers[i], indices.size(), 1, 0, 0, 0);
 
 			vkCmdEndRenderPass(_command_buffers[i]);
 
@@ -1049,6 +1051,21 @@ namespace sandcastle::graphics
         
         vkhandle<VkBuffer> staging_buffer{_device, vkDestroyBuffer};
         vkhandle<VkDeviceMemory> staging_buffer_memory{_device, vkFreeMemory};
+
+		create_buffer(buffer_size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
+			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, 
+			staging_buffer, staging_buffer_memory);
+		
+		void* data;
+		vkMapMemory(_device, staging_buffer_memory, 0, buffer_size, 0, &data);
+		std::memcpy(data, indices.data(), (size_t) buffer_size);
+		vkUnmapMemory(_device, staging_buffer_memory);
+
+		create_buffer(buffer_size, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+			VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, 
+			_index_buffer, _index_buffer_memory);
+
+		copy_buffer(staging_buffer, _index_buffer, buffer_size);
 	}
 
 	void simpletriangle::create_buffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties,
