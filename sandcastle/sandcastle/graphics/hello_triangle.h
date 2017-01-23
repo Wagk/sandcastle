@@ -16,6 +16,13 @@
 namespace sandcastle::graphics
 {
 	
+	struct uniform_buffer_object
+	{
+		glm::mat4 _model;
+		glm::mat4 _view;
+		glm::mat4 _proj;
+	};
+
 	struct vertex
 	{
 		glm::vec2 _pos;
