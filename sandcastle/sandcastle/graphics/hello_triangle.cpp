@@ -1205,4 +1205,16 @@ namespace sandcastle::graphics
 
 		return attribute_descriptions;
 	}
+
+    void simpletriangle::create_uniform_buffer()
+    {
+        VkDeviceSize buffer_size = sizeof(uniform_buffer_object);
+
+        create_buffer(buffer_size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT |
+                VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, _uniform_staging_buffer, _uniform_staging_buffer_memory);
+
+        create_buffer(buffer_size, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
+                VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, _uniform_buffer, _uniform_buffer_memory);
+    }
+
 }
