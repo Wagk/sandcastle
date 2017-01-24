@@ -68,6 +68,7 @@ namespace sandcastle::graphics
 		create_swap_chain();
 		create_image_views();
 		create_render_pass();
+		create_descriptor_set_layout();
 		create_graphics_pipeline();
 		create_frame_buffers();
 		create_command_pool();
@@ -1132,6 +1133,33 @@ namespace sandcastle::graphics
 		vkQueueWaitIdle(_graphics_queue);
 
 		vkFreeCommandBuffers(_device, _command_pool, 1, &command_buffer);
+	}
+
+	void simpletriangle::create_descriptor_set_layout()
+	{
+		VkDescriptorSetLayoutBinding ubo_layout_binding = {};
+		ubo_layout_binding.binding = 0;
+		ubo_layout_binding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+		ubo_layout_binding.descriptorCount = 1;
+		ubo_layout_binding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+		ubo_layout_binding.pImmutableSamplers = nullptr;
+
+		VkDescriptorSetLayoutCreateInfo layout_info = {};
+		layout_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+		layout_info.bindingCount = 1;
+		layout_info.pBindings = &ubo_layout_binding;
+
+		if (vkCreateDescriptorSetLayout(_device, &layout_info, nullptr, _descriptor_set_layout.replace()) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to create descriptor set layout!");
+		}
+
+		VkDescriptorSetLayout set_layouts[] = { _descriptor_set_layout };
+		VkPipelineLayoutCreateInfo pipeline_layout_info = {};
+		pipeline_layout_info.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+		pipeline_layout_info.setLayoutCount = 1;
+		pipeline_layout_info.pSetLayouts = set_layouts;
+
 	}
 	
 	void simpletriangle::setup_debug_callback()

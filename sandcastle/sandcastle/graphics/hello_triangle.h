@@ -112,12 +112,12 @@ namespace sandcastle::graphics
 
 		static void on_window_resize(GLFWwindow* window, int width, int height);
 
-		VkPhysicalDevice _physical_device = VK_NULL_HANDLE; //the physical device
-		vkhandle<VkInstance> _instance{vkDestroyInstance}; //this is the vulkan instance, we need to boot one everytime we start
-		vkhandle<VkDevice> _device{ vkDestroyDevice }; //this is the logical device
+		VkPhysicalDevice                   _physical_device = VK_NULL_HANDLE; //the physical device
+		vkhandle<VkInstance>               _instance{vkDestroyInstance}; //this is the vulkan instance, we need to boot one everytime we start
+		vkhandle<VkDevice>                 _device{ vkDestroyDevice }; //this is the logical device
 		vkhandle<VkDebugReportCallbackEXT> _debug_callback{ _instance, DestroyDebugReportCallbackEXT }; //this is the validation layer callback:w
-		vkhandle<VkSurfaceKHR> _surface{ _instance, vkDestroySurfaceKHR }; //the surface to draw onto
-		vkhandle<VkSwapchainKHR> _swap_chain{ _device, vkDestroySwapchainKHR };
+		vkhandle<VkSurfaceKHR>             _surface{ _instance, vkDestroySurfaceKHR }; //the surface to draw onto
+		vkhandle<VkSwapchainKHR>           _swap_chain{ _device, vkDestroySwapchainKHR };
 
 		std::vector<VkImage> _swap_chain_images;
 		VkFormat _swap_chain_image_format;
@@ -133,15 +133,18 @@ namespace sandcastle::graphics
 		static std::vector<char> read_binary(const std::string& file);
 		void create_shader_module(const std::vector<char>& code, vkhandle<VkShaderModule>& shader);
 
-		vkhandle<VkPipelineLayout> _pipeline_layout{ _device, vkDestroyPipelineLayout };
-		vkhandle<VkRenderPass> _render_pass{ _device, vkDestroyRenderPass };
-		vkhandle<VkPipeline> _graphics_pipeline{ _device, vkDestroyPipeline };
+		void create_descriptor_set_layout();
+
+		vkhandle<VkDescriptorSetLayout>      _descriptor_set_layout{ _device, vkDestroyDescriptorSetLayout };
+		vkhandle<VkPipelineLayout>           _pipeline_layout{ _device, vkDestroyPipelineLayout };
+		vkhandle<VkRenderPass>               _render_pass{ _device, vkDestroyRenderPass };
+		vkhandle<VkPipeline>                 _graphics_pipeline{ _device, vkDestroyPipeline };
 		std::vector<vkhandle<VkFramebuffer>> _swap_chain_frame_buffers;
 
 		void create_command_pool();
 		void create_command_buffers();
 
-		vkhandle<VkCommandPool> _command_pool{ _device, vkDestroyCommandPool };
+		vkhandle<VkCommandPool>      _command_pool{ _device, vkDestroyCommandPool };
 		std::vector<VkCommandBuffer> _command_buffers;
 
 		void create_semaphores();
@@ -152,16 +155,22 @@ namespace sandcastle::graphics
 		void create_vertex_buffer();
 		uint32_t find_memory_type(uint32_t typefilter, VkMemoryPropertyFlags properties);
 
-		vkhandle<VkBuffer> _vertex_buffer{ _device, vkDestroyBuffer };
+		vkhandle<VkBuffer>       _vertex_buffer{ _device, vkDestroyBuffer };
 		vkhandle<VkDeviceMemory> _vertex_buffer_memory{ _device, vkFreeMemory };
 
 		void create_index_buffer();
-		vkhandle<VkBuffer> _index_buffer{ _device, vkDestroyBuffer };
-		vkhandle<VkDeviceMemory> _index_buffer_memory{ _device, vkFreeMemory };
 
-		void create_buffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, 
-			vkhandle<VkBuffer>& buffer, vkhandle<VkDeviceMemory>& buffer_memory);
+		vkhandle<VkBuffer>       _index_buffer{ _device, vkDestroyBuffer };
+		vkhandle<VkDeviceMemory> _index_buffer_memory{ _device, vkFreeMemory };
+		vkhandle<VkBuffer>       _uniform_staging_buffer{ _device, vkDestroyBuffer };
+		vkhandle<VkDeviceMemory> _uniform_staging_buffer_memory{ _device, vkFreeMemory };
+		vkhandle<VkBuffer>       _uniform_buffer{ _device, vkDestroyBuffer };
+		vkhandle<VkDeviceMemory> _uniform_buffer_memory{ _device, vkFreeMemory };
+
+		void create_buffer(VkDeviceSize size,VkBufferUsageFlags usage, VkMemoryPropertyFlags properties,
+			vkhandle<VkBuffer>& buffer,      vkhandle<VkDeviceMemory>& buffer_memory);
 		void copy_buffer(VkBuffer src_buffer, VkBuffer dst_buffer, VkDeviceSize size);
+
 	};
 }
 
