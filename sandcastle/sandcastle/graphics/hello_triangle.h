@@ -5,8 +5,11 @@
 #include <array>
 #include <iostream>
 #include <fstream>
+#include <chrono>
 
+#define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -160,6 +163,7 @@ namespace sandcastle::graphics
 
 		void create_index_buffer();
         void create_uniform_buffer();
+		void update_uniform_buffer();
 
 		vkhandle<VkBuffer>       _index_buffer{ _device, vkDestroyBuffer };
 		vkhandle<VkDeviceMemory> _index_buffer_memory{ _device, vkFreeMemory };
@@ -169,7 +173,7 @@ namespace sandcastle::graphics
 		vkhandle<VkDeviceMemory> _uniform_buffer_memory{ _device, vkFreeMemory };
 
 		void create_buffer(VkDeviceSize size,VkBufferUsageFlags usage, VkMemoryPropertyFlags properties,
-			vkhandle<VkBuffer>& buffer,      vkhandle<VkDeviceMemory>& buffer_memory);
+							vkhandle<VkBuffer>& buffer, vkhandle<VkDeviceMemory>& buffer_memory);
 		void copy_buffer(VkBuffer src_buffer, VkBuffer dst_buffer, VkDeviceSize size);
 
 	};
