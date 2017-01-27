@@ -74,6 +74,7 @@ namespace sandcastle::graphics
 		create_command_pool();
 		create_vertex_buffer();
 		create_index_buffer();
+		create_uniform_buffer();
 		create_command_buffers();
 		create_semaphores();
 	}
@@ -1246,7 +1247,7 @@ namespace sandcastle::graphics
         std::memcpy(data, &ubo, sizeof(ubo));
         vkUnmapMemory(_device, _uniform_staging_buffer_memory);
 
-        copy_buffer(_uniform_staging_buffer_memory, _uniform_buffer, sizeof(ubo));
+        copy_buffer(_uniform_staging_buffer, _uniform_buffer, sizeof(ubo));
         
 	}
 
