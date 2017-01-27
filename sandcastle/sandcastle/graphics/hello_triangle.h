@@ -64,30 +64,32 @@ namespace sandcastle::graphics
 		bool check_device_extension_support(VkPhysicalDevice device);
 
 		static VKAPI_ATTR VkBool32 VKAPI_CALL debugcallback_fn(
-			VkDebugReportFlagsEXT flags,
+			VkDebugReportFlagsEXT      flags,
 			VkDebugReportObjectTypeEXT objtype,
-			uint64_t obj,
-			size_t location,
-			int32_t code,
-			const char* layerprefix,
-			const char* msg,
-			void* userdata);
+			uint64_t                   obj,
+			size_t                     location,
+			int32_t                    code,
+			const char*                layerprefix,
+			const char*                msg,
+			void*                      userdata);
 
 		void setup_debug_callback();
 		VkResult CreateDebugReportCallbackEXT(
-			VkInstance instance,
+			VkInstance                                instance,
 			const VkDebugReportCallbackCreateInfoEXT* pcreateinfo,
-			const VkAllocationCallbacks* palloc,
-			VkDebugReportCallbackEXT* pcallback);
+			const VkAllocationCallbacks*              palloc,
+			VkDebugReportCallbackEXT*                 pcallback);
 		
 		static void DestroyDebugReportCallbackEXT(
-			VkInstance instance,
-			VkDebugReportCallbackEXT callback, 
-			const VkAllocationCallbacks* palloc);
+			VkInstance                         instance,
+			VkDebugReportCallbackEXT           callback,
+			const VkAllocationCallbacks*       palloc);
 
 		struct queue_family_indices {
-			int _graphics_family = -1;
+
+			int _graphics_family     = -1;
 			int _presentation_family = -1;
+
 			bool is_complete() {
 				return _graphics_family >= 0 && _presentation_family >= 0;
 			}
@@ -96,16 +98,15 @@ namespace sandcastle::graphics
 		queue_family_indices find_queue_families(VkPhysicalDevice device);
 
 		struct swap_chain_support_details {
-			VkSurfaceCapabilitiesKHR _capabilities;
+			VkSurfaceCapabilitiesKHR        _capabilities;
 			std::vector<VkSurfaceFormatKHR> _formats;
-			std::vector<VkPresentModeKHR> _present_modes;
+			std::vector<VkPresentModeKHR>   _present_modes;
 		};
 
 		swap_chain_support_details query_swap_chain_support(VkPhysicalDevice device);
-
-		VkSurfaceFormatKHR choose_swap_surface_format(const std::vector<VkSurfaceFormatKHR>& available_formats);
-		VkPresentModeKHR choose_swap_present_mode(const std::vector<VkPresentModeKHR>& avaiable_presents);
-		VkExtent2D choose_swap_extent(const VkSurfaceCapabilitiesKHR& capabilities);
+		VkSurfaceFormatKHR         choose_swap_surface_format(const std::vector<VkSurfaceFormatKHR>& available_formats);
+		VkPresentModeKHR           choose_swap_present_mode(const std::vector<VkPresentModeKHR>& avaiable_presents);
+		VkExtent2D                 choose_swap_extent(const VkSurfaceCapabilitiesKHR& capabilities);
 
 		void create_graphics_pipeline();
 		void create_render_pass();
@@ -122,11 +123,11 @@ namespace sandcastle::graphics
 		vkhandle<VkSurfaceKHR>             _surface{ _instance, vkDestroySurfaceKHR }; //the surface to draw onto
 		vkhandle<VkSwapchainKHR>           _swap_chain{ _device, vkDestroySwapchainKHR };
 
-		std::vector<VkImage> _swap_chain_images;
-		VkFormat _swap_chain_image_format;
-		VkExtent2D _swap_chain_extent;
-
+		std::vector<VkImage>               _swap_chain_images;
+		VkFormat                           _swap_chain_image_format;
+		VkExtent2D                         _swap_chain_extent;
 		std::vector<vkhandle<VkImageView>> _swap_chain_image_views;
+
 		void create_image_views();
 
 		//apparently being able to handle draw commands doesn't mean you can render to screen

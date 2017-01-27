@@ -1242,7 +1242,7 @@ namespace sandcastle::graphics
 
         void* data;
 
-        vkMapMemory(_device, _uniform_staging_buffer_memory, 0, sizeof(ubo), &data);
+        vkMapMemory(_device, _uniform_staging_buffer_memory, 0, sizeof(ubo), 0, &data);
         std::memcpy(data, &ubo, sizeof(ubo));
         vkUnmapMemory(_device, _uniform_staging_buffer_memory);
 
