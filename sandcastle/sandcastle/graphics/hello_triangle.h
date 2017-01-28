@@ -165,6 +165,7 @@ namespace sandcastle::graphics
 		void create_index_buffer();
         void create_uniform_buffer();
 		void update_uniform_buffer();
+		void create_descriptor_pool();
 
 		vkhandle<VkBuffer>       _index_buffer{ _device, vkDestroyBuffer };
 		vkhandle<VkDeviceMemory> _index_buffer_memory{ _device, vkFreeMemory };

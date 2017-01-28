@@ -75,6 +75,7 @@ namespace sandcastle::graphics
 		create_vertex_buffer();
 		create_index_buffer();
 		create_uniform_buffer();
+		create_descriptor_pool();
 		create_command_buffers();
 		create_semaphores();
 	}
@@ -114,14 +115,14 @@ namespace sandcastle::graphics
 
 		VkSubmitInfo submit_info = {};
 
-		VkSemaphore wait_semaphores[] = { _image_available_semaphore };
+		VkSemaphore wait_semaphores[]      = { _image_available_semaphore };
 		VkPipelineStageFlags wait_stages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
-		submit_info.sType                  = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-		submit_info.waitSemaphoreCount     = 1;
-		submit_info.pWaitSemaphores        = wait_semaphores;
-		submit_info.pWaitDstStageMask      = wait_stages;
-		submit_info.commandBufferCount     = 1;
-		submit_info.pCommandBuffers        = &_command_buffers[image_index];
+		submit_info.sType              = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+		submit_info.waitSemaphoreCount = 1;
+		submit_info.pWaitSemaphores    = wait_semaphores;
+		submit_info.pWaitDstStageMask  = wait_stages;
+		submit_info.commandBufferCount = 1;
+		submit_info.pCommandBuffers    = &_command_buffers[image_index];
 
 		VkSemaphore signal_semaphores[] = { _render_finished_semaphore };
 		submit_info.signalSemaphoreCount = 1;
@@ -172,7 +173,7 @@ namespace sandcastle::graphics
 		std::vector<const char*> extensions;
 
 		unsigned int glfw_extension_count = 0;
-		const char** glfw_extensions = glfwGetRequiredInstanceExtensions(&glfw_extension_count);
+		const char** glfw_extensions      = glfwGetRequiredInstanceExtensions(&glfw_extension_count);
 
 		for (unsigned int i = 0; i < glfw_extension_count; ++i)
 		{
@@ -233,7 +234,7 @@ namespace sandcastle::graphics
 		appinfo.apiVersion         = VK_API_VERSION_1_0;
 
 		unsigned int glfw_extension_count = 0;
-		const char** glfw_extensions = glfwGetRequiredInstanceExtensions(&glfw_extension_count);
+		const char** glfw_extensions      = glfwGetRequiredInstanceExtensions(&glfw_extension_count);
 
 		VkInstanceCreateInfo createinfo = {};
 		createinfo.sType                   = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
@@ -249,7 +250,7 @@ namespace sandcastle::graphics
 			createinfo.enabledLayerCount = 0;
 		else
 		{
-			createinfo.enabledLayerCount = (uint32_t)validation_layers.size();
+			createinfo.enabledLayerCount   = (uint32_t)validation_layers.size();
 			createinfo.ppEnabledLayerNames = validation_layers.data();
 		}
 
@@ -1249,6 +1250,11 @@ namespace sandcastle::graphics
 
         copy_buffer(_uniform_staging_buffer, _uniform_buffer, sizeof(ubo));
         
+	}
+
+	void simpletriangle::create_descriptor_pool()
+	{
+
 	}
 
 }
