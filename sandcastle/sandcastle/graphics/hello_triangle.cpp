@@ -1256,14 +1256,14 @@ namespace sandcastle::graphics
 	void simpletriangle::create_descriptor_pool()
 	{
 		VkDescriptorPoolSize pool_size = {};
-		pool_size.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+		pool_size.type            = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
 		pool_size.descriptorCount = 1;
 
 		VkDescriptorPoolCreateInfo pool_info = {};
-		pool_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+		pool_info.sType         = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
 		pool_info.poolSizeCount = 1;
-		pool_info.pPoolSizes = &pool_size;
-		pool_info.maxSets = 1;
+		pool_info.pPoolSizes    = &pool_size;
+		pool_info.maxSets       = 1;
 
 		if (vkCreateDescriptorPool(_device, &pool_info, nullptr, _descriptor_pool.replace()) != VK_SUCCESS)
 		{
@@ -1274,13 +1274,13 @@ namespace sandcastle::graphics
 
 	void simpletriangle::create_descriptor_set()
 	{
-		VkDescriptorSetLayout layouts[] = { _descriptor_set_layout };
+		VkDescriptorSetLayout layouts[]        = { _descriptor_set_layout };
 		VkDescriptorSetAllocateInfo alloc_info = {};
 
-		alloc_info.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
-		alloc_info.descriptorPool = _descriptor_pool;
+		alloc_info.sType              = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+		alloc_info.descriptorPool     = _descriptor_pool;
 		alloc_info.descriptorSetCount = 1;
-		alloc_info.pSetLayouts = layouts;
+		alloc_info.pSetLayouts        = layouts;
 
 		if (vkAllocateDescriptorSets(_device, &alloc_info, &_descriptor_set) != VK_SUCCESS)
 		{

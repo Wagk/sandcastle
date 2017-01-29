@@ -180,7 +180,7 @@ namespace sandcastle::graphics
 		void copy_buffer(VkBuffer src_buffer, VkBuffer dst_buffer, VkDeviceSize size);
 
 		vkhandle<VkDescriptorPool> _descriptor_pool{ _device, vkDestroyDescriptorPool };
-		VkDescriptorSet _descriptor_set;
+		VkDescriptorSet            _descriptor_set;
 	};
 }
 
