@@ -69,7 +69,6 @@ namespace sandcastle::graphics
 		create_image_views();
 		create_render_pass();
 		create_descriptor_set_layout();
-		create_descriptor_pool();
 		create_graphics_pipeline();
 		create_frame_buffers();
 		create_command_pool();
@@ -77,6 +76,7 @@ namespace sandcastle::graphics
 		create_index_buffer();
 		create_uniform_buffer();
 		create_descriptor_pool();
+		create_descriptor_set();
 		create_command_buffers();
 		create_semaphores();
 	}
@@ -697,7 +697,7 @@ namespace sandcastle::graphics
 		rasterizer.polygonMode             = VK_POLYGON_MODE_FILL;
 		rasterizer.lineWidth               = 1.f;
 		rasterizer.cullMode                = VK_CULL_MODE_BACK_BIT;
-		rasterizer.frontFace               = VK_FRONT_FACE_CLOCKWISE;
+		rasterizer.frontFace               = VK_FRONT_FACE_COUNTER_CLOCKWISE;
 		rasterizer.depthBiasEnable         = VK_FALSE;
 		rasterizer.depthBiasConstantFactor = 0.f;
 		rasterizer.depthBiasClamp          = 0.f;
@@ -745,16 +745,17 @@ namespace sandcastle::graphics
 			VK_DYNAMIC_STATE_LINE_WIDTH
 		};
 
-		//not used...yet
-		VkPipelineDynamicStateCreateInfo dynamic_state = {};
-		dynamic_state.sType             = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
-		dynamic_state.dynamicStateCount = 2;
-		dynamic_state.pDynamicStates    = dynamic_states;
+		////not used...yet
+		//vkpipelinedynamicstatecreateinfo dynamic_state = {};
+		//dynamic_state.stype             = vk_structure_type_pipeline_dynamic_state_create_info;
+		//dynamic_state.dynamicstatecount = 2;
+		//dynamic_state.pdynamicstates    = dynamic_states;
 
+		VkDescriptorSetLayout set_layouts[] = { _descriptor_set_layout };
 		VkPipelineLayoutCreateInfo pipeline_layout_info = {};
 		pipeline_layout_info.sType                  = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-		pipeline_layout_info.setLayoutCount         = 0;
-		pipeline_layout_info.pSetLayouts            = nullptr;
+		pipeline_layout_info.setLayoutCount         = 1;
+		pipeline_layout_info.pSetLayouts            = set_layouts;
 		pipeline_layout_info.pushConstantRangeCount = 0;
 		pipeline_layout_info.pPushConstantRanges    = nullptr;
 
@@ -764,10 +765,9 @@ namespace sandcastle::graphics
 		}
 
 		VkGraphicsPipelineCreateInfo pipeline_info = {};
-		pipeline_info.sType      = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
-		pipeline_info.stageCount = 2;
-		pipeline_info.pStages    = shader_stages;
-
+		pipeline_info.sType               = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+		pipeline_info.stageCount          = 2;
+		pipeline_info.pStages             = shader_stages;
 		pipeline_info.pVertexInputState   = &vertex_input_info;
 		pipeline_info.pInputAssemblyState = &input_assembly_info;
 		pipeline_info.pViewportState      = &viewport_state;
@@ -776,13 +776,11 @@ namespace sandcastle::graphics
 		pipeline_info.pDepthStencilState  = nullptr;
 		pipeline_info.pColorBlendState    = &color_blending;
 		pipeline_info.pDynamicState       = nullptr;
-
-		pipeline_info.layout     = _pipeline_layout;
-		pipeline_info.renderPass = _render_pass;
-		pipeline_info.subpass    = 0;
-
-		pipeline_info.basePipelineHandle = VK_NULL_HANDLE;
-		pipeline_info.basePipelineIndex  = -1;
+		pipeline_info.layout              = _pipeline_layout;
+		pipeline_info.renderPass          = _render_pass;
+		pipeline_info.subpass             = 0;
+		pipeline_info.basePipelineHandle  = VK_NULL_HANDLE;
+		pipeline_info.basePipelineIndex   = -1;
 
 		if (vkCreateGraphicsPipelines(_device, VK_NULL_HANDLE, 1, &pipeline_info, nullptr,
 			_graphics_pipeline.replace()) != VK_SUCCESS)
@@ -986,11 +984,13 @@ namespace sandcastle::graphics
 			vkCmdBeginRenderPass(_command_buffers[i], &render_pass_info, VK_SUBPASS_CONTENTS_INLINE);
 			vkCmdBindPipeline(_command_buffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, _graphics_pipeline);
 
-			VkBuffer       vertex_buffers[] = { _vertex_buffer };
-			VkDeviceSize   offsets[] = { 0 };
+			VkBuffer     vertex_buffers[] = { _vertex_buffer };
+			VkDeviceSize offsets[] = { 0 };
 
 			vkCmdBindVertexBuffers(_command_buffers[i], 0, 1, vertex_buffers, offsets);
 			vkCmdBindIndexBuffer(_command_buffers[i], _index_buffer, 0, VK_INDEX_TYPE_UINT16);
+			vkCmdBindDescriptorSets(_command_buffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, 
+                    _pipeline_layout, 0, 1, &_descriptor_set, 0, nullptr);
 
 			//vkCmdDraw(_command_buffers[i], 3, 1, 0, 0);
 			vkCmdDrawIndexed(_command_buffers[i], indices.size(), 1, 0, 0, 0);
@@ -1164,13 +1164,6 @@ namespace sandcastle::graphics
 			throw std::runtime_error("failed to create descriptor set layout!");
 		}
 
-		VkDescriptorSetLayout set_layouts[]             = { _descriptor_set_layout };
-		VkPipelineLayoutCreateInfo pipeline_layout_info = {};
-
-		pipeline_layout_info.sType          = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-		pipeline_layout_info.setLayoutCount = 1;
-		pipeline_layout_info.pSetLayouts    = set_layouts;
-
 	}
 	
 	void simpletriangle::setup_debug_callback()
@@ -1286,6 +1279,24 @@ namespace sandcastle::graphics
 		{
 			throw std::runtime_error("failed to allocate descriptor set!");
 		}
+
+        VkDescriptorBufferInfo buffer_info = {};
+        buffer_info.buffer = _uniform_buffer;
+        buffer_info.offset = 0;
+        buffer_info.range  = sizeof(uniform_buffer_object);
+
+        VkWriteDescriptorSet descriptor_write = {};
+        descriptor_write.sType            = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+        descriptor_write.dstSet           = _descriptor_set;
+        descriptor_write.dstBinding       = 0;
+        descriptor_write.dstArrayElement  = 0;
+        descriptor_write.descriptorType   = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+        descriptor_write.descriptorCount  = 1;
+        descriptor_write.pBufferInfo      = &buffer_info;
+        descriptor_write.pImageInfo       = nullptr;
+        descriptor_write.pTexelBufferView = nullptr;
+
+        vkUpdateDescriptorSets(_device, 1, &descriptor_write, 0, nullptr);
 
 	}
 
