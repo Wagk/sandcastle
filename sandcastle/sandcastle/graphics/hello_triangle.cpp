@@ -5,6 +5,11 @@
 #include <limits>
 #include <algorithm>
 
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
+#include <FreeImage.h>
+
+
 namespace sandcastle::graphics
 {
 	const int g_width  = 800;
@@ -72,6 +77,7 @@ namespace sandcastle::graphics
 		create_graphics_pipeline();
 		create_frame_buffers();
 		create_command_pool();
+		create_texture_image();
 		create_vertex_buffer();
 		create_index_buffer();
 		create_uniform_buffer();
@@ -1297,6 +1303,38 @@ namespace sandcastle::graphics
         descriptor_write.pTexelBufferView = nullptr;
 
         vkUpdateDescriptorSets(_device, 1, &descriptor_write, 0, nullptr);
+
+	}
+
+	void simpletriangle::create_texture_image()
+	{
+		
+		int tex_width, tex_height, tex_channels;
+		stbi_uc* pixels = stbi_load("textures/texture.jpg", &tex_width, &tex_height, &tex_channels, STBI_rgb_alpha);
+		
+		VkDeviceSize image_size = tex_width * tex_height * 4;
+
+		if (pixels == nullptr)
+			throw std::runtime_error("failed to load texture image!");
+
+		VkImageCreateInfo image_info = {};
+		image_info.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+		image_info.imageType = VK_IMAGE_TYPE_2D;
+		image_info.extent.width = tex_width;
+		image_info.extent.height = tex_height;
+		image_info.extent.depth = 1;
+		image_info.mipLevels = 1;
+		image_info.arrayLayers = 1;
+		image_info.format = VK_FORMAT_R8G8B8A8_UNORM;
+		image_info.tiling = VK_IMAGE_TILING_LINEAR;
+		image_info.initialLayout = VK_IMAGE_LAYOUT_PREINITIALIZED;
+		image_info.usage = VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
+		image_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+		image_info.samples = VK_SAMPLE_COUNT_1_BIT;
+		image_info.flags = 0;
+
+		if (vkCreateImage(_device, &image_info, nullptr, _staging_image.replace()) != VK_SUCCESS)
+			throw std::runtime_error("failed to create image!");
 
 	}
 

@@ -167,6 +167,7 @@ namespace sandcastle::graphics
 		void update_uniform_buffer();
 		void create_descriptor_pool();
 		void create_descriptor_set();
+		void create_texture_image();
 
 		vkhandle<VkBuffer>       _index_buffer{ _device, vkDestroyBuffer };
 		vkhandle<VkDeviceMemory> _index_buffer_memory{ _device, vkFreeMemory };
@@ -181,6 +182,10 @@ namespace sandcastle::graphics
 
 		vkhandle<VkDescriptorPool> _descriptor_pool{ _device, vkDestroyDescriptorPool };
 		VkDescriptorSet            _descriptor_set;
+
+		vkhandle<VkImage> _staging_image{ _device, vkDestroyImage };
+		vkhandle<VkDeviceMemory> _staging_image_memory{ _device, vkFreeMemory };
+
 	};
 }
 

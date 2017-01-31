@@ -128,6 +128,12 @@
     <ClInclude Include="graphics\vkhandle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lib\FreeImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="math\mat.inl">
