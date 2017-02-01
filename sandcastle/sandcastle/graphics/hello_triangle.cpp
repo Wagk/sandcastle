@@ -1310,7 +1310,7 @@ namespace sandcastle::graphics
 	{
 		
 		int tex_width, tex_height, tex_channels;
-		stbi_uc* pixels = stbi_load("textures/texture.jpg", &tex_width, &tex_height, &tex_channels, STBI_rgb_alpha);
+		stbi_uc* pixels = stbi_load("graphics/textures/texture.jpg", &tex_width, &tex_height, &tex_channels, STBI_rgb_alpha);
 		
 		VkDeviceSize image_size = tex_width * tex_height * 4;
 
@@ -1335,6 +1335,9 @@ namespace sandcastle::graphics
 
 		if (vkCreateImage(_device, &image_info, nullptr, _staging_image.replace()) != VK_SUCCESS)
 			throw std::runtime_error("failed to create image!");
+
+		VkMemoryRequirements mem_reqs;
+		vkGetImageMemoryRequirements(_device, _staging_image, &mem_reqs);
 
 	}
 
