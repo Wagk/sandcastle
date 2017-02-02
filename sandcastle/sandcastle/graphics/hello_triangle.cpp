@@ -1339,6 +1339,15 @@ namespace sandcastle::graphics
 		VkMemoryRequirements mem_reqs;
 		vkGetImageMemoryRequirements(_device, _staging_image, &mem_reqs);
 
+		VkImageCreateInfo image_info = {};
+		image_info.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+		image_info.imageType = VK_IMAGE_TYPE_2D;
+		image_info.extent.width = tex_width;
+		image_info.extent.height = tex_height;
+		image_info.extent.depth = 1;
+		image_info.mipLevels = 1;
+		image_info.arrayLayers = 1;
+
 	}
 
 }
