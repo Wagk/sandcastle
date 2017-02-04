@@ -1344,6 +1344,13 @@ namespace sandcastle::graphics
 		alloc_info.allocationSize = mem_reqs.size;
 		alloc_info.memoryTypeIndex = find_memory_type(mem_reqs.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
 
+		if (vkAllocateMemory(_device, &alloc_info, nullptr, _staging_image_memory.replace()) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to allocate image memory!");
+		}
+
+		vkBindImageMemory(_device, _staging_image, _staging_image_memory, 0);
+
 	}
 
 }
