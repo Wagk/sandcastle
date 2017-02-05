@@ -1351,6 +1351,14 @@ namespace sandcastle::graphics
 
 		vkBindImageMemory(_device, _staging_image, _staging_image_memory, 0);
 
+		void* data;
+		vkMapMemory(_device, _staging_image_memory, 0, image_size, 0, &data);
+
+		VkImageSubresource subresource = {};
+		subresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+		subresource.mipLevel = 0;
+		subresource.arrayLayer = 0;
+
 	}
 
 }
