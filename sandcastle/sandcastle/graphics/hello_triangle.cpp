@@ -1359,6 +1359,9 @@ namespace sandcastle::graphics
 		subresource.mipLevel = 0;
 		subresource.arrayLayer = 0;
 
+		VkSubresourceLayout staging_image_layout = {};
+		vkGetImageSubresourceLayout(_device, _staging_image, &subresource, &staging_image_layout);
+
 	}
 
 }
