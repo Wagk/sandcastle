@@ -1362,6 +1362,15 @@ namespace sandcastle::graphics
 		VkSubresourceLayout staging_image_layout = {};
 		vkGetImageSubresourceLayout(_device, _staging_image, &subresource, &staging_image_layout);
 
+		if (staging_image_layout.rowPitch == tex_width * 4)
+		{
+			memcpy(data, pixels, (size_t)image_size);
+		}
+		else
+		{
+
+		}
+
 	}
 
 }
