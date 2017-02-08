@@ -1368,7 +1368,7 @@ namespace sandcastle::graphics
 		}
 		else
 		{
-
+			uint8_t* data_bytes = reinterpret_cast<uint8_t*>(data);
 		}
 
 	}
