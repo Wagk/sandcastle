@@ -1369,6 +1369,11 @@ namespace sandcastle::graphics
 		else
 		{
 			uint8_t* data_bytes = reinterpret_cast<uint8_t*>(data);
+
+			for (int y = 0; y < tex_height; ++y)
+			{
+				memcpy(&data_bytes[y * staging_image_layout.rowPitch], &pixels[y * tex_width * 4], tex_width * 4);
+			}
 		}
 
 	}
