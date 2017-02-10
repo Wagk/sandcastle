@@ -1362,6 +1362,9 @@ namespace sandcastle::graphics
 		VkSubresourceLayout staging_image_layout = {};
 		vkGetImageSubresourceLayout(_device, _staging_image, &subresource, &staging_image_layout);
 
+		void* data;
+		vkMapMemory(_device, _staging_image_memory, 0, image_size, 0, &data);
+
 		if (staging_image_layout.rowPitch == tex_width * 4)
 		{
 			memcpy(data, pixels, (size_t)image_size);
@@ -1375,6 +1378,8 @@ namespace sandcastle::graphics
 				memcpy(&data_bytes[y * staging_image_layout.rowPitch], &pixels[y * tex_width * 4], tex_width * 4);
 			}
 		}
+
+		vkUnmapMemory(_device, _staging_image_memory);
 
 	}
 
