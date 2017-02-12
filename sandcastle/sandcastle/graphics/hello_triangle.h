@@ -179,6 +179,7 @@ namespace sandcastle::graphics
 		void create_buffer(VkDeviceSize size,VkBufferUsageFlags usage, VkMemoryPropertyFlags properties,
 							vkhandle<VkBuffer>& buffer, vkhandle<VkDeviceMemory>& buffer_memory);
 		void copy_buffer(VkBuffer src_buffer, VkBuffer dst_buffer, VkDeviceSize size);
+		void create_image(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties, vkhandle<VkImage>& image, vkhandle<VkDeviceMemory>& image_memory);
 
 		vkhandle<VkDescriptorPool> _descriptor_pool{ _device, vkDestroyDescriptorPool };
 		VkDescriptorSet            _descriptor_set;

@@ -1151,6 +1151,10 @@ namespace sandcastle::graphics
 		vkFreeCommandBuffers(_device, _command_pool, 1, &command_buffer);
 	}
 
+	void simpletriangle::create_image(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties, vkhandle<VkImage>& image, vkhandle<VkDeviceMemory>& image_memory)
+	{
+	}
+
 	void simpletriangle::create_descriptor_set_layout()
 	{
 		VkDescriptorSetLayoutBinding ubo_layout_binding = {};
@@ -1380,6 +1384,8 @@ namespace sandcastle::graphics
 		}
 
 		vkUnmapMemory(_device, _staging_image_memory);
+
+		stbi_image_free(pixels);
 
 	}
 
