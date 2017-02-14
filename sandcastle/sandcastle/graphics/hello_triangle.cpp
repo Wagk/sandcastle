@@ -1151,8 +1151,12 @@ namespace sandcastle::graphics
 		vkFreeCommandBuffers(_device, _command_pool, 1, &command_buffer);
 	}
 
-	void simpletriangle::create_image(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties, vkhandle<VkImage>& image, vkhandle<VkDeviceMemory>& image_memory)
+	void simpletriangle::create_image(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, 
+		VkImageUsageFlags usage, VkMemoryPropertyFlags properties, vkhandle<VkImage>& image, 
+		vkhandle<VkDeviceMemory>& image_memory)
 	{
+		VkImageCreateInfo image_info = {};
+		image_info.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
 	}
 
 	void simpletriangle::create_descriptor_set_layout()
