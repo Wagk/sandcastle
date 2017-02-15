@@ -1157,6 +1157,7 @@ namespace sandcastle::graphics
 	{
 		VkImageCreateInfo image_info = {};
 		image_info.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+		image_info.imageType = VK_IMAGE_TYPE_2D;
 	}
 
 	void simpletriangle::create_descriptor_set_layout()
