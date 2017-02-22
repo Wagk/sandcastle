@@ -1182,6 +1182,13 @@ namespace sandcastle::graphics
 		alloc_info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
 		alloc_info.allocationSize = mem_requirements.size;
 		alloc_info.memoryTypeIndex = find_memory_type(mem_requirements.memoryTypeBits, properties);
+
+		if (vkAllocateMemory(_device, &alloc_info, nullptr, image_memory.replace()) != VK_SUCCESS)
+		{
+			throw std::runtime_error("failed to allocate image memory!");
+		}
+
+		vkBindImageMemory(_device, image, image_memory, 0);
 	}
 
 	void simpletriangle::create_descriptor_set_layout()
