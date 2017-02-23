@@ -1357,42 +1357,13 @@ namespace sandcastle::graphics
 		if (pixels == nullptr)
 			throw std::runtime_error("failed to load texture image!");
 
-		VkImageCreateInfo image_info = {};
-		image_info.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
-		image_info.imageType = VK_IMAGE_TYPE_2D;
-		image_info.extent.width = tex_width;
-		image_info.extent.height = tex_height;
-		image_info.extent.depth = 1;
-		image_info.mipLevels = 1;
-		image_info.arrayLayers = 1;
-		image_info.format = VK_FORMAT_R8G8B8A8_UNORM;
-		image_info.tiling = VK_IMAGE_TILING_LINEAR;
-		image_info.initialLayout = VK_IMAGE_LAYOUT_PREINITIALIZED;
-		image_info.usage = VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
-		image_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-		image_info.samples = VK_SAMPLE_COUNT_1_BIT;
-		image_info.flags = 0;
+		vkhandle<VkImage> staging_image{ _device, vkDestroyImage };
+		vkhandle<VkDeviceMemory> staging_image_memory{ _device, vkFreeMemory };
 
-		if (vkCreateImage(_device, &image_info, nullptr, _staging_image.replace()) != VK_SUCCESS)
-			throw std::runtime_error("failed to create image!");
-
-		VkMemoryRequirements mem_reqs;
-		vkGetImageMemoryRequirements(_device, _staging_image, &mem_reqs);
-
-		VkMemoryAllocateInfo alloc_info = {};
-		alloc_info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-		alloc_info.allocationSize = mem_reqs.size;
-		alloc_info.memoryTypeIndex = find_memory_type(mem_reqs.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
-
-		if (vkAllocateMemory(_device, &alloc_info, nullptr, _staging_image_memory.replace()) != VK_SUCCESS)
-		{
-			throw std::runtime_error("failed to allocate image memory!");
-		}
-
-		vkBindImageMemory(_device, _staging_image, _staging_image_memory, 0);
-
-		void* data;
-		vkMapMemory(_device, _staging_image_memory, 0, image_size, 0, &data);
+		create_image(tex_width, tex_height, VK_FORMAT_R8G8B8A8_UNORM, VK_IMAGE_TILING_LINEAR, 
+			VK_IMAGE_USAGE_TRANSFER_SRC_BIT, 
+			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, 
+			staging_image, staging_image_memory);
 
 		VkImageSubresource subresource = {};
 		subresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
