@@ -190,6 +190,9 @@ namespace sandcastle::graphics
 		vkhandle<VkImage> _staging_image{ _device, vkDestroyImage };
 		vkhandle<VkDeviceMemory> _staging_image_memory{ _device, vkFreeMemory };
 
+		VkCommandBuffer begin_single_time_commands();
+		void end_single_time_commands(VkCommandBuffer command_buffer);
+
 	};
 }
 
