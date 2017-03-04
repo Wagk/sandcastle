@@ -1191,6 +1191,27 @@ namespace sandcastle::graphics
 		vkBindImageMemory(_device, image, image_memory, 0);
 	}
 
+	VkCommandBuffer simpletriangle::begin_single_time_commands()
+	{
+		VkCommandBufferAllocateInfo alloc_info = {};
+		alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+		alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+		alloc_info.commandPool = _command_pool;
+		alloc_info.commandBufferCount = 1;
+
+		VkCommandBuffer command_buffer;
+		vkAllocateCommandBuffers(_device, &alloc_info, &command_buffer);
+
+		VkCommandBufferBeginInfo begin_info = {};
+		begin_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+		begin_info.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+
+	}
+
+	void simpletriangle::end_single_time_commands(VkCommandBuffer command_buffer)
+	{
+	}
+
 	void simpletriangle::create_descriptor_set_layout()
 	{
 		VkDescriptorSetLayoutBinding ubo_layout_binding = {};
