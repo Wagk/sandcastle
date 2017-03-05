@@ -1206,10 +1206,14 @@ namespace sandcastle::graphics
 		begin_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
 		begin_info.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
 
+		vkBeginCommandBuffer(command_buffer, &begin_info);
+
+		return command_buffer;
 	}
 
 	void simpletriangle::end_single_time_commands(VkCommandBuffer command_buffer)
 	{
+		vkEndCommandBuffer(command_buffer);
 	}
 
 	void simpletriangle::create_descriptor_set_layout()
