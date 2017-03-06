@@ -1214,6 +1214,8 @@ namespace sandcastle::graphics
 	void simpletriangle::end_single_time_commands(VkCommandBuffer command_buffer)
 	{
 		vkEndCommandBuffer(command_buffer);
+
+		VkSubmitInfo submit_info = {};
 	}
 
 	void simpletriangle::create_descriptor_set_layout()
