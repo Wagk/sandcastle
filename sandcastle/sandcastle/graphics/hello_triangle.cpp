@@ -1216,6 +1216,14 @@ namespace sandcastle::graphics
 		vkEndCommandBuffer(command_buffer);
 
 		VkSubmitInfo submit_info = {};
+		submit_info.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+		submit_info.commandBufferCount = 1;
+		submit_info.pCommandBuffers = &command_buffer;
+
+		vkQueueSubmit(_graphics_queue, 1, &submit_info, VK_NULL_HANDLE);
+		vkQueueWaitIdle(_graphics_queue);
+
+		vkFreeCommandBuffers(_device, _command_pool, 1, &command_buffer);
 	}
 
 	void simpletriangle::create_descriptor_set_layout()
