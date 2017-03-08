@@ -107,7 +107,7 @@ namespace sandcastle::graphics
 	{
 		uint32_t image_index;
 
-		VkResult result = vkAcquireNextImageKHR(_device, _swap_chain, std::numeric_limits<uint32_t>::max(), 
+		VkResult result = vkAcquireNextImageKHR(_device, _swap_chain, std::numeric_limits<uint32_t>::max(),
 			_image_available_semaphore, VK_NULL_HANDLE, &image_index);
 
 		if (result == VK_ERROR_OUT_OF_DATE_KHR)
@@ -321,8 +321,8 @@ namespace sandcastle::graphics
 		}
 		else
 		{
-			//An image is owned by one queue family at a time and ownership must be 
-			//explicitly transfered before using it in another queue family. 
+			//An image is owned by one queue family at a time and ownership must be
+			//explicitly transfered before using it in another queue family.
 			//This option offers the best performance.
 			create_info.imageSharingMode      = VK_SHARING_MODE_EXCLUSIVE;
 			create_info.queueFamilyIndexCount = 0;
@@ -384,7 +384,7 @@ namespace sandcastle::graphics
 				break;
 			}
 		}
-		
+
 		if (_physical_device == VK_NULL_HANDLE)
 			throw std::runtime_error("failed to find a suitable GPU!");
 	}
@@ -395,12 +395,12 @@ namespace sandcastle::graphics
 		queue_family_indices indices = find_queue_families(_physical_device);
 
 		std::vector<VkDeviceQueueCreateInfo> queue_create_infos = {};
-		std::set<int> unique_queue_families = { indices._graphics_family, 
+		std::set<int> unique_queue_families = { indices._graphics_family,
 												indices._presentation_family };
 
 		float queue_priority = 1.f;
 		for (int queue_family : unique_queue_families) {
-			
+
 			//for each of them generate a queue_create_info struct
 			VkDeviceQueueCreateInfo queue_create_info = {};
 			queue_create_info.sType            = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
@@ -431,7 +431,7 @@ namespace sandcastle::graphics
 		}
 
 		//call the thing and pray
-		if (vkCreateDevice(_physical_device, &device_create_info, nullptr, _device.replace()) 
+		if (vkCreateDevice(_physical_device, &device_create_info, nullptr, _device.replace())
 			!= VK_SUCCESS) {
 			throw std::runtime_error("failed to create logical device!");
 		}
@@ -475,7 +475,7 @@ namespace sandcastle::graphics
 
 		std::vector<VkExtensionProperties> available_extensions(extension_count);
 		vkEnumerateDeviceExtensionProperties(device, nullptr, &extension_count, available_extensions.data());
-		
+
 		std::set<std::string> required_extensions(device_extensions.begin(), device_extensions.end());
 
 		//match available extensions with required extensions. make sure everything is there
@@ -545,16 +545,16 @@ namespace sandcastle::graphics
 
 		for (int i = 0, s = (int)queue_families.size(); i < s; ++i)
 		{
-			if (queue_families[i].queueCount > 0 && 
+			if (queue_families[i].queueCount > 0 &&
 				queue_families[i].queueFlags & VK_QUEUE_GRAPHICS_BIT)
-			{ 
+			{
 				indices._graphics_family = i;
 			}
 
 			VkBool32 presentation_support = false;
 			vkGetPhysicalDeviceSurfaceSupportKHR(device, i, _surface, &presentation_support);
 
-			if (queue_families[i].queueCount > 0 && presentation_support) 
+			if (queue_families[i].queueCount > 0 && presentation_support)
 			{
 				indices._presentation_family = i;
 			}
@@ -628,9 +628,9 @@ namespace sandcastle::graphics
 		{
 			VkExtent2D actual_extent = { g_width, g_height };
 
-			actual_extent.width = std::max(capabilities.minImageExtent.width, 
+			actual_extent.width = std::max(capabilities.minImageExtent.width,
 				std::min(capabilities.maxImageExtent.width, actual_extent.width));
-			actual_extent.height = std::max(capabilities.minImageExtent.height, 
+			actual_extent.height = std::max(capabilities.minImageExtent.height,
 				std::min(capabilities.maxImageExtent.height, actual_extent.height));
 
 			return actual_extent;
@@ -724,7 +724,7 @@ namespace sandcastle::graphics
 		//color blending
 		VkPipelineColorBlendAttachmentState color_blend_attachment = {};
 		color_blend_attachment.colorWriteMask      = VK_COLOR_COMPONENT_R_BIT |
-			                                         VK_COLOR_COMPONENT_G_BIT | 
+			                                         VK_COLOR_COMPONENT_G_BIT |
                                                      VK_COLOR_COMPONENT_B_BIT |
                                                      VK_COLOR_COMPONENT_A_BIT;
 		color_blend_attachment.blendEnable         = VK_FALSE;
@@ -995,7 +995,7 @@ namespace sandcastle::graphics
 
 			vkCmdBindVertexBuffers(_command_buffers[i], 0, 1, vertex_buffers, offsets);
 			vkCmdBindIndexBuffer(_command_buffers[i], _index_buffer, 0, VK_INDEX_TYPE_UINT16);
-			vkCmdBindDescriptorSets(_command_buffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, 
+			vkCmdBindDescriptorSets(_command_buffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS,
                     _pipeline_layout, 0, 1, &_descriptor_set, 0, nullptr);
 
 			//vkCmdDraw(_command_buffers[i], 3, 1, 0, 0);
@@ -1031,16 +1031,16 @@ namespace sandcastle::graphics
 		vkhandle<VkDeviceMemory> staging_buffer_memory{ _device, vkFreeMemory };
 
 		create_buffer(buffer_size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, 
+			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
 			staging_buffer, staging_buffer_memory);
-		
+
 		void* data;
 		vkMapMemory(_device, staging_buffer_memory, 0, buffer_size, 0, &data);
 		std::memcpy(data, vertices.data(), (size_t) buffer_size);
 		vkUnmapMemory(_device, staging_buffer_memory);
 
 		create_buffer(buffer_size, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
-			VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, 
+			VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
 			_vertex_buffer, _vertex_buffer_memory);
 
 		copy_buffer(staging_buffer, _vertex_buffer, buffer_size);
@@ -1065,21 +1065,21 @@ namespace sandcastle::graphics
 	void simpletriangle::create_index_buffer()
 	{
 		VkDeviceSize buffer_size = sizeof(indices[0]) * indices.size();
-        
+
         vkhandle<VkBuffer>       staging_buffer{_device, vkDestroyBuffer};
         vkhandle<VkDeviceMemory> staging_buffer_memory{_device, vkFreeMemory};
 
 		create_buffer(buffer_size, VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, 
+			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
 			staging_buffer, staging_buffer_memory);
-		
+
 		void* data;
 		vkMapMemory(_device, staging_buffer_memory, 0, buffer_size, 0, &data);
 		std::memcpy(data, indices.data(), (size_t) buffer_size);
 		vkUnmapMemory(_device, staging_buffer_memory);
 
 		create_buffer(buffer_size, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
-			VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, 
+			VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
 			_index_buffer, _index_buffer_memory);
 
 		copy_buffer(staging_buffer, _index_buffer, buffer_size);
@@ -1116,59 +1116,33 @@ namespace sandcastle::graphics
 
 	void simpletriangle::copy_buffer(VkBuffer src_buffer, VkBuffer dst_buffer, VkDeviceSize size)
 	{
-		VkCommandBufferAllocateInfo alloc_info = {};
-		alloc_info.sType              = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-		alloc_info.level              = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-		alloc_info.commandPool        = _command_pool;
-		alloc_info.commandBufferCount = 1;
-
-		VkCommandBuffer command_buffer;
-		vkAllocateCommandBuffers(_device, &alloc_info, &command_buffer);
-
-		VkCommandBufferBeginInfo begin_info = {};
-		begin_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-		begin_info.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-
-		vkBeginCommandBuffer(command_buffer, &begin_info);
+		VkCommandBuffer command_buffer = begin_single_time_commands();
 
 		VkBufferCopy copy_region = {};
-		copy_region.srcOffset = 0;
-		copy_region.dstOffset = 0;
-		copy_region.size      = size;
-		
+		copy_region.size = size;
 		vkCmdCopyBuffer(command_buffer, src_buffer, dst_buffer, 1, &copy_region);
 
-		vkEndCommandBuffer(command_buffer);
-
-		VkSubmitInfo submit_info = {};
-		submit_info.sType              = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-		submit_info.commandBufferCount = 1;
-		submit_info.pCommandBuffers    = &command_buffer;
-
-		vkQueueSubmit(_graphics_queue, 1, &submit_info, VK_NULL_HANDLE);
-		vkQueueWaitIdle(_graphics_queue);
-
-		vkFreeCommandBuffers(_device, _command_pool, 1, &command_buffer);
+		end_single_time_commands();
 	}
 
-	void simpletriangle::create_image(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, 
-		VkImageUsageFlags usage, VkMemoryPropertyFlags properties, vkhandle<VkImage>& image, 
+	void simpletriangle::create_image(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling,
+		VkImageUsageFlags usage, VkMemoryPropertyFlags properties, vkhandle<VkImage>& image,
 		vkhandle<VkDeviceMemory>& image_memory)
 	{
 		VkImageCreateInfo image_info = {};
-		image_info.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
-		image_info.imageType = VK_IMAGE_TYPE_2D;
-		image_info.extent.width = width;
+		image_info.sType         = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+		image_info.imageType     = VK_IMAGE_TYPE_2D;
+		image_info.extent.width  = width;
 		image_info.extent.height = height;
-		image_info.extent.depth = 1;
-		image_info.mipLevels = 1;
-		image_info.arrayLayers = 1;
-		image_info.format = format;
-		image_info.tiling = tiling;
+		image_info.extent.depth  = 1;
+		image_info.mipLevels     = 1;
+		image_info.arrayLayers   = 1;
+		image_info.format        = format;
+		image_info.tiling        = tiling;
 		image_info.initialLayout = VK_IMAGE_LAYOUT_PREINITIALIZED;
-		image_info.usage = usage;
-		image_info.samples = VK_SAMPLE_COUNT_1_BIT;
-		image_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+		image_info.usage         = usage;
+		image_info.samples       = VK_SAMPLE_COUNT_1_BIT;
+		image_info.sharingMode   = VK_SHARING_MODE_EXCLUSIVE;
 
 		if (vkCreateImage(_device, &image_info, nullptr, image.replace()) != VK_SUCCESS)
 		{
@@ -1179,8 +1153,8 @@ namespace sandcastle::graphics
 		vkGetImageMemoryRequirements(_device, image, &mem_requirements);
 
 		VkMemoryAllocateInfo alloc_info = {};
-		alloc_info.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-		alloc_info.allocationSize = mem_requirements.size;
+		alloc_info.sType           = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+		alloc_info.allocationSize  = mem_requirements.size;
 		alloc_info.memoryTypeIndex = find_memory_type(mem_requirements.memoryTypeBits, properties);
 
 		if (vkAllocateMemory(_device, &alloc_info, nullptr, image_memory.replace()) != VK_SUCCESS)
@@ -1194,9 +1168,9 @@ namespace sandcastle::graphics
 	VkCommandBuffer simpletriangle::begin_single_time_commands()
 	{
 		VkCommandBufferAllocateInfo alloc_info = {};
-		alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-		alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-		alloc_info.commandPool = _command_pool;
+		alloc_info.sType              = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+		alloc_info.level              = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+		alloc_info.commandPool        = _command_pool;
 		alloc_info.commandBufferCount = 1;
 
 		VkCommandBuffer command_buffer;
@@ -1216,9 +1190,9 @@ namespace sandcastle::graphics
 		vkEndCommandBuffer(command_buffer);
 
 		VkSubmitInfo submit_info = {};
-		submit_info.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+		submit_info.sType              = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 		submit_info.commandBufferCount = 1;
-		submit_info.pCommandBuffers = &command_buffer;
+		submit_info.pCommandBuffers    = &command_buffer;
 
 		vkQueueSubmit(_graphics_queue, 1, &submit_info, VK_NULL_HANDLE);
 		vkQueueWaitIdle(_graphics_queue);
@@ -1246,7 +1220,7 @@ namespace sandcastle::graphics
 		}
 
 	}
-	
+
 	void simpletriangle::setup_debug_callback()
 	{
 		if (!enable_validation_layers)
@@ -1324,7 +1298,7 @@ namespace sandcastle::graphics
         vkUnmapMemory(_device, _uniform_staging_buffer_memory);
 
         copy_buffer(_uniform_staging_buffer, _uniform_buffer, sizeof(ubo));
-        
+
 	}
 
 	void simpletriangle::create_descriptor_pool()
@@ -1383,10 +1357,10 @@ namespace sandcastle::graphics
 
 	void simpletriangle::create_texture_image()
 	{
-		
+
 		int tex_width, tex_height, tex_channels;
 		stbi_uc* pixels = stbi_load("graphics/textures/texture.jpg", &tex_width, &tex_height, &tex_channels, STBI_rgb_alpha);
-		
+
 		VkDeviceSize image_size = tex_width * tex_height * 4;
 
 		if (pixels == nullptr)
@@ -1395,14 +1369,14 @@ namespace sandcastle::graphics
 		vkhandle<VkImage> staging_image{ _device, vkDestroyImage };
 		vkhandle<VkDeviceMemory> staging_image_memory{ _device, vkFreeMemory };
 
-		create_image(tex_width, tex_height, VK_FORMAT_R8G8B8A8_UNORM, VK_IMAGE_TILING_LINEAR, 
-			VK_IMAGE_USAGE_TRANSFER_SRC_BIT, 
-			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, 
+		create_image(tex_width, tex_height, VK_FORMAT_R8G8B8A8_UNORM, VK_IMAGE_TILING_LINEAR,
+			VK_IMAGE_USAGE_TRANSFER_SRC_BIT,
+			VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
 			_texture_image, _texture_image_memory);
 
 		VkImageSubresource subresource = {};
 		subresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-		subresource.mipLevel = 0;
+		subresource.mipLevel   = 0;
 		subresource.arrayLayer = 0;
 
 		VkSubresourceLayout staging_image_layout = {};
