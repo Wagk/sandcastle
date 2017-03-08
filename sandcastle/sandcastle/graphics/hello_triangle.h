@@ -18,7 +18,7 @@
 
 namespace sandcastle::graphics
 {
-	
+
 	struct uniform_buffer_object
 	{
 		glm::mat4 _model;
@@ -79,7 +79,7 @@ namespace sandcastle::graphics
 			const VkDebugReportCallbackCreateInfoEXT* pcreateinfo,
 			const VkAllocationCallbacks*              palloc,
 			VkDebugReportCallbackEXT*                 pcallback);
-		
+
 		static void DestroyDebugReportCallbackEXT(
 			VkInstance                         instance,
 			VkDebugReportCallbackEXT           callback,
@@ -131,7 +131,7 @@ namespace sandcastle::graphics
 		void create_image_views();
 
 		//apparently being able to handle draw commands doesn't mean you can render to screen
-		VkQueue _graphics_queue; 
+		VkQueue _graphics_queue;
 		VkQueue _presentation_queue;
 
 		static std::vector<char> read_binary(const std::string& file);

@@ -1122,7 +1122,7 @@ namespace sandcastle::graphics
 		copy_region.size = size;
 		vkCmdCopyBuffer(command_buffer, src_buffer, dst_buffer, 1, &copy_region);
 
-		end_single_time_commands();
+		end_single_time_commands(command_buffer);
 	}
 
 	void simpletriangle::create_image(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling,
