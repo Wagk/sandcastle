@@ -182,7 +182,9 @@ namespace sandcastle::graphics
 		void create_buffer(VkDeviceSize size,VkBufferUsageFlags usage, VkMemoryPropertyFlags properties,
 							vkhandle<VkBuffer>& buffer, vkhandle<VkDeviceMemory>& buffer_memory);
 		void copy_buffer(VkBuffer src_buffer, VkBuffer dst_buffer, VkDeviceSize size);
-		void create_image(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties, vkhandle<VkImage>& image, vkhandle<VkDeviceMemory>& image_memory);
+		void create_image(uint32_t width, uint32_t height, VkFormat format,
+				VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties,
+				vkhandle<VkImage>& image, vkhandle<VkDeviceMemory>& image_memory);
 
 		vkhandle<VkDescriptorPool> _descriptor_pool{ _device, vkDestroyDescriptorPool };
 		VkDescriptorSet            _descriptor_set;
@@ -192,6 +194,8 @@ namespace sandcastle::graphics
 
 		VkCommandBuffer begin_single_time_commands();
 		void end_single_time_commands(VkCommandBuffer command_buffer);
+		void transition_image_layout(VkImage image, VkFormat format,
+				VkImageLayout old_layout, VkImageLayout new_layout);
 
 	};
 }

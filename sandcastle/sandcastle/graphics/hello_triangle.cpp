@@ -1405,4 +1405,12 @@ namespace sandcastle::graphics
 
 	}
 
+	void hellotriangle::transition_image_layout(VkImage image, VkFormat format,
+			VkImageLayout old_layout, VkImageLayout new_layout)
+	{
+		VkCommandBuffer command_buffer = begin_single_time_commands();
+
+		end_single_time_commands();
+	}
+
 }
