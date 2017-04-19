@@ -1139,6 +1139,30 @@ void simpletriangle::create_image(uint32_t width, uint32_t height,
   vkBindImageMemory(_device, image, image_memory, 0);
 }
 
+void simpletriangle::copy_image(VkImage src_image, VkImage dst_image, uint32_t width, uint32_t height)
+{
+	VkCommandBuffer command_buffer = begin_single_time_commands();
+
+	VkImageSubresourceLayers subresource = {};
+	subresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	subresource.baseArrayLayer = 0;
+	subresource.mipLevel = 0;
+	subresource.layerCount = 1;
+
+	VkImageCopy region = {};
+	region.srcSubresource = subresource;
+	region.dstSubresource = subresource;
+	region.srcOffset = { 0, 0, 0 };
+	region.dstOffset = { 0, 0, 0 };
+	region.extent.width = width;
+	region.extent.height = height;
+	region.extent.depth = 1;
+
+	vkCmdCopyImage(command_buffer, src_image, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, dst_image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
+
+	end_single_time_commands(command_buffer);
+}
+
 VkCommandBuffer simpletriangle::begin_single_time_commands() {
   VkCommandBufferAllocateInfo alloc_info = {};
   alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;

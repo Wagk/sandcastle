@@ -63,14 +63,10 @@ namespace sandcastle::graphics
     bool is_device_suitable(VkPhysicalDevice device);
     bool check_device_extension_support(VkPhysicalDevice device);
 
-    static VKAPI_ATTR VkBool32 VKAPI_CALL debugcallback_fn(VkDebugReportFlagsEXT      flags,
-							   VkDebugReportObjectTypeEXT objtype,
-							   uint64_t                   obj,
-							   size_t                     location,
-							   int32_t                    code,
-							   const char*                layerprefix,
-							   const char*                msg,
-							   void*                      userdata);
+    static VKAPI_ATTR VkBool32 VKAPI_CALL debugcallback_fn(
+        VkDebugReportFlagsEXT flags, VkDebugReportObjectTypeEXT objtype,
+        uint64_t obj, size_t location, int32_t code, const char* layerprefix,
+        const char* msg, void* userdata);
 
     void setup_debug_callback();
     VkResult CreateDebugReportCallbackEXT(VkInstance                                instance,
@@ -181,6 +177,11 @@ namespace sandcastle::graphics
     void create_image(uint32_t width, uint32_t height, VkFormat format,
 		      VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties,
 		      vkhandle<VkImage>& image, vkhandle<VkDeviceMemory>& image_memory);
+
+
+
+
+	void copy_image(VkImage src_image, VkImage dst_image, uint32_t width, uint32_t height);
 
     vkhandle<VkDescriptorPool> _descriptor_pool{ _device, vkDestroyDescriptorPool };
     VkDescriptorSet            _descriptor_set;
