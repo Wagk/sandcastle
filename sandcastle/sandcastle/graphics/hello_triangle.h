@@ -178,9 +178,6 @@ namespace sandcastle::graphics
 		      VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties,
 		      vkhandle<VkImage>& image, vkhandle<VkDeviceMemory>& image_memory);
 
-
-
-
 	void copy_image(VkImage src_image, VkImage dst_image, uint32_t width, uint32_t height);
 
     vkhandle<VkDescriptorPool> _descriptor_pool{ _device, vkDestroyDescriptorPool };
