@@ -1163,7 +1163,8 @@ void simpletriangle::copy_image(VkImage src_image, VkImage dst_image, uint32_t w
 	end_single_time_commands(command_buffer);
 }
 
-VkCommandBuffer simpletriangle::begin_single_time_commands() {
+VkCommandBuffer simpletriangle::begin_single_time_commands() 
+{
   VkCommandBufferAllocateInfo alloc_info = {};
   alloc_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
   alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
@@ -1399,12 +1400,6 @@ void simpletriangle::create_texture_image() {
   vkUnmapMemory(_device, staging_image_memory);
 
   stbi_image_free(pixels);
-
-  transition_image_layout(staging_image, VK_FORMAT_R8G8B8A8_UNORM, VK_IMAGE_LAYOUT_PREINITIALIZED, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
-  transition_image_layout(_texture_image, VK_FORMAT_R8G8B8A8_UNORM, VK_IMAGE_LAYOUT_PREINITIALIZED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
-  copy_image(staging_image, _texture_image, tex_width, tex_height);
-
-  transition_image_layout(_texture_image, VK_FORMAT_R8G8B8A8_UNORM, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 }
 
 void simpletriangle::transition_image_layout(VkImage image, VkFormat format,
@@ -1427,26 +1422,6 @@ void simpletriangle::transition_image_layout(VkImage image, VkFormat format,
   barrier.subresourceRange.layerCount = 1;
   barrier.srcAccessMask = 0;  // TODO
   barrier.dstAccessMask = 0;  // TODO
-
-  if (old_layout == VK_IMAGE_LAYOUT_PREINITIALIZED && new_layout == VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL)
-  {
-	  barrier.srcAccessMask = VK_ACCESS_HOST_WRITE_BIT;
-	  barrier.dstAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
-  }
-  else if (old_layout == VK_IMAGE_LAYOUT_PREINITIALIZED && new_layout == VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL) 
-  {
-	  barrier.srcAccessMask = VK_ACCESS_HOST_WRITE_BIT;
-	  barrier.dstAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
-  }
-  else if (old_layout == VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL && new_layout == VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL) 
-  {
-	  barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
-	  barrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
-  }
-  else 
-  {
-	  throw std::invalid_argument("unsupported layout transition!");
-  }
 
   vkCmdPipelineBarrier(command_buffer, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
                        VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, 0, 0, nullptr, 0,
