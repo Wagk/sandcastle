@@ -69,10 +69,10 @@ namespace sandcastle::graphics
         const char* msg, void* userdata);
 
     void setup_debug_callback();
-    VkResult CreateDebugReportCallbackEXT(VkInstance                                instance,
-					  const VkDebugReportCallbackCreateInfoEXT* pcreateinfo,
-					  const VkAllocationCallbacks*              palloc,
-					  VkDebugReportCallbackEXT*                 pcallback);
+    VkResult CreateDebugReportCallbackEXT(VkInstance instance,
+                                          const VkDebugReportCallbackCreateInfoEXT* pcreateinfo,
+                                          const VkAllocationCallbacks*              palloc,
+                                          VkDebugReportCallbackEXT*                 pcallback);
 
     static void DestroyDebugReportCallbackEXT(VkInstance                         instance,
 					      VkDebugReportCallbackEXT           callback,
